@@ -87,9 +87,11 @@ public class CatalogResponseModelAdapter {
         final ArrayList<Offer> offers = new ArrayList<Offer>();
         if (result.getProducts() != null
                 && CollectionUtils.isNotEmpty(result.getProducts().getProductOrOffer())) {
+            toReturn.setTotalResults(result.getProducts().getTotalResults());
             offers.addAll(convertOffers(result.getProducts().getProductOrOffer()));
         }
         if (result.getOffers() != null && CollectionUtils.isNotEmpty(result.getOffers().getOffer())) {
+            toReturn.setTotalResults(result.getOffers().getTotalResults());
             offers.addAll(convertOffers(result.getOffers().getOffer()));
         }
         
