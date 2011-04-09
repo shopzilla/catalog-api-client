@@ -118,7 +118,10 @@ public class CatalogResponseModelAdapter {
             o.setMid(catalogOffer.getMerchantId());
             
             if (catalogOffer.getPrice() != null) {
-                o.setPrice(catalogOffer.getPrice().getIntegral());
+                Price p = new Price();
+                p.setIntegral(catalogOffer.getPrice().getIntegral());
+                p.setPrice(catalogOffer.getPrice().getValue());
+                o.setPrice(p);
             }
             o.setTitle(catalogOffer.getTitle());
             o.setDescription(catalogOffer.getDescription());
