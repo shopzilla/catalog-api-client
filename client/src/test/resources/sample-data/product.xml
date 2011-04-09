@@ -1,0 +1,292 @@
+<ProductResponse xmlns="http://www.shopzilla.com/services/catalog">
+    <Classification>
+        <relevancyScore>1000</relevancyScore>
+    </Classification>
+    <Products totalResults="2000" includedResults="10">
+        <PriceSet>
+            <minPrice integral="100">$1.00</minPrice>
+            <maxPrice integral="179900">$1,799.00</maxPrice>
+        </PriceSet>
+        <!--
+         |   Offer is a single item sold at a given price, by a single Merchant).
+         |
+         |   There is a One-to-One relationship between Offer and Merchant here.
+         |-->
+        <Offer id="2253933024" categoryId="10150000" merchantId="31665">
+            <title>NIKE Jordan Rare Air Men's Basketball Shoe, Navy/Red/White</title>
+            <description>Jordan Rare Air Men's Basketball Shoe. The Jordan Rare Air Basketball Shoe takes specific ques
+                from the Air Jordan 2, 3, 4, 5 and 6. Features a suede and synthetic upper with elephant print (AJ 3),
+                lockdown lace clasp and tongue (AJ 5), outsole with...
+            </description>
+            <manufacturer>NIKE</manufacturer>
+            <url>http://www.bizrate.com/rd?t=http%3A%2F%2Ftracking.searchmarketing.com%2Fclick.asp%3Faid%3D668329251&amp;mid=31665&amp;cat_id=10150000&amp;atom=100000874&amp;prod_id=&amp;oid=2253933024&amp;pos=1&amp;b_id=18&amp;bid_type=0&amp;bamt=8e6fc9110ff780c3&amp;rf=af1&amp;af_assettype_id=10&amp;af_creative_id=6&amp;af_id=0000&amp;af_placement_id=1</url>
+            <Images>
+                <Image ysize="60" xsize="60">http://image10.bizrate-images.com/resize?sq=60&amp;uid=2253933024&amp;mid=31665</Image>
+                <Image ysize="100" xsize="100">http://image10.bizrate-images.com/resize?sq=100&amp;uid=2253933024&amp;mid=31665</Image>
+                <Image ysize="160" xsize="160">http://image10.bizrate-images.com/resize?sq=160&amp;uid=2253933024&amp;mid=31665</Image>
+                <Image ysize="400" xsize="400">http://image10.bizrate-images.com/resize?sq=400&amp;uid=2253933024&amp;mid=31665</Image>
+            </Images>
+            <sku>407361401</sku>
+            <detailUrl>
+                http://www.bizrate.com/oid2253933024/index__rf--af1__af_assettype_id--10__af_creative_id--6__af_id--0000__af_placement_id--1.html
+            </detailUrl>
+            <price integral="9998">$99.98</price>
+            <originalPrice integral="13999">$139.99</originalPrice>
+            <markdownPercent>28.58</markdownPercent>
+            <bidded>true</bidded>
+            <merchantProductId>407361401</merchantProductId>
+            <merchantName>Finish Line</merchantName>
+            <MerchantRating value="7.80">
+                <Image ysize="34" xsize="34">http://img10.bizrate-images.com/site/smiley_good_34x34.gif</Image>
+            </MerchantRating>
+            <merchantLogoUrl>http://img10.bizrate-images.com/merchant/little/31665.gif</merchantLogoUrl>
+            <condition>NEW</condition>
+            <stock>IN</stock>
+            <shipAmount integral="799">$7.99</shipAmount>
+            <shipType>CUSTOM</shipType>
+        </Offer>
+        <Offer id="2399364940" categoryId="10150000" merchantId="31665">
+            <title>NIKE Air Jordan Retro 13 Men's Basketball Shoe, Black/Varsity Red/White/Yellow</title>
+            <description>Air Jordan Retro 13 Men's Basketball Shoe. On December 30th Jordan broke Kareem Abdul-Jabbar's
+                NBA record, by scoring in double-digits for the 788th consecutive game. That season, Jordan also led the
+                Bulls to their sixth NBA Championship title. The Air...
+            </description>
+            <manufacturer>NIKE</manufacturer>
+            <url>http://www.bizrate.com/rd?t=http%3A%2F%2Ftracking.searchmarketing.com%2Fclick.asp%3Faid%3D809628169&amp;mid=31665&amp;cat_id=10150000&amp;atom=100000874&amp;prod_id=&amp;oid=2399364940&amp;pos=1&amp;b_id=18&amp;bid_type=0&amp;bamt=8e6fc9110ff780c3&amp;rf=af1&amp;af_assettype_id=10&amp;af_creative_id=6&amp;af_id=0000&amp;af_placement_id=1</url>
+            <Images>
+                <Image ysize="60" xsize="60">http://image10.bizrate-images.com/resize?sq=60&amp;uid=2399364940&amp;mid=31665</Image>
+                <Image ysize="100" xsize="100">http://image10.bizrate-images.com/resize?sq=100&amp;uid=2399364940&amp;mid=31665</Image>
+                <Image ysize="160" xsize="160">http://image10.bizrate-images.com/resize?sq=160&amp;uid=2399364940&amp;mid=31665</Image>
+                <Image ysize="400" xsize="400">http://image10.bizrate-images.com/resize?sq=400&amp;uid=2399364940&amp;mid=31665</Image>
+            </Images>
+            <sku>414571001</sku>
+            <detailUrl>
+                http://www.bizrate.com/oid2399364940/index__rf--af1__af_assettype_id--10__af_creative_id--6__af_id--0000__af_placement_id--1.html
+            </detailUrl>
+            <price integral="15999">$159.99</price>
+            <originalPrice integral="15999">$159.99</originalPrice>
+            <markdownPercent>0.00</markdownPercent>
+            <bidded>true</bidded>
+            <merchantProductId>414571001</merchantProductId>
+            <merchantName>Finish Line</merchantName>
+            <MerchantRating value="7.80">
+                <Image ysize="34" xsize="34">http://img10.bizrate-images.com/site/smiley_good_34x34.gif</Image>
+            </MerchantRating>
+            <merchantLogoUrl>http://img10.bizrate-images.com/merchant/little/31665.gif</merchantLogoUrl>
+            <condition>NEW</condition>
+            <stock>IN</stock>
+            <shipAmount integral="0">$0.00</shipAmount>
+            <shipType>CUSTOM</shipType>
+        </Offer>
+        <!--
+         |   Product is a single item offered for sale at one or more prices, by one or more Merchants.
+         |
+         |   There is a One-to-Many relationship between Product and Merchant here.
+         |   (Offer represents a join between Product and Merchant)
+         |-->
+        <Product id="2360376805" categoryId="10150000">
+            <title>NIKE Air Max+ 2010 Men's Running Shoe, Black/Electric Green/White</title>
+            <description>Air Max+ 2010 Men's Running Shoe. The new Nike Air Max 2010 features full-length Nike Air Max
+                technology for the ultimate cushioned running shoe experience. Flywire in the upper securely holds the
+                foot without adding additional weight. Nike+ ready!...
+            </description>
+            <manufacturer>Nike</manufacturer>
+            <url>
+                http://www.bizrate.com/nike-air-max-2010-mens-running-shoe-blackelectric-greenwhite--pid2360376805/compareprices__rf--af1__af_assettype_id--10__af_creative_id--6__af_id--0000__af_placement_id--1.html
+            </url>
+            <Images>
+                <Image ysize="60" xsize="60">http://image10.bizrate-images.com/resize?sq=60&amp;uid=2360376805</Image>
+                <Image ysize="100" xsize="100">http://image10.bizrate-images.com/resize?sq=100&amp;uid=2360376805
+                </Image>
+                <Image ysize="160" xsize="160">http://image10.bizrate-images.com/resize?sq=160&amp;uid=2360376805
+                </Image>
+                <Image ysize="400" xsize="400">http://image10.bizrate-images.com/resize?sq=400&amp;uid=2360376805
+                </Image>
+            </Images>
+            <relevancy>1915275033182208.000000</relevancy>
+            <PriceSet>
+                <minPrice integral="7998">$79.98</minPrice>
+                <maxPrice integral="18500">$185.00</maxPrice>
+                <stores>10</stores>
+            </PriceSet>
+        </Product>
+        <Product id="1988710867" categoryId="10150000">
+            <title>Nike Zoom Vomero+ 5 Men's Running Shoe</title>
+            <description>The Nike Zoom Vomero+ 5: Better fit, smoother rideA classic, refined. The Nike Zoom Vomero+ 5
+                Men?s Running Shoe combines the best Zoom Vomero features with an enhanced fit, smoother ride and
+                lighter weight. BenefitsBest for underpronators to...
+            </description>
+            <manufacturer>Nike</manufacturer>
+            <url>
+                http://www.bizrate.com/nike-zoom-vomero-5-mens-running-shoe--pid1988710867/compareprices__rf--af1__af_assettype_id--10__af_creative_id--6__af_id--0000__af_placement_id--1.html
+            </url>
+            <Images>
+                <Image ysize="60" xsize="60">http://image10.bizrate-images.com/resize?sq=60&amp;uid=1988710867</Image>
+                <Image ysize="100" xsize="100">http://image10.bizrate-images.com/resize?sq=100&amp;uid=1988710867
+                </Image>
+                <Image ysize="160" xsize="160">http://image10.bizrate-images.com/resize?sq=160&amp;uid=1988710867
+                </Image>
+                <Image ysize="400" xsize="400">http://image10.bizrate-images.com/resize?sq=400&amp;uid=1988710867
+                </Image>
+            </Images>
+            <relevancy>228441760727040.000000</relevancy>
+            <PriceSet>
+                <minPrice integral="6500">$65.00</minPrice>
+                <maxPrice integral="13000">$130.00</maxPrice>
+                <stores>6</stores>
+            </PriceSet>
+        </Product>
+        <Product id="2391623500" categoryId="10150000">
+            <title>NIKE Air Flight Classic Men's Basketball Shoe, Dark Grey/Black</title>
+            <description>Air Flight Classic Men's Basketball Shoe. Take Flight in this modern take on the Flight series
+                shoes from the late 90's. Features a heel Air-Sole, leather upper and a classic outsole traction pattern
+                that resembles the Jordan 4. Dark Grey/Black
+            </description>
+            <manufacturer>Nike</manufacturer>
+            <url>
+                http://www.bizrate.com/nike-air-flight-classic-mens-basketball-shoe-dark-greyblack--pid2391623500/compareprices__rf--af1__af_assettype_id--10__af_creative_id--6__af_id--0000__af_placement_id--1.html
+            </url>
+            <Images>
+                <Image ysize="60" xsize="60">http://image10.bizrate-images.com/resize?sq=60&amp;uid=2391623500</Image>
+                <Image ysize="100" xsize="100">http://image10.bizrate-images.com/resize?sq=100&amp;uid=2391623500
+                </Image>
+                <Image ysize="160" xsize="160">http://image10.bizrate-images.com/resize?sq=160&amp;uid=2391623500
+                </Image>
+                <Image ysize="400" xsize="400">http://image10.bizrate-images.com/resize?sq=400&amp;uid=2391623500
+                </Image>
+            </Images>
+            <relevancy>181517313638400.000000</relevancy>
+            <PriceSet>
+                <minPrice integral="8999">$89.99</minPrice>
+                <maxPrice integral="8999">$89.99</maxPrice>
+                <stores>2</stores>
+            </PriceSet>
+        </Product>
+        <Product id="2391625405" categoryId="10150000">
+            <title>NIKE Jordan AJF 4 Men's Basketball Shoe, Black/Varsity Red/Stealth</title>
+            <description>Jordan AJF 4 Men's Basketball Shoe. Air Jordan and Air Force 1. The Ultimate Collaboration! The
+                shoe game stands upon yet another threshold of change and this is your opportunity to be a part of the
+                change to come. The Air Jordan Franchise and the Air...
+            </description>
+            <manufacturer>Nike</manufacturer>
+            <url>
+                http://www.bizrate.com/nike-jordan-ajf-4-mens-basketball-shoe-blackvarsity-redstealth--pid2391625405/compareprices__rf--af1__af_assettype_id--10__af_creative_id--6__af_id--0000__af_placement_id--1.html
+            </url>
+            <Images>
+                <Image ysize="60" xsize="60">http://image10.bizrate-images.com/resize?sq=60&amp;uid=2391625405</Image>
+                <Image ysize="100" xsize="100">http://image10.bizrate-images.com/resize?sq=100&amp;uid=2391625405
+                </Image>
+                <Image ysize="160" xsize="160">http://image10.bizrate-images.com/resize?sq=160&amp;uid=2391625405
+                </Image>
+                <Image ysize="400" xsize="400">http://image10.bizrate-images.com/resize?sq=400&amp;uid=2391625405
+                </Image>
+            </Images>
+            <relevancy>162462640898048.000000</relevancy>
+            <PriceSet>
+                <minPrice integral="11998">$119.98</minPrice>
+                <maxPrice integral="14999">$149.99</maxPrice>
+                <stores>2</stores>
+            </PriceSet>
+        </Product>
+        <Product id="2390488292" categoryId="10150000">
+            <title>Nike Air Foamposite One Men's Shoe</title>
+            <description>The Nike Air Foamposite One: Locked-down fit, sleek street styleThe classic basketball
+                silhouette you know and love makes a comeback in the Nike Air Foamposite One, a street shoe with a big
+                Swoosh that pops and a fit that keeps your foot locked down....
+            </description>
+            <manufacturer>Nike</manufacturer>
+            <url>
+                http://www.bizrate.com/nike-air-foamposite-one-mens-shoe--pid2390488292/compareprices__rf--af1__af_assettype_id--10__af_creative_id--6__af_id--0000__af_placement_id--1.html
+            </url>
+            <Images>
+                <Image ysize="60" xsize="60">http://image10.bizrate-images.com/resize?sq=60&amp;uid=2390488292</Image>
+                <Image ysize="100" xsize="100">http://image10.bizrate-images.com/resize?sq=100&amp;uid=2390488292
+                </Image>
+                <Image ysize="160" xsize="160">http://image10.bizrate-images.com/resize?sq=160&amp;uid=2390488292
+                </Image>
+                <Image ysize="400" xsize="400">http://image10.bizrate-images.com/resize?sq=400&amp;uid=2390488292
+                </Image>
+            </Images>
+            <relevancy>128665484525568.000000</relevancy>
+            <PriceSet>
+                <minPrice integral="15997">$159.97</minPrice>
+                <maxPrice integral="20000">$200.00</maxPrice>
+                <stores>1</stores>
+            </PriceSet>
+        </Product>
+        <Product id="2374113969" categoryId="10150000">
+            <title>NIKE Shox Conundrum SI Men's Running Shoe</title>
+            <description>Shox Conundrum SI Men's Running Shoe. The Nike Shox Conundrum SI has the classic four puck Shox
+                heel for proven performance. Styling inspired by original Shox but with updated materials and colors.
+            </description>
+            <manufacturer>Nike</manufacturer>
+            <url>
+                http://www.bizrate.com/nike-shox-conundrum-si-mens-running-shoe--pid2374113969/compareprices__rf--af1__af_assettype_id--10__af_creative_id--6__af_id--0000__af_placement_id--1.html
+            </url>
+            <Images>
+                <Image ysize="60" xsize="60">http://image10.bizrate-images.com/resize?sq=60&amp;uid=2374113969</Image>
+                <Image ysize="100" xsize="100">http://image10.bizrate-images.com/resize?sq=100&amp;uid=2374113969
+                </Image>
+                <Image ysize="160" xsize="160">http://image10.bizrate-images.com/resize?sq=160&amp;uid=2374113969
+                </Image>
+                <Image ysize="400" xsize="400">http://image10.bizrate-images.com/resize?sq=400&amp;uid=2374113969
+                </Image>
+            </Images>
+            <relevancy>111822199848960.000000</relevancy>
+            <PriceSet>
+                <minPrice integral="6899">$68.99</minPrice>
+                <maxPrice integral="13499">$134.99</maxPrice>
+                <stores>4</stores>
+            </PriceSet>
+        </Product>
+        <Product id="2125796490" categoryId="10150000">
+            <title>NIKE Air Max LTD Men's Running Shoe</title>
+            <description>No Description</description>
+            <manufacturer>Nike</manufacturer>
+            <url>
+                http://www.bizrate.com/nike-air-max-ltd-mens-running-shoe--pid2125796490/compareprices__rf--af1__af_assettype_id--10__af_creative_id--6__af_id--0000__af_placement_id--1.html
+            </url>
+            <Images>
+                <Image ysize="60" xsize="60">http://image10.bizrate-images.com/resize?sq=60&amp;uid=2125796490</Image>
+                <Image ysize="100" xsize="100">http://image10.bizrate-images.com/resize?sq=100&amp;uid=2125796490
+                </Image>
+                <Image ysize="160" xsize="160">http://image10.bizrate-images.com/resize?sq=160&amp;uid=2125796490
+                </Image>
+                <Image ysize="400" xsize="400">http://image10.bizrate-images.com/resize?sq=400&amp;uid=2125796490
+                </Image>
+            </Images>
+            <relevancy>90278425788416.000000</relevancy>
+            <PriceSet>
+                <minPrice integral="6799">$67.99</minPrice>
+                <maxPrice integral="16000">$160.00</maxPrice>
+                <stores>7</stores>
+            </PriceSet>
+        </Product>
+        <Product id="2399924590" categoryId="10150000">
+            <title>NIKE Jordan Ol' School IV Men's Basketball Shoe, White/Varsity Red/Black/Charcoal</title>
+            <description>Jordan Ol' School IV Men's Basketball Shoe. The Jordan Ol' School IV Basketball Shoe is your
+                go-to shoe for game time. This fourth installment of the Ol' School series features a suede and mesh
+                upper for a lightweight fit that keeps your feet cool. A...
+            </description>
+            <manufacturer>Nike</manufacturer>
+            <url>
+                http://www.bizrate.com/nike-jordan-ol-school-iv-mens-basketball-shoe-whitevarsity-redblackcharcoal--pid2399924590/compareprices__rf--af1__af_assettype_id--10__af_creative_id--6__af_id--0000__af_placement_id--1.html
+            </url>
+            <Images>
+                <Image ysize="60" xsize="60">http://image10.bizrate-images.com/resize?sq=60&amp;uid=2399924590</Image>
+                <Image ysize="100" xsize="100">http://image10.bizrate-images.com/resize?sq=100&amp;uid=2399924590
+                </Image>
+                <Image ysize="160" xsize="160">http://image10.bizrate-images.com/resize?sq=160&amp;uid=2399924590
+                </Image>
+                <Image ysize="400" xsize="400">http://image10.bizrate-images.com/resize?sq=400&amp;uid=2399924590
+                </Image>
+            </Images>
+            <relevancy>68413959438336.000000</relevancy>
+            <PriceSet>
+                <minPrice integral="7998">$79.98</minPrice>
+                <maxPrice integral="9999">$99.99</maxPrice>
+                <stores>1</stores>
+            </PriceSet>
+        </Product>
+    </Products>
+</ProductResponse>

@@ -1,0 +1,49 @@
+Shopzilla Publisher API Client
+------------------------------
+
+This library allows registered members of the Shopzilla publisher program to programmatically access the Shopzilla
+Catalog API. See http://publisher.shopzilla.com for more information.
+
+To get started:
+1) Make sure you have a recent version of the java JDK installed (1.6.x). Set JAVA_HOME as necessary in your terminal.
+   Verify that this is correctly configured by running:
+
+     java -version
+
+2) Install Maven 2.x; Verify that this is correctly configured by running the following command in your terminal; You
+   should see a usage/help output:
+
+     mvn
+
+3) Fetch a copy of this code (after making sure that you've installed git):
+
+     git clone git@github.com:sz-alook/shopzilla-catalog-api-client.git
+
+4) Set up environment variables with your Shopzilla publisher api key and id:
+
+     export PUBLISHER_ID=<your id>
+     export PUBLISHER_API_KEY=<your api key>
+
+5) Run the following command to build the code and make sample requests against the Catalog API:
+
+     mvn clean install
+
+   You should see output towards the end that looks as below (with your credentials instead of <KEY>/<ID>). This is the
+   Url used to retrieve the product data. If you browse to this URL, you'll see an example of what data is available
+   from this type of query.
+
+        2011-04-07 21:50:57,742 DEBUG [org.springframework.web.client.RestTemplate] - <Created GET request for
+        "catalog.bizrate.com/services/catalog/v1/us/product?apiKey=<KEY>&publisherId=<ID>&placementId=1&
+        categoryId=&keyword=nike+men%2527s+shoes&productId=&productIdType=&offersOnly=false&merchantId=&brandId=&
+        biddedOnly=&minPrice=&maxPrice=&minMarkdown=&zipCode=&freeShipping=&start=0&results=10&startOffers=0&
+        resultsOffers=0&sort=relevancy_desc&attFilter=&showAttributes=false&showProductAttributes=false&
+        minRelevancyScore=100&maxAge=&showRawUrl=&imageOnly=">
+
+   There are domain object available, corresponding to the XML elements in this XML response. See the XSD schema, in
+   model/src/main/resources/service.xsd for a full description. Additionally, if you view the source code in the folder
+   model/target/generated-sources/xjc you can see a series of Java objects representing the data returned by the API.
+
+   ProductClient.java, for instance, returns a ProductResponse object, with methods getOffers(), getProducts(), etc.
+   These calls can be integrated into your applications as you please.
+
+6) Make cool applications!

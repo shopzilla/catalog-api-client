@@ -1,0 +1,1042 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.shopzilla.com/services/catalog" targetNamespace="http://www.shopzilla.com/services/catalog" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+    <xs:annotation>
+        <xs:documentation>
+        <!--
+          ~ Copyright 2011 Shopzilla.com
+          ~
+          ~ Licensed under the Apache License, Version 2.0 (the "License");
+          ~ you may not use this file except in compliance with the License.
+          ~ You may obtain a copy of the License at
+          ~
+          ~      http://www.apache.org/licenses/LICENSE-2.0
+          ~
+          ~ Unless required by applicable law or agreed to in writing, software
+          ~ distributed under the License is distributed on an "AS IS" BASIS,
+          ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+          ~ See the License for the specific language governing permissions and
+          ~ limitations under the License.
+          -->
+        </xs:documentation>
+    </xs:annotation>
+
+    <xs:element name="ProductResponse">
+        <xs:annotation>
+            <xs:documentation>Top-level container element for responses from the Product Service</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Classification" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>
+                            The Classification element is a container for analysis about the request.
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="relevancyScore" minOccurs="0" type="xs:unsignedInt">
+                                <xs:annotation>
+                                    <xs:documentation>Ranges from 1 to 1000, with 1000 being the "most relevant".
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="RelatedAttributes" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>
+            RelatedAttributes contains a set of product Attributes that are related to the request,
+            and may be used to further filter subsequent requests.
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Attribute" minOccurs="0" maxOccurs="unbounded" type="AttributeType"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Products" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>
+            Products contains Products or Offers that matched the specified criteria.
+            It is omitted if the request specifies that only offers should be returned.
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="PriceSet" minOccurs="0" maxOccurs="1" type="PriceSetType">
+                                <xs:annotation>
+                                    <xs:documentation>
+            	  Gives the min and max price boundaries for the result set. Not included if there are no results.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                                <xs:annotation>
+                                    <xs:documentation>
+            	  The search results will be a mix of Products and Offers which are not aligned to any Product.
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:element name="Product" type="ProductType"/>
+                                <xs:element name="Offer" type="OfferType"/>
+                            </xs:choice>
+                        </xs:sequence>
+                        <xs:attributeGroup ref="ResultsGroup"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Offers" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>
+            Offers contains data for offers that matched the specified criteria.  It is omitted
+            unless the request specifies that only offers should be returned.
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="PriceSet" minOccurs="0" maxOccurs="1" type="PriceSetType">
+                                <xs:annotation>
+                                    <xs:documentation>
+            	  Gives the min and max price boundaries for the result set. Not included if there are no results.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="Offer" type="OfferType" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                        <xs:attributeGroup ref="ResultsGroup"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="TaxonomyResponse">
+        <xs:annotation>
+            <xs:documentation>
+        Top-level container element for responses from the Taxonomy Service.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Taxonomy" minOccurs="0" maxOccurs="1">
+                    <xs:annotation>
+                        <xs:documentation>Taxonomy contains a list of Category elements, which can constitute a tree,
+              a forest or simply a flat list.  Most commonly, it is a list (in the case of search results) or a tree (in the case of
+              lookups on categoryIds).
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Categories" type="CategoriesType"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="BrandsResponse">
+        <xs:annotation>
+            <xs:documentation>
+          Top-level container element for responses from the Brand Service.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Brands" type="BrandsType" minOccurs="0" maxOccurs="1">
+
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="BrandsType">
+        <xs:sequence>
+            <xs:element name="Brand" type="BrandType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="totalResults" type="xs:long"/>
+        <xs:attribute name="includedResults" type="xs:long"/>
+    </xs:complexType>
+
+    <xs:element name="MerchantResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Merchants" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>
+            The Merchants element either contains a list of MerchantType elements, each of which will include a "Details" elements
+            depending on whether the extra level of information in MerchantDetailType has been specifically requested.
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Merchant" type="MerchantType" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="AttributeType">
+        <xs:annotation>
+            <xs:documentation>AttributeType represents a product attribute such as size, color, brand, etc.
+        An attribute may take on many values.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="AttributeValues" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="AttributeValue" type="AttributeValueType" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id" type="attributeIdType" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="AttributeValueType">
+        <xs:annotation>
+            <xs:documentation>AttributeValueType represents a particular value of a given product attribute.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="count" type="xs:unsignedInt" default="0" minOccurs="0"/>
+            <xs:element name="relevancy" type="xs:decimal" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="attributeIdType" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="CertificationType">
+        <xs:annotation>
+            <xs:documentation>
+       CertificationType tells you whether or not a merchant is certified, and provides images that can serve as the certification icon.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Image" type="ImageType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="certified" type="xs:boolean" default="true"/>
+    </xs:complexType>
+
+    <xs:simpleType name="RatingValueType">
+        <xs:annotation>
+            <xs:documentation>
+        Rating values are in the range [0.0, 10.0], where 0 is the worst and 10 is the best.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="3"/>
+            <xs:fractionDigits value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="RatingType">
+        <xs:annotation>
+            <xs:documentation>
+        RatingType gives you the basic rating data plus images
+        that can serve as the icon for that rating value.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Image" type="ImageType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="value" type="RatingValueType" use="required"/>
+    </xs:complexType>
+
+
+    <xs:complexType name="ImageType">
+        <xs:annotation>
+            <xs:documentation>
+        ImageType is the URL for an image, plus size information.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="xs:anyURI">
+                <xs:attribute name="xsize" type="xs:unsignedInt" use="optional"/>
+                <xs:attribute name="ysize" type="xs:unsignedInt" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+
+    <xs:attributeGroup name="ResultsGroup">
+        <xs:attribute name="totalResults" type="xs:unsignedInt" use="required"/>
+        <xs:attribute name="includedResults" type="xs:unsignedInt" use="required"/>
+    </xs:attributeGroup>
+
+    <xs:group name="CatalogStatsElementGroup">
+        <xs:sequence>
+            <xs:element name="productCount" type="xs:int" minOccurs="0"/>
+            <xs:element name="offerCount" type="xs:int" minOccurs="0"/>
+        </xs:sequence>
+    </xs:group>
+
+    <xs:complexType name="MerchantRatingType">
+        <xs:sequence>
+            <xs:element name="Overall" type="RatingType"/>
+            <xs:element name="ShopAgain" type="RatingType" minOccurs="0"/>
+            <xs:element name="OnTimeDeliv" type="RatingType" minOccurs="0"/>
+            <xs:element name="CustSupport" type="RatingType" minOccurs="0"/>
+            <xs:element name="ItemMetExpect" type="RatingType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="MerchRatingType">
+        <xs:sequence>
+            <xs:element name="ratingPeriod" type="xs:int" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="lifeTimeReviewCount" type="xs:long" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="DateFirstRated" type="xs:dateTime" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="DateFirstCertified" type="xs:dateTime" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="DimensionalAverages" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="Average" minOccurs="1" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="SurveyCounts" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Count" type="SurveyCount" minOccurs="1" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Percentages" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="PercentagePeriod" type="PercentagePeriodType" minOccurs="1" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Status" type="Status" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="CountryCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="url" type="xs:anyURI" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="urlDetail" type="xs:anyURI" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Status">
+        <xs:sequence>
+            <xs:element name="Certification" minOccurs="1">
+                <xs:complexType>
+            <xs:simpleContent><xs:extension base="xs:boolean">
+                <xs:attribute name="url" type="xs:anyURI" use="required"/>
+                </xs:extension></xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="rated" type="xs:boolean" default="true"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SurveyCount">
+        <xs:sequence>
+            <xs:element name="SurveyType" minOccurs="1">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="pos"/>
+                        <xs:enumeration value="ff"/>
+                        <xs:enumeration value="panel"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Count" type="xs:long" minOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="period" type="xs:int" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="PercentagePeriodType">
+        <xs:sequence>
+            <xs:element name="Percentage" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                    <xs:element name="PercentType" minOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="positive"/>
+                                <xs:enumeration value="negative"/>
+                                <xs:enumeration value="neutral"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="Percent" type="xs:decimal" minOccurs="1"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="period" type="xs:int" use="required"/>
+    </xs:complexType>
+
+    <xs:element name="MerchantsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Merchant" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="MerchantInfo" type="MerchInfoType" minOccurs="0" maxOccurs="1">
+                            </xs:element>
+                            <xs:element name="MerchantRating" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation>Merchant Rating information.</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Rating" type="MerchRatingType" minOccurs="1" maxOccurs="1"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="MerchantReviews" minOccurs="0" maxOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation>Merchant Review information.</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Review" type="MerchantReviewType" minOccurs="1" maxOccurs="unbounded"/>
+                                    </xs:sequence>
+                                    <xs:attribute name="numberOfReviews" type="xs:long" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="mid" type="xs:long" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="totalMerchants" type="xs:long" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="MerchInfoType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="url" type="xs:anyURI" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="logoUrl" type="xs:anyURI" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="totalProductCount" type="xs:long" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="countryCode" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Details" type="MerchantDetailType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>The details are omitted unless specifically requested.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="MerchantReviewType">
+        <xs:sequence>
+            <xs:element name="nickname" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="url" type="xs:anyURI" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="DimensionalAverages" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="Average" minOccurs="1" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ffComment" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="posComment" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="reviewDate" type="xs:dateTime" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="hasMerchantResponse" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="ReviewResponses" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="sourceOfLastResponse" type="ResponseSourceEnumType" minOccurs="0" maxOccurs="1"/>
+                        <xs:element name="ReviewResponse" type="ReviewResponse" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="reviewId" type="xs:long" use="required"/>
+    </xs:complexType>
+
+    <xs:simpleType name="ResponseSourceEnumType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Merchant"/>
+            <xs:enumeration value="Consumer"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:element name="Average">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:decimal">
+                    <xs:attribute name="dimension" use="required" type="xs:string"/>
+                    <xs:attribute name="image" use="required" type="xs:anyURI"/>
+                    <xs:attribute name="min" use="optional" default="1" type="xs:int"/>
+                    <xs:attribute name="max" use="optional" default="10" type="xs:int"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:complexType name="ReviewResponse">
+        <xs:sequence>
+            <xs:element name="responseText" type="xs:string" minOccurs="1"/>
+            <xs:element name="responseSource" type="ResponseSourceEnumType" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+
+    <xs:complexType name="MerchantType">
+        <xs:annotation>
+            <xs:documentation>Basic merchant meta data</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="xs:string" minOccurs="0"/>
+            <xs:element name="url" type="xs:anyURI" minOccurs="0"/>
+            <xs:element name="logoUrl" type="xs:anyURI" minOccurs="0"/>
+            <xs:group ref="CatalogStatsElementGroup"/>
+            <xs:element name="Certification" type="CertificationType" minOccurs="0"/>
+            <xs:element name="Rating" type="MerchantRatingType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>If certification value indicates unrated merchant, the Rating element is suppressed.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Details" type="MerchantDetailType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>The details are omitted unless specifically requested.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id" type="mid" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="MerchantContactType">
+        <xs:annotation>
+            <xs:documentation>Contact information for a Merchant
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="address1" type="xs:string" minOccurs="0"/>
+            <xs:element name="address2" type="xs:string" minOccurs="0"/>
+            <xs:element name="city" type="xs:string" minOccurs="0"/>
+            <xs:element name="state" type="xs:string" minOccurs="0"/>
+            <xs:element name="postalCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="country" type="xs:string" minOccurs="0"/>
+            <xs:element name="phone" type="xs:string" minOccurs="0"/>
+            <xs:element name="fax" type="xs:string" minOccurs="0"/>
+            <xs:element name="email" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+
+    </xs:complexType>
+
+    <xs:complexType name="MerchantFeaturesType">
+        <xs:annotation>
+            <xs:documentation>Information about what features a merchant offers.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="orderPhone" type="xs:string" minOccurs="0"/>
+            <xs:element name="orderTollFree" type="xs:string" minOccurs="0"/>
+            <xs:element name="orderFax" type="xs:string" minOccurs="0"/>
+            <xs:element name="orderOnline" type="xs:string" minOccurs="0"/>
+            <xs:element name="orderEmail" type="xs:string" minOccurs="0"/>
+            <xs:element name="orderOneClick" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="search" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="alwaysConfidential" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="requestConfidential" type="xs:boolean" minOccurs="0"/>
+
+            <xs:element name="liveService" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="orderTracking" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="shoppingCart" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="secure" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="register" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="guaranteed" type="xs:boolean" minOccurs="0"/>
+
+            <xs:element name="deliveryPriority" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="deliveryNextDay" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="deliveryFirstClass" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="deliveryGround" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="deliveryIntlExpress" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="deliveryIntlRegular" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="deliveryOther" type="xs:string" minOccurs="0"/>
+
+            <xs:element name="payAmex" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="payDiscover" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="payMasterCard" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="payVisa" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="payCheck" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="payDiners" type="xs:boolean" minOccurs="0"/>
+            <xs:element name="payOther" type="xs:string" minOccurs="0"/>
+
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="MerchantDetailType">
+        <xs:annotation>
+            <xs:documentation>Adds an extra level of details to the MerchantType
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="description" type="xs:string" minOccurs="0"/>
+            <xs:element name="memberSince" type="xs:date"/>
+            <xs:element name="surveyCount" type="xs:unsignedInt"/>
+            <xs:element name="surveyCountLife" type="xs:unsignedInt"/>
+            <xs:element name="Contact" type="MerchantContactType"/>
+            <xs:element name="Features" type="MerchantFeaturesType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:attributeGroup name="IdAttributeGroup">
+        <xs:annotation>
+            <xs:documentation>Product identifier (pid) common to compacted product and offer types</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="id" type="uid" use="required"/>
+    </xs:attributeGroup>
+
+    <xs:attributeGroup name="CategoryIdAttributeGroup">
+        <xs:attribute name="categoryId" type="uid" use="required"/>
+    </xs:attributeGroup>
+
+    <xs:group name="ProductOfferElementGroup">
+        <xs:annotation>
+            <xs:documentation>Elements common to compacted product and offer types</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="title" type="xs:string" minOccurs="0"/>
+            <xs:element name="mature" type="xs:boolean" default="false" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Is this product/offer for mature eyes only?</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="description" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Description</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="manufacturer" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Manufacturer</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="url" type="xs:anyURI" minOccurs="0"/>
+            <xs:element name="rawUrl" type="xs:anyURI" minOccurs="0"/>
+            <xs:choice minOccurs="0">
+                <xs:element name="Images" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Image" type="ImageType" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Image" type="ImageType"/>
+            </xs:choice>
+            <xs:choice minOccurs="0">
+                <xs:element name="Skus" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="sku" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="sku" type="xs:string"/>
+            </xs:choice>
+            <xs:element name="longDescription" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:group>
+
+    <xs:complexType name="ProductType">
+        <xs:annotation>
+            <xs:documentation>Represents a compacted product that exists independent of offers.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:group ref="ProductOfferElementGroup"/>
+            <xs:element name="relevancy" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="Rating" type="RatingType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Rating is 1-5, represented here to two decimal places</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="PriceSet" minOccurs="0" maxOccurs="1" type="PriceSetType"/>
+            <xs:element name="Attributes" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+            		Documents detailed features of a product.  Only included when a single product is requested.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Attribute" minOccurs="0" maxOccurs="unbounded" type="AttributeType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Offers" type="ProductOffersType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attributeGroup ref="IdAttributeGroup"/>
+        <xs:attributeGroup ref="CategoryIdAttributeGroup"/>
+    </xs:complexType>
+
+    <xs:complexType name="OfferType">
+        <xs:annotation>
+            <xs:documentation>Represents an offer for an item which may or may not be aligned to a specific product.
+        If the OfferType instance does not have a productId attribute, then it is a stand-alone offer, with no
+        relationship to a specific product.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:group ref="ProductOfferElementGroup"/>
+            <xs:element name="detailUrl" type="xs:anyURI" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Link to the offer's page on BizRate.com.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="price" type="PriceType" minOccurs="0"/>
+            <xs:element name="originalPrice" type="PriceType" minOccurs="0"/>
+            <xs:element name="markdownPercent" type="xs:decimal" minOccurs="0">
+            	<xs:annotation>
+                    <xs:documentation>
+            		Price discount percent (orginalPrice-price/orginalPrice*100)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="shipCost" type="PriceType" minOccurs="0"/>
+            <xs:element name="tax" type="PriceType" minOccurs="0"/>
+            <xs:element name="totalPrice" type="PriceType" minOccurs="0"/>
+            <xs:element name="bidded" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+            	Does this offer have a non-zero bid?
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="merchantProductId" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Merchant's product ID</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="merchantName" type="xs:string" minOccurs="0"/>
+            <xs:element name="MerchantRating" type="RatingType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>The merchant's overall rating</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="merchantLogoUrl" type="xs:anyURI" minOccurs="0"/>
+            <xs:element name="condition" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+		        NEW: New
+                        USED: Used
+                        OPEN: Open Box
+                        REFURBISHED: Refurbished
+                        OEM: OEM
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="NEW">
+                            <xs:annotation>
+                                <xs:documentation>New</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="USED">
+                            <xs:annotation>
+                                <xs:documentation>Used</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="OPEN">
+                            <xs:annotation>
+                                <xs:documentation>Open Box</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="REFURBISHED">
+                            <xs:annotation>
+                                <xs:documentation>Refurbished</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="OEM">
+                            <xs:annotation>
+                                <xs:documentation>OEM</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="stock" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>unknown: See Site for Availability
+                        IN: In Stock
+                        OUT: Out of Stock
+                        BACKORDER: Back-Order
+                        LIMITED: Limited Quantity
+                        PREORDER: Pre-Order
+                        SPECIAL: Special Order
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="UNKNOWN">
+                            <xs:annotation>
+                                <xs:documentation>See Site for Availability</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="IN">
+                            <xs:annotation>
+                                <xs:documentation>In Stock</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="OUT">
+                            <xs:annotation>
+                                <xs:documentation>Out of Stock</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="BACKORDER">
+                            <xs:annotation>
+                                <xs:documentation>Back-Order</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="LIMITED">
+                            <xs:annotation>
+                                <xs:documentation>Limited Quantity</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="PREORDER">
+                            <xs:annotation>
+                                <xs:documentation>Pre-Order</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="SPECIAL">
+                            <xs:annotation>
+                                <xs:documentation>Special Order</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="originPostalCode" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Zip code offer shipped from</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="shipAmount" type="PriceType" minOccurs="0"/>
+            <xs:element name="shipType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>UPS: UPS
+                        USPS: USPS
+                        FEDEX: FedEx
+                        CUSTOM: Custom
+                        FREE: Free Shipping
+                        UNKNOWN: "See Site"
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="UPS">
+                            <xs:annotation>
+                                <xs:documentation>UPS</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="USPS">
+                            <xs:annotation>
+                                <xs:documentation>USPS</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="FEDEX">
+                            <xs:annotation>
+                                <xs:documentation>FedEx</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="CUSTOM">
+                            <xs:annotation>
+                                <xs:documentation>Custom</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="FREE">
+                            <xs:annotation>
+                                <xs:documentation>Free Shipping</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="UNKNOWN">
+                            <xs:annotation>
+                                <xs:documentation>"See Site"</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="shipWeight" type="xs:decimal" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Offer unit weight in US lbs.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="promotion" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Promotional identifier. Current values:
+                        1 Authorized dealer
+                        2 See site for better price
+                        3 Same day shipping
+                        4 Kit special
+                        5 2-3 day shipping
+                        6 Store pickup available
+                        7 Price before rebate
+                        8 Gift with purchase
+                        9 Buy direct from manufacturer
+                        10 Extended warranty
+                        11 Earn store loyalty points
+                        12 Credit application required
+                        13 Downloadable software
+                        14 Shipped from manufacturer
+                        15 Limited time offer
+                        16 Rebate available
+                        17 7-14 day shipping
+                        18 2-4 week shipping
+                        19 % off special offer
+                        20 Downloadable format
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="relevancy" type="xs:decimal" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attributeGroup ref="IdAttributeGroup"/>
+        <xs:attributeGroup ref="CategoryIdAttributeGroup"/>
+        <xs:attribute name="merchantId" type="mid" use="required"/>
+        <xs:attribute name="productId" type="uid" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="ProductOffersType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="Offer" type="OfferType"/>
+        </xs:sequence>
+        <xs:attribute name="totalOffers" type="xs:unsignedInt" use="required"/>
+        <xs:attribute name="includedOffers" type="xs:unsignedInt" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="CategoryType">
+        <xs:annotation>
+            <xs:documentation>Category represents a node in the Taxonomy hierarchy used to classify
+        products and offers.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="xs:string" maxOccurs="1" minOccurs="0"/>
+            <xs:element name="numberOfProducts" type="xs:int" maxOccurs="1" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Currently the data is not available; to be added.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="minimumBid" type="xs:string" maxOccurs="1" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>A local currency value indicating the minimum price a merchant can bid on products within a category.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="url" type="xs:anyURI"/>
+            <xs:element name="Children" type="CategoriesType" maxOccurs="1" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>The children element contains the Category nodes that are children of the current one.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Ancestors" type="CategoriesType" maxOccurs="1" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Ancestors are ordered descending from the top level category; from most general to most specific.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:long" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="CategoriesType">
+        <xs:sequence>
+            <xs:element name="Category" type="CategoryType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+
+    <xs:complexType name="BrandType">
+        <xs:annotation>
+            <xs:documentation>Meta data about brands</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="xs:string" minOccurs="0"/>
+            <xs:group ref="CatalogStatsElementGroup"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:long" use="required"/>
+    </xs:complexType>
+
+    <!-- Common Types -->
+    <xs:simpleType name="uid">
+        <xs:annotation>
+            <xs:documentation>"Universal" ID space for products and offers</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:unsignedInt"/>
+    </xs:simpleType>
+    <xs:simpleType name="uidList">
+        <xs:annotation>
+            <xs:documentation>"List of space separated Universal" IDs for products and offers</xs:documentation>
+        </xs:annotation>
+        <xs:list itemType="xs:unsignedInt"/>
+    </xs:simpleType>
+    <xs:simpleType name="cid">
+        <xs:annotation>
+            <xs:documentation>Category ID</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:unsignedInt"/>
+    </xs:simpleType>
+    <xs:simpleType name="mid">
+        <xs:annotation>
+            <xs:documentation>Merchant ID</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:unsignedInt"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="money">
+        <xs:annotation>
+            <xs:documentation>Integer quantities of smallest "tenderable" denomination (e.g., cents in US)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:unsignedInt"/>
+    </xs:simpleType>
+
+    <xs:complexType name="PriceSetType">
+        <xs:annotation>
+            <xs:documentation>Conveys simple aggregate information about a set of prices.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="minPrice" type="PriceType">
+                <xs:annotation>
+                    <xs:documentation>Minimum price</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="maxPrice" type="PriceType">
+                <xs:annotation>
+                    <xs:documentation>Maximum price</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="stores" type="xs:unsignedInt" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Number of stores whose prices are included in the set</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PriceType">
+        <xs:annotation>
+            <xs:documentation>
+       	The money type is used to convey prices.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="integral" type="xs:unsignedInt" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Integer quantities of smallest "tenderable" denomination (e.g., cents in US)
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:simpleType name="attributeIdType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+</xs:schema>

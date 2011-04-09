@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2011 Shopzilla.com
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="productService" class="com.shopzilla.api.service.ProductService">
+        <property name="marshaller" ref="jaxbMarshaller" />
+        <property name="unmarshaller" ref="jaxbMarshaller" />
+    </bean>
+
+    <bean id="productClient" class="com.shopzilla.api.client.ProductClient">
+        <property name="restTemplate" ref="restTemplate"/>
+        <property name="productService" ref="productService"/>
+    </bean>
+
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+        <property name="messageConverters">
+            <list>
+                <bean id="messageConverter" class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+                    <property name="marshaller" ref="jaxbMarshaller"/>
+                    <property name="unmarshaller" ref="jaxbMarshaller"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="jaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <property name="classesToBeBound">
+            <list>
+                <value>com.shopzilla.services.catalog.ProductResponse</value>
+                <value>com.shopzilla.services.catalog.ProductType</value>
+                <value>com.shopzilla.services.catalog.ProductOffersType</value>
+            </list>
+        </property>
+        <property name="schema" value="classpath:service.xsd"/>
+    </bean>
+
+    <bean id="credentialFactory" class="com.shopzilla.api.client.helper.CredentialFactory" />
+
+
+
+</beans>
