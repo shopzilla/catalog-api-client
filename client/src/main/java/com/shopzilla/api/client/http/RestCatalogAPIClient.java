@@ -20,7 +20,8 @@ import org.springframework.web.client.RestOperations;
 
 import com.shopzilla.api.client.CatalogAPIClient;
 import com.shopzilla.api.client.ProductSearchRequest;
-import com.shopzilla.api.client.ProductUrl;
+import com.shopzilla.api.client.UrlProvider;
+import com.shopzilla.api.client.brand.BizrateUrlProvider;
 import com.shopzilla.api.client.model.CatalogResponse;
 import com.shopzilla.api.client.model.CatalogResponseModelAdapter;
 import com.shopzilla.services.catalog.ProductResponse;
@@ -31,13 +32,15 @@ import com.shopzilla.services.catalog.ProductResponse;
  */
 public class RestCatalogAPIClient implements CatalogAPIClient {
 
+    private UrlProvider urlProvider = new BizrateUrlProvider();
+
     private RestOperations restTemplate;
 
     public CatalogResponse performSearch(ProductSearchRequest request) {
 
-        ProductResponse result = restTemplate.getForObject(ProductUrl.PRODUCT_URL,
+        ProductResponse result = restTemplate.getForObject(urlProvider.getProductServiceURL(),
                 ProductResponse.class,
-                ProductUrl.makeParameterMap(request));
+                urlProvider.makeParameterMap(request));
 
         return CatalogResponseModelAdapter.fromCatalogAPI(result);
     }
@@ -45,6 +48,10 @@ public class RestCatalogAPIClient implements CatalogAPIClient {
     @Required
     public void setRestTemplate(RestOperations restTemplate) {
         this.restTemplate = restTemplate;
+    }
+
+    public void setUrlProvider(UrlProvider urlProvider) {
+        this.urlProvider = urlProvider;
     }
 
 }
