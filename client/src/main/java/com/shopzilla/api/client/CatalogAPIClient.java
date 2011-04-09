@@ -15,7 +15,10 @@
  */
 package com.shopzilla.api.client;
 
+import java.util.List;
+
 import com.shopzilla.api.client.model.CatalogResponse;
+import com.shopzilla.api.client.model.Category;
 
 /**
  * @author sscanlon
@@ -23,5 +26,8 @@ import com.shopzilla.api.client.model.CatalogResponse;
  */
 public interface CatalogAPIClient {
 
-    CatalogResponse performSearch(ProductSearchRequest request);
+    public CatalogResponse performSearch(ProductSearchRequest request);
+
+    public List<Category> performCategorySearch(ProductSearchRequest request);
+
 }

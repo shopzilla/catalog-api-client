@@ -15,6 +15,8 @@
  */
 package com.shopzilla.api.client.http;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.client.RestOperations;
 
@@ -24,7 +26,10 @@ import com.shopzilla.api.client.UrlProvider;
 import com.shopzilla.api.client.brand.BizrateUrlProvider;
 import com.shopzilla.api.client.model.CatalogResponse;
 import com.shopzilla.api.client.model.CatalogResponseModelAdapter;
+import com.shopzilla.api.client.model.Category;
+import com.shopzilla.api.client.model.CategoryModelAdapter;
 import com.shopzilla.services.catalog.ProductResponse;
+import com.shopzilla.services.catalog.TaxonomyResponse;
 
 /**
  * @author sscanlon
@@ -43,6 +48,14 @@ public class RestCatalogAPIClient implements CatalogAPIClient {
                 urlProvider.makeParameterMap(request));
 
         return CatalogResponseModelAdapter.fromCatalogAPI(result);
+    }
+
+    public List<Category> performCategorySearch(ProductSearchRequest request) {
+        TaxonomyResponse response = restTemplate.getForObject(urlProvider.getTaxonomyServiceURL(),
+                TaxonomyResponse.class,
+                urlProvider.makeParameterMap(request));
+
+        return CategoryModelAdapter.fromCatalogAPI(response);
     }
 
     @Required
