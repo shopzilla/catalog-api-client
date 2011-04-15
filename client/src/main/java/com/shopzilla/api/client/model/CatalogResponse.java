@@ -24,6 +24,8 @@ import java.util.List;
  */
 public class CatalogResponse {
 
+    private Long totalResults;
+
     private Long relevancyScore;
 
     private List<Attribute> relatedAttributes;
@@ -60,6 +62,14 @@ public class CatalogResponse {
 
     public void setRelevancyScore(Long relevancyScore) {
         this.relevancyScore = relevancyScore;
+    }
+
+    public Long getTotalResults() {
+        return totalResults;
+    }
+
+    public void setTotalResults(Long totalResults) {
+        this.totalResults = totalResults;
     }
 
 }

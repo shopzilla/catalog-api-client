@@ -28,7 +28,7 @@ public class Offer {
 
     private Long id;
     private Long mid;
-    private Long price;
+    private Price price;
     private Long categoryId;
 
     private String title;
@@ -91,11 +91,11 @@ public class Offer {
         this.mid = mid;
     }
 
-    public Long getPrice() {
+    public Price getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Price price) {
         this.price = price;
     }
 

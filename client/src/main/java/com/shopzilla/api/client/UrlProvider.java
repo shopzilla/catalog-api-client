@@ -15,19 +15,21 @@
  */
 package com.shopzilla.api.client;
 
-import java.util.List;
-
-import com.shopzilla.api.client.model.CatalogResponse;
-import com.shopzilla.api.client.model.Category;
+import java.util.Map;
 
 /**
  * @author sscanlon
  * 
  */
-public interface CatalogAPIClient {
+public interface UrlProvider {
 
-    public CatalogResponse performSearch(ProductSearchRequest request);
+    public String getProductServiceURL();
 
-    public List<Category> performCategorySearch(ProductSearchRequest request);
+    public String getTaxonomyServiceURL();
 
+    public String getBrandServiceURL();
+
+    public String getMerchantServiceURL();
+
+    public Map<String, ?> makeParameterMap(ProductSearchRequest request);
 }

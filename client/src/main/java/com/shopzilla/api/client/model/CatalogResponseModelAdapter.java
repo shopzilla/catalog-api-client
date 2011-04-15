@@ -87,9 +87,11 @@ public class CatalogResponseModelAdapter {
         final ArrayList<Offer> offers = new ArrayList<Offer>();
         if (result.getProducts() != null
                 && CollectionUtils.isNotEmpty(result.getProducts().getProductOrOffer())) {
+            toReturn.setTotalResults(result.getProducts().getTotalResults());
             offers.addAll(convertOffers(result.getProducts().getProductOrOffer()));
         }
         if (result.getOffers() != null && CollectionUtils.isNotEmpty(result.getOffers().getOffer())) {
+            toReturn.setTotalResults(result.getOffers().getTotalResults());
             offers.addAll(convertOffers(result.getOffers().getOffer()));
         }
         
@@ -118,7 +120,10 @@ public class CatalogResponseModelAdapter {
             o.setMid(catalogOffer.getMerchantId());
             
             if (catalogOffer.getPrice() != null) {
-                o.setPrice(catalogOffer.getPrice().getIntegral());
+                Price p = new Price();
+                p.setIntegral(catalogOffer.getPrice().getIntegral());
+                p.setPrice(catalogOffer.getPrice().getValue());
+                o.setPrice(p);
             }
             o.setTitle(catalogOffer.getTitle());
             o.setDescription(catalogOffer.getDescription());
