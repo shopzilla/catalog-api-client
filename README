@@ -17,7 +17,7 @@ To get started:
 
 3) Fetch a copy of this code (after making sure that you've installed git):
 
-     git clone git@github.com:sz-alook/shopzilla-catalog-api-client.git
+     git clone https://sz-alook@github.com/shopzilla/catalog-api-client.git
 
 4) Set up environment variables with your Shopzilla publisher api key and id:
 

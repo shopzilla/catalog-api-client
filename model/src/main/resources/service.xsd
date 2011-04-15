@@ -41,6 +41,12 @@
                                     </xs:documentation>
                                 </xs:annotation>
                             </xs:element>
+                            <xs:element name="searchUrl" minOccurs="0" type="xs:string">
+                                <xs:annotation>
+                                    <xs:documentation>Link to the Bizrate search results.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
