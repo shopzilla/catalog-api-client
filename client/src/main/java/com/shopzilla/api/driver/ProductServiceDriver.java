@@ -30,7 +30,7 @@ public class ProductServiceDriver {
 
     public static void main(String[] args) throws JAXBException, IOException {
 
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:applicationContext-client.xml");
         ProductService service = applicationContext.getBean("productService", ProductService.class);
 
         //service.xmlInputStreamToJava();

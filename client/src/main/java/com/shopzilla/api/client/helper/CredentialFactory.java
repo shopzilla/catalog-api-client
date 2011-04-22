@@ -46,15 +46,7 @@ public class CredentialFactory {
         return publisherId;
     }
 
-    public void setPublisherId(String publisherId) {
-        this.publisherId = publisherId;
-    }
-
     public String getPublisherApiKey() {
         return publisherApiKey;
-    }
-
-    public void setPublisherApiKey(String publisherApiKey) {
-        this.publisherApiKey = publisherApiKey;
     }
 }

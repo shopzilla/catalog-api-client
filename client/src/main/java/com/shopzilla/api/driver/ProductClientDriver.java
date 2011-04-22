@@ -29,7 +29,7 @@ public class ProductClientDriver {
     private static final String keyword = "nike+men%27s+shoes";
 
     public static void main(String[] args) {
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:applicationContext-client.xml");
         ProductClient client = applicationContext.getBean("productClient", ProductClient.class);
         credentialFactory = applicationContext.getBean("credentialFactory", CredentialFactory.class);
         apiKey = credentialFactory.getPublisherApiKey();

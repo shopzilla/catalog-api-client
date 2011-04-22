@@ -31,7 +31,7 @@ import static junit.framework.Assert.assertEquals;
  * @since 3/27/11
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:spring/applicationContext-test.xml"})
+@ContextConfiguration(locations = {"classpath:spring/applicationContext-client-test.xml"})
 public class ProductClientIntegrationTest {
     @Autowired
     ProductClient client;
