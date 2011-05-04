@@ -15,10 +15,39 @@
  */
 package com.shopzilla.api.client.model;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+
 /**
  * @author sscanlon
  *
  */
 public class Product {
+    private String title;
+    private String url;
+    private Long categoryId;
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getURL() {
+        return url;
+    }
+
+    public void setURL(String value) {
+        this.url = value;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
 }

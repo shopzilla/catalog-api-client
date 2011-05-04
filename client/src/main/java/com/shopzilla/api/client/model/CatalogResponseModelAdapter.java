@@ -24,6 +24,7 @@ import com.shopzilla.services.catalog.AttributeType;
 import com.shopzilla.services.catalog.AttributeType.AttributeValues;
 import com.shopzilla.services.catalog.AttributeValueType;
 import com.shopzilla.services.catalog.OfferType;
+import com.shopzilla.services.catalog.ProductType;
 import com.shopzilla.services.catalog.ProductResponse;
 import com.shopzilla.services.catalog.ProductResponse.Classification;
 import com.shopzilla.services.catalog.ProductResponse.RelatedAttributes;
@@ -94,8 +95,15 @@ public class CatalogResponseModelAdapter {
             toReturn.setTotalResults(result.getOffers().getTotalResults());
             offers.addAll(convertOffers(result.getOffers().getOffer()));
         }
-        
         toReturn.setOffers(offers);
+
+        final ArrayList<Product> products = new ArrayList<Product>();
+        if (result.getProducts() != null
+                && CollectionUtils.isNotEmpty(result.getProducts().getProductOrOffer())) {
+            toReturn.setTotalResults(result.getProducts().getTotalResults());
+            products.addAll(convertProducts(result.getProducts().getProductOrOffer()));
+        }
+        toReturn.setProducts(products);
         
         return toReturn;
     }
@@ -132,5 +140,23 @@ public class CatalogResponseModelAdapter {
             offers.add(o);
         }
         return offers;
+    }
+
+    private static List<Product> convertProducts(List<?> rawProducts) {
+        ArrayList<Product> products = new ArrayList<Product>();
+        for (Object productOrOffer : rawProducts) {
+            if (!(productOrOffer instanceof ProductType)) {
+                continue;
+            }
+
+            ProductType catalogProduct = (ProductType) productOrOffer;
+            Product p = new Product();
+            p.setTitle(catalogProduct.getTitle());
+            p.setURL(catalogProduct.getUrl());
+            p.setCategoryId(catalogProduct.getCategoryId());
+
+            products.add(p);
+        }
+        return products;
     }
 }

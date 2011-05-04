@@ -19,15 +19,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import com.shopzilla.services.catalog.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.shopzilla.services.catalog.AttributeType;
 import com.shopzilla.services.catalog.AttributeType.AttributeValues;
-import com.shopzilla.services.catalog.AttributeValueType;
-import com.shopzilla.services.catalog.OfferType;
-import com.shopzilla.services.catalog.PriceType;
-import com.shopzilla.services.catalog.ProductResponse;
 import com.shopzilla.services.catalog.ProductResponse.Products;
 import com.shopzilla.services.catalog.ProductResponse.RelatedAttributes;
 
@@ -82,6 +78,34 @@ public class CatalogResponseModelAdapterTest {
         assertEquals(converted.getURL(), o.getUrl());
         assertEquals(converted.getDetailURL(), o.getDetailUrl());
         assertEquals(converted.getTitle(), o.getTitle());
+
+    }
+
+    @Test
+    public void testFromCatalogAPIProducts() {
+
+        OfferType o = new OfferType();
+        o.setCategoryId(5L);
+        o.setDescription("desc");
+        o.setId(123l);
+        o.setMerchantId(321l);
+        o.setPrice(new PriceType());
+        o.getPrice().setIntegral(1234l);
+
+        ProductType p = new ProductType();
+        p.setTitle("MyProduct");
+        p.setUrl("http://my.url/");
+        p.setCategoryId(222L);
+
+        from.setProducts(new Products());
+        from.getProducts().getProductOrOffer().add(p);
+        CatalogResponse result = CatalogResponseModelAdapter.fromCatalogAPI(from);
+        assertEquals(result.getProducts().size(), 1);
+        Product convertedProduct = result.getProducts().get(0);
+
+        assertEquals(convertedProduct.getTitle(), p.getTitle());
+        assertEquals(convertedProduct.getURL(), p.getUrl());
+        assertEquals(convertedProduct.getURL(), p.getUrl());
 
     }
 
