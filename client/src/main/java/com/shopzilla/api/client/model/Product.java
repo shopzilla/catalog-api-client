@@ -23,9 +23,26 @@ import javax.xml.bind.annotation.XmlSchemaType;
  *
  */
 public class Product {
+    private Long id;
+    private Long categoryId;
     private String title;
     private String url;
-    private Long categoryId;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
 
     public String getTitle() {
         return title;
@@ -41,13 +58,5 @@ public class Product {
 
     public void setURL(String value) {
         this.url = value;
-    }
-
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
     }
 }

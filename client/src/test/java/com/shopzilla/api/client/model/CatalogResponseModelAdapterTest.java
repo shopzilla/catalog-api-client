@@ -96,6 +96,7 @@ public class CatalogResponseModelAdapterTest {
         p.setTitle("MyProduct");
         p.setUrl("http://my.url/");
         p.setCategoryId(222L);
+        p.setId(333L);
 
         from.setProducts(new Products());
         from.getProducts().getProductOrOffer().add(p);
@@ -103,10 +104,10 @@ public class CatalogResponseModelAdapterTest {
         assertEquals(result.getProducts().size(), 1);
         Product convertedProduct = result.getProducts().get(0);
 
+        assertEquals(convertedProduct.getId(), (Long) p.getId());
+        assertEquals(convertedProduct.getCategoryId(), (Long) p.getCategoryId());
         assertEquals(convertedProduct.getTitle(), p.getTitle());
         assertEquals(convertedProduct.getURL(), p.getUrl());
-        assertEquals(convertedProduct.getURL(), p.getUrl());
-
     }
 
     @Test

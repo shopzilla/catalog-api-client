@@ -638,7 +638,7 @@
                 <xs:element name="Skus" minOccurs="0">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="sku" type="xs:string"/>
+                            <xs:element name="sku" type="xs:string" maxOccurs="unbounded"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>

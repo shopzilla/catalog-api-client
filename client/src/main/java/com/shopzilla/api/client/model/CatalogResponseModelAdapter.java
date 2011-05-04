@@ -151,9 +151,10 @@ public class CatalogResponseModelAdapter {
 
             ProductType catalogProduct = (ProductType) productOrOffer;
             Product p = new Product();
+            p.setId(catalogProduct.getId());
+            p.setCategoryId(catalogProduct.getCategoryId());
             p.setTitle(catalogProduct.getTitle());
             p.setURL(catalogProduct.getUrl());
-            p.setCategoryId(catalogProduct.getCategoryId());
 
             products.add(p);
         }
