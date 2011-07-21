@@ -44,9 +44,9 @@
     <bean id="jaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
         <property name="classesToBeBound">
             <list>
-                <value>com.shopzilla.services.catalog.ProductResponse</value>
-                <value>com.shopzilla.services.catalog.ProductType</value>
-                <value>com.shopzilla.services.catalog.ProductOffersType</value>
+                <value>com.shopzilla.android.model.ProductResponse</value>
+                <value>com.shopzilla.android.model.ProductType</value>
+                <value>com.shopzilla.android.model.ProductOffersType</value>
             </list>
         </property>
         <property name="schema" value="classpath:service.xsd"/>
