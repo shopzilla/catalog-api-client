@@ -9,6 +9,11 @@
 
     <name>Shopzilla API Client - Root</name>
     <url>http://maven.apache.org</url>
+    
+    <scm>
+        <connection>scm:git:git://github.com/shopzilla/catalog-api-client</connection>
+        <developerConnection>scm:git:git://github.com/shopzilla/catalog-api-client</developerConnection>
+    </scm>
 
     <modules>
         <module>model</module>
