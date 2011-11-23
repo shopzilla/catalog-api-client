@@ -27,6 +27,8 @@ public class CatalogResponse {
     private Long totalResults;
 
     private Long relevancyScore;
+    
+    private String serviceUrl;
 
     private List<Attribute> relatedAttributes;
     private List<Product> products = Collections.emptyList();
@@ -72,4 +74,18 @@ public class CatalogResponse {
         this.totalResults = totalResults;
     }
 
+    public String getServiceUrl() {
+        return serviceUrl;
+    }
+
+    public void setServiceUrl(String serviceUrl) {
+        this.serviceUrl = serviceUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "CatalogResponse [totalResults=" + totalResults + ", relevancyScore="
+                + relevancyScore + ", serviceUrl=" + serviceUrl + ", relatedAttributes="
+                + relatedAttributes + ", products=" + products + ", offers=" + offers + "]";
+    }
 }

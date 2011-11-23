@@ -44,6 +44,10 @@ public abstract class AbstractBaseUrlProvider implements UrlProvider {
         parameters.put("showAttributes", request.isShowAttributes());
         parameters.put("showProductAttributes", request.isShowProductAttributes());
         parameters.put("merchantId", request.getMerchantId());
+        parameters.put("imageOnly", request.getImageOnly());
+        parameters.put("zipCode", request.getZipCode());
+        parameters.put("backfillResults", request.getBackfillResults());
+        parameters.put("minRelevancyScore", request.getMinRelevancyScore());
 
         return parameters;
     }

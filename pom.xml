@@ -4,7 +4,7 @@
 
     <groupId>com.shopzilla.api</groupId>
     <artifactId>root</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Shopzilla API Client - Root</name>
@@ -133,4 +133,22 @@
             <url>http://repository.springsource.com/maven/bundles/external</url>
         </repository>
     </repositories>
+    <distributionManagement>
+    <!-- Defines where to deploy artifacts to -->
+    <repository>
+        <id>internal-releases</id>
+        <name>internal-releases</name>
+        <url>http://nexus.shopzilla.com:2099/nexus/content/repositories/internal-releases/</url>
+    </repository>
+    <snapshotRepository>
+        <id>internal-snapshots</id>
+        <name>internal-snapshots</name>
+        <url>http://nexus.shopzilla.com:2099/nexus/content/repositories/internal-snapshots/</url>
+    </snapshotRepository>
+    <site>
+      <id>opensource.shopzilla.com</id>
+      <name>Bizrate.com</name>
+      <url>scp://opensource.shopzilla.com/site/bizrate.com</url>
+    </site>
+  </distributionManagement>
 </project>

@@ -28,20 +28,22 @@ public class ProductSearchRequest {
         SZOID, SZPID, MPID, SKU;
     };
 
-    
     private String apiKey;
     private String publisherId;
     
     private String keyword;
     private Integer start = 0;
     private Integer numResults = 25;
+    private Integer backfillResults = 0;
+    private Integer minRelevancyScore = 100;
 
     private Integer placementId = DEFAULT_PLACEMENT_ID;
     private String categoryId = EMPTY_STRING;
     private String productId = EMPTY_STRING;
     private Long merchantId;
+    private String zipCode = EMPTY_STRING;
     
-    
+    private Boolean imageOnly = Boolean.FALSE;
     private Boolean offersOnly = Boolean.FALSE;
     private Boolean showAttributes = Boolean.FALSE;
     private Boolean showProductAttributes = Boolean.FALSE;
@@ -96,12 +98,44 @@ public class ProductSearchRequest {
         this.productId = productId;
     }
 
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
     public Integer getNumResults() {
         return numResults;
     }
 
     public void setNumResults(Integer numResults) {
         this.numResults = numResults;
+    }
+
+    public Integer getBackfillResults() {
+        return backfillResults;
+    }
+
+    public void setBackfillResults(Integer backfillResults) {
+        this.backfillResults = backfillResults;
+    }
+
+    public Integer getMinRelevancyScore() {
+        return minRelevancyScore;
+    }
+
+    public void setMinRelevancyScore(Integer minRelevancyScore) {
+        this.minRelevancyScore = minRelevancyScore;
+    }
+
+    public Boolean getImageOnly() {
+        return imageOnly;
+    }
+
+    public void setImageOnly(Boolean imageOnly) {
+        this.imageOnly = imageOnly;
     }
 
     public Boolean getOffersOnly() {
@@ -152,4 +186,15 @@ public class ProductSearchRequest {
         this.merchantId = merchantId;
     }
 
+    @Override
+    public String toString() {
+        return "ProductSearchRequest [apiKey=" + apiKey + ", publisherId=" + publisherId
+                + ", keyword=" + keyword + ", start=" + start + ", numResults=" + numResults
+                + ", backfillResults=" + backfillResults + ", minRelevancyScore="
+                + minRelevancyScore + ", placementId=" + placementId + ", categoryId=" + categoryId
+                + ", productId=" + productId + ", merchantId=" + merchantId + ", zipCode="
+                + zipCode + ", imageOnly=" + imageOnly + ", offersOnly=" + offersOnly
+                + ", showAttributes=" + showAttributes + ", showProductAttributes="
+                + showProductAttributes + ", productType=" + productType + "]";
+    }
 }

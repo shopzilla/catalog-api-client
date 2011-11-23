@@ -15,10 +15,12 @@
  */
 package com.shopzilla.api.client.http;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.client.RestOperations;
+import org.springframework.web.util.UriTemplate;
 
 import com.shopzilla.api.client.CatalogAPIClient;
 import com.shopzilla.api.client.ProductSearchRequest;
@@ -42,12 +44,15 @@ public class RestCatalogAPIClient implements CatalogAPIClient {
     private RestOperations restTemplate;
 
     public CatalogResponse performSearch(ProductSearchRequest request) {
+        
+        UriTemplate uriTemplate = new UriTemplate(urlProvider.getProductServiceURL());
+        URI serviceUri = uriTemplate.expand(urlProvider.makeParameterMap(request));
 
-        ProductResponse result = restTemplate.getForObject(urlProvider.getProductServiceURL(),
-                ProductResponse.class,
-                urlProvider.makeParameterMap(request));
+        ProductResponse result = restTemplate.getForObject(serviceUri, ProductResponse.class);
 
-        return CatalogResponseModelAdapter.fromCatalogAPI(result);
+        CatalogResponse toReturn = CatalogResponseModelAdapter.fromCatalogAPI(result);
+        toReturn.setServiceUrl(serviceUri.toString());
+        return toReturn;
     }
 
     public List<Category> performCategorySearch(ProductSearchRequest request) {
@@ -66,5 +71,4 @@ public class RestCatalogAPIClient implements CatalogAPIClient {
     public void setUrlProvider(UrlProvider urlProvider) {
         this.urlProvider = urlProvider;
     }
-
 }
