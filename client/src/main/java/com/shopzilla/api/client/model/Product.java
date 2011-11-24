@@ -15,18 +15,20 @@
  */
 package com.shopzilla.api.client.model;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
+import java.util.List;
 
 /**
  * @author sscanlon
- *
  */
 public class Product {
     private Long id;
     private Long categoryId;
     private String title;
     private String url;
+    private String description;
+    private String longDescription;
+    private List<String> skus;
+    private String sku;
 
     public Long getId() {
         return id;
@@ -59,4 +61,37 @@ public class Product {
     public void setURL(String value) {
         this.url = value;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getLongDescription() {
+        return longDescription;
+    }
+
+    public void setLongDescription(String longDescription) {
+        this.longDescription = longDescription;
+    }
+
+    public List<String> getSkus() {
+        return skus;
+    }
+
+    public void setSkus(List<String> skus) {
+        this.skus = skus;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+
 }

@@ -155,9 +155,26 @@ public class CatalogResponseModelAdapter {
             p.setCategoryId(catalogProduct.getCategoryId());
             p.setTitle(catalogProduct.getTitle());
             p.setURL(catalogProduct.getUrl());
+            p.setDescription(catalogProduct.getDescription());
+            p.setLongDescription(catalogProduct.getLongDescription());
+            p.setSku(catalogProduct.getSku());
+
+            p.setSkus(convertSkus(catalogProduct.getSkus()));
 
             products.add(p);
         }
         return products;
     }
+
+    private static List<String> convertSkus(OfferType.Skus skus) {
+        if (skus == null) {
+            return null;
+        }
+        List<String> convertedSkus = new ArrayList<String>();
+        for (String sku : skus.getSku()) {
+            convertedSkus.add(sku);
+        }
+        return convertedSkus;
+    }
+
 }

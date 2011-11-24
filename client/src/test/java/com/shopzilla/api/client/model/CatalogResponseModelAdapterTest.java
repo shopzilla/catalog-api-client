@@ -15,21 +15,20 @@
  */
 package com.shopzilla.api.client.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
 import com.shopzilla.services.catalog.*;
-import org.junit.Before;
-import org.junit.Test;
-
 import com.shopzilla.services.catalog.AttributeType.AttributeValues;
 import com.shopzilla.services.catalog.ProductResponse.Products;
 import com.shopzilla.services.catalog.ProductResponse.RelatedAttributes;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 /**
  * @author sscanlon
- * 
  */
 public class CatalogResponseModelAdapterTest {
 
@@ -97,6 +96,19 @@ public class CatalogResponseModelAdapterTest {
         p.setUrl("http://my.url/");
         p.setCategoryId(222L);
         p.setId(333L);
+        p.setDescription("Description");
+        p.setLongDescription("LongDescription");
+        p.setSku("sku");
+
+        OfferType.Skus skus = new OfferType.Skus();
+        skus.getSku().add("sku1");
+        skus.getSku().add("sku2");
+        p.setSkus(skus);
+
+        List<String> expectedSkus = new ArrayList<String>(2);
+        expectedSkus.add("sku1");
+        expectedSkus.add("sku2");
+
 
         from.setProducts(new Products());
         from.getProducts().getProductOrOffer().add(p);
@@ -108,6 +120,11 @@ public class CatalogResponseModelAdapterTest {
         assertEquals(convertedProduct.getCategoryId(), (Long) p.getCategoryId());
         assertEquals(convertedProduct.getTitle(), p.getTitle());
         assertEquals(convertedProduct.getURL(), p.getUrl());
+        assertEquals(convertedProduct.getDescription(), p.getDescription());
+        assertEquals(convertedProduct.getLongDescription(), p.getLongDescription());
+        assertEquals(convertedProduct.getSku(), p.getSku());
+        assertEquals(convertedProduct.getSkus(), expectedSkus);
+
     }
 
     @Test
@@ -136,6 +153,83 @@ public class CatalogResponseModelAdapterTest {
         assertEquals(v.getId(), attr.getId());
         assertEquals(v.getLabel(), attr.getName());
         assertEquals(v.getValues().size(), 1);
+
+    }
+
+    @Test
+    public void testNullSkus() {
+
+        OfferType o = new OfferType();
+        o.setCategoryId(5L);
+        o.setDescription("desc");
+        o.setId(123l);
+        o.setMerchantId(321l);
+        o.setPrice(new PriceType());
+        o.getPrice().setIntegral(1234l);
+
+        ProductType p = new ProductType();
+        p.setTitle("MyProduct");
+        p.setUrl("http://my.url/");
+        p.setCategoryId(222L);
+        p.setId(333L);
+        p.setDescription("Description");
+        p.setLongDescription("LongDescription");
+        p.setSku("sku");
+        p.setSkus(null);
+
+        from.setProducts(new Products());
+        from.getProducts().getProductOrOffer().add(p);
+        CatalogResponse result = CatalogResponseModelAdapter.fromCatalogAPI(from);
+        assertEquals(result.getProducts().size(), 1);
+        Product convertedProduct = result.getProducts().get(0);
+
+        assertEquals(convertedProduct.getId(), (Long) p.getId());
+        assertEquals(convertedProduct.getCategoryId(), (Long) p.getCategoryId());
+        assertEquals(convertedProduct.getTitle(), p.getTitle());
+        assertEquals(convertedProduct.getURL(), p.getUrl());
+        assertEquals(convertedProduct.getDescription(), p.getDescription());
+        assertEquals(convertedProduct.getLongDescription(), p.getLongDescription());
+        assertEquals(convertedProduct.getSku(), p.getSku());
+        assertEquals(convertedProduct.getSkus(), null);
+
+    }
+
+    @Test
+    public void testEmptySkus() {
+
+        OfferType o = new OfferType();
+        o.setCategoryId(5L);
+        o.setDescription("desc");
+        o.setId(123l);
+        o.setMerchantId(321l);
+        o.setPrice(new PriceType());
+        o.getPrice().setIntegral(1234l);
+
+        ProductType p = new ProductType();
+        p.setTitle("MyProduct");
+        p.setUrl("http://my.url/");
+        p.setCategoryId(222L);
+        p.setId(333L);
+        p.setDescription("Description");
+        p.setLongDescription("LongDescription");
+        p.setSku("sku");
+        OfferType.Skus skus = new OfferType.Skus();
+        p.setSkus(skus);
+
+        from.setProducts(new Products());
+        from.getProducts().getProductOrOffer().add(p);
+        CatalogResponse result = CatalogResponseModelAdapter.fromCatalogAPI(from);
+        assertEquals(result.getProducts().size(), 1);
+        Product convertedProduct = result.getProducts().get(0);
+
+        assertEquals(convertedProduct.getId(), (Long) p.getId());
+        assertEquals(convertedProduct.getCategoryId(), (Long) p.getCategoryId());
+        assertEquals(convertedProduct.getTitle(), p.getTitle());
+        assertEquals(convertedProduct.getURL(), p.getUrl());
+        assertEquals(convertedProduct.getDescription(), p.getDescription());
+        assertEquals(convertedProduct.getLongDescription(), p.getLongDescription());
+        assertEquals(convertedProduct.getSku(), p.getSku());
+        assertEquals(convertedProduct.getSkus(), new ArrayList<String>());
 
     }
 }
