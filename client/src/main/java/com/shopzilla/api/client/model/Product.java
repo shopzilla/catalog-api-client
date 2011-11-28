@@ -29,6 +29,7 @@ public class Product {
     private String longDescription;
     private List<String> skus;
     private String sku;
+    private List<Attribute> attributes;
 
     public Long getId() {
         return id;
@@ -92,6 +93,14 @@ public class Product {
 
     public void setSku(String sku) {
         this.sku = sku;
+    }
+
+    public List<Attribute> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(List<Attribute> attributes) {
+        this.attributes = attributes;
     }
 
 }

@@ -19,6 +19,7 @@ import com.shopzilla.services.catalog.*;
 import com.shopzilla.services.catalog.AttributeType.AttributeValues;
 import com.shopzilla.services.catalog.ProductResponse.Products;
 import com.shopzilla.services.catalog.ProductResponse.RelatedAttributes;
+import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -109,6 +110,24 @@ public class CatalogResponseModelAdapterTest {
         expectedSkus.add("sku1");
         expectedSkus.add("sku2");
 
+        ProductType.Attributes attributes = new ProductType.Attributes();
+        AttributeType attributeType = new AttributeType();
+        attributeType.setName("Name1");
+        attributeType.setId("Id1");
+
+
+        AttributeValues attributeValues = new AttributeValues();
+        AttributeValueType attributeValueType = new AttributeValueType();
+        attributeValueType.setName("NameType1");
+        attributeValueType.setId("IdType1");
+        attributeValues.getAttributeValue().add(attributeValueType);
+
+        attributeType.setAttributeValues(attributeValues);
+
+        attributes.getAttribute().add(attributeType);
+
+        p.setAttributes(attributes);
+
 
         from.setProducts(new Products());
         from.getProducts().getProductOrOffer().add(p);
@@ -124,7 +143,79 @@ public class CatalogResponseModelAdapterTest {
         assertEquals(convertedProduct.getLongDescription(), p.getLongDescription());
         assertEquals(convertedProduct.getSku(), p.getSku());
         assertEquals(convertedProduct.getSkus(), expectedSkus);
+        assertTrue(attributesAreEqual(convertedProduct.getAttributes(), p.getAttributes()));
 
+    }
+
+    private boolean attributesAreEqual(List<Attribute> attributes, ProductType.Attributes productTypeAttributes) {
+        if (attributes == null && productTypeAttributes == null) {
+            return true;
+        }
+        if (attributes == null || productTypeAttributes == null) {
+            return false;
+        }
+        if (productTypeAttributes.getAttribute().size() != attributes.size()) {
+            return false;
+        }
+        for (int i = 0; i < attributes.size(); i++) {
+            if (!attributeIsEqual(attributes.get(i), productTypeAttributes.getAttribute().get(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean attributeIsEqual(Attribute attribute, AttributeType attributeType) {
+        if (attribute == null && attributeType == null) {
+            return true;
+        }
+        if (attribute == null || attributeType == null) {
+            return false;
+        }
+        if (!StringUtils.equals(attribute.getId(), attributeType.getId())) {
+            return false;
+        }
+        if (!StringUtils.equals(attribute.getLabel(), attributeType.getName())) {
+            return false;
+        }
+        if (!attributeValuesAreEqual(attribute.getValues(), attributeType.getAttributeValues())) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean attributeValuesAreEqual(List<AttributeValue> values, AttributeValues attributeValues) {
+        if (values == null && attributeValues == null) {
+            return true;
+        }
+        if (values == null || attributeValues == null) {
+            return false;
+        }
+        if (values.size() != attributeValues.getAttributeValue().size()) {
+            return false;
+        }
+        for (int i = 0; i < values.size(); i++) {
+            if (!attributeValueIsEqual(values.get(i), attributeValues.getAttributeValue().get(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean attributeValueIsEqual(AttributeValue attributeValue, AttributeValueType attributeValueType) {
+        if (attributeValue == null && attributeValueType == null) {
+            return true;
+        }
+        if (attributeValue == null || attributeValueType == null) {
+            return false;
+        }
+        if (!StringUtils.equals(attributeValue.getId(), attributeValueType.getId())) {
+            return false;
+        }
+        if (!StringUtils.equals(attributeValue.getLabel(), attributeValueType.getName())) {
+            return false;
+        }
+        return true;
     }
 
     @Test
@@ -232,4 +323,7 @@ public class CatalogResponseModelAdapterTest {
         assertEquals(convertedProduct.getSkus(), new ArrayList<String>());
 
     }
+
 }
+
+

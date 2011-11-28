@@ -15,23 +15,17 @@
  */
 package com.shopzilla.api.client.model;
 
+import com.shopzilla.services.catalog.*;
+import com.shopzilla.services.catalog.AttributeType.AttributeValues;
+import com.shopzilla.services.catalog.ProductResponse.Classification;
+import com.shopzilla.services.catalog.ProductResponse.RelatedAttributes;
+import org.apache.commons.collections.CollectionUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.collections.CollectionUtils;
-
-import com.shopzilla.services.catalog.AttributeType;
-import com.shopzilla.services.catalog.AttributeType.AttributeValues;
-import com.shopzilla.services.catalog.AttributeValueType;
-import com.shopzilla.services.catalog.OfferType;
-import com.shopzilla.services.catalog.ProductType;
-import com.shopzilla.services.catalog.ProductResponse;
-import com.shopzilla.services.catalog.ProductResponse.Classification;
-import com.shopzilla.services.catalog.ProductResponse.RelatedAttributes;
-
 /**
  * @author sscanlon
- * 
  */
 public class CatalogResponseModelAdapter {
 
@@ -104,7 +98,7 @@ public class CatalogResponseModelAdapter {
             products.addAll(convertProducts(result.getProducts().getProductOrOffer()));
         }
         toReturn.setProducts(products);
-        
+
         return toReturn;
     }
 
@@ -114,19 +108,19 @@ public class CatalogResponseModelAdapter {
             if (!(productOrOffer instanceof OfferType)) {
                 continue;
             }
-            
+
             OfferType catalogOffer = (OfferType) productOrOffer;
             Offer o = new Offer();
-            
+
             Merchant m = new Merchant();
             m.setId(catalogOffer.getMerchantId());
             m.setName(catalogOffer.getMerchantName());
             o.setMerchant(m);
-            
+
             o.setCategoryId(catalogOffer.getCategoryId());
             o.setId(catalogOffer.getId());
             o.setMid(catalogOffer.getMerchantId());
-            
+
             if (catalogOffer.getPrice() != null) {
                 Price p = new Price();
                 p.setIntegral(catalogOffer.getPrice().getIntegral());
@@ -158,12 +152,43 @@ public class CatalogResponseModelAdapter {
             p.setDescription(catalogProduct.getDescription());
             p.setLongDescription(catalogProduct.getLongDescription());
             p.setSku(catalogProduct.getSku());
-
             p.setSkus(convertSkus(catalogProduct.getSkus()));
+            p.setAttributes(convertAttributes(catalogProduct.getAttributes()));
 
             products.add(p);
         }
         return products;
+    }
+
+    private static List<Attribute> convertAttributes(ProductType.Attributes productTypeAttributes) {
+        if (productTypeAttributes == null) {
+            return null;
+        }
+        List<AttributeType> attributeTypes = productTypeAttributes.getAttribute();
+        List<Attribute> convertedAttributes = new ArrayList<Attribute>(attributeTypes.size());
+        for (AttributeType attributeType : attributeTypes) {
+            Attribute attribute = new Attribute();
+            attribute.setLabel(attributeType.getName());
+            attribute.setId(attributeType.getId());
+            attribute.setValues(convertAttributeValues(attributeType.getAttributeValues()));
+            convertedAttributes.add(attribute);
+        }
+        return convertedAttributes;
+    }
+
+    private static List<AttributeValue> convertAttributeValues(AttributeValues attributeValues) {
+        if (attributeValues == null) {
+            return null;
+        }
+        List<AttributeValueType> attributeValueTypes = attributeValues.getAttributeValue();
+        List<AttributeValue> convertedAttributeValues = new ArrayList<AttributeValue>(attributeValueTypes.size());
+        for (AttributeValueType attributeValueType : attributeValueTypes) {
+            AttributeValue attributeValue = new AttributeValue();
+            attributeValue.setLabel(attributeValueType.getName());
+            attributeValue.setId(attributeValueType.getId());
+            convertedAttributeValues.add(attributeValue);
+        }
+        return convertedAttributeValues;
     }
 
     private static List<String> convertSkus(OfferType.Skus skus) {
