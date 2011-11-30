@@ -15,27 +15,26 @@
  */
 package com.shopzilla.api.client.http;
 
-import java.net.URI;
-import java.util.List;
-
+import com.shopzilla.api.client.CatalogAPIClient;
+import com.shopzilla.api.client.UrlProvider;
+import com.shopzilla.api.client.brand.BizrateUrlProvider;
+import com.shopzilla.api.client.model.*;
+import com.shopzilla.api.client.model.request.AbstractSearchRequest;
+import com.shopzilla.api.client.model.request.AttributeSearchRequest;
+import com.shopzilla.api.client.model.request.ProductSearchRequest;
+import com.shopzilla.api.client.model.response.AttributeSearchResponse;
+import com.shopzilla.services.catalog.AttributeResponse;
+import com.shopzilla.services.catalog.ProductResponse;
+import com.shopzilla.services.catalog.TaxonomyResponse;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.util.UriTemplate;
 
-import com.shopzilla.api.client.CatalogAPIClient;
-import com.shopzilla.api.client.ProductSearchRequest;
-import com.shopzilla.api.client.UrlProvider;
-import com.shopzilla.api.client.brand.BizrateUrlProvider;
-import com.shopzilla.api.client.model.CatalogResponse;
-import com.shopzilla.api.client.model.CatalogResponseModelAdapter;
-import com.shopzilla.api.client.model.Category;
-import com.shopzilla.api.client.model.CategoryModelAdapter;
-import com.shopzilla.services.catalog.ProductResponse;
-import com.shopzilla.services.catalog.TaxonomyResponse;
+import java.net.URI;
+import java.util.List;
 
 /**
  * @author sscanlon
- * 
  */
 public class RestCatalogAPIClient implements CatalogAPIClient {
 
@@ -44,7 +43,7 @@ public class RestCatalogAPIClient implements CatalogAPIClient {
     private RestOperations restTemplate;
 
     public CatalogResponse performSearch(ProductSearchRequest request) {
-        
+
         UriTemplate uriTemplate = new UriTemplate(urlProvider.getProductServiceURL());
         URI serviceUri = uriTemplate.expand(urlProvider.makeParameterMap(request));
 
@@ -53,6 +52,14 @@ public class RestCatalogAPIClient implements CatalogAPIClient {
         CatalogResponse toReturn = CatalogResponseModelAdapter.fromCatalogAPI(result);
         toReturn.setServiceUrl(serviceUri.toString());
         return toReturn;
+    }
+
+    public AttributeSearchResponse performAttributeSearch(AttributeSearchRequest request) {
+        UriTemplate uriTemplate = new UriTemplate(urlProvider.getAttributeServiceURL());
+        URI serviceUri = uriTemplate.expand(urlProvider.makeAttributeParameterMap(request));
+
+        AttributeResponse response = restTemplate.getForObject(serviceUri, AttributeResponse.class);
+        return AttributeModelAdapter.fromCatalogAPI(response);
     }
 
     public List<Category> performCategorySearch(ProductSearchRequest request) {

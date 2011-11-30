@@ -19,6 +19,10 @@ import java.util.List;
 
 import com.shopzilla.api.client.model.CatalogResponse;
 import com.shopzilla.api.client.model.Category;
+import com.shopzilla.api.client.model.request.AbstractSearchRequest;
+import com.shopzilla.api.client.model.request.AttributeSearchRequest;
+import com.shopzilla.api.client.model.request.ProductSearchRequest;
+import com.shopzilla.api.client.model.response.AttributeSearchResponse;
 
 /**
  * @author sscanlon
@@ -29,5 +33,9 @@ public interface CatalogAPIClient {
     public CatalogResponse performSearch(ProductSearchRequest request);
 
     public List<Category> performCategorySearch(ProductSearchRequest request);
+
+    AttributeSearchResponse performAttributeSearch(AttributeSearchRequest request);
+
+
 
 }

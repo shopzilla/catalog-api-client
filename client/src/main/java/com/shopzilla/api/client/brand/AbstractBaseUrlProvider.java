@@ -15,15 +15,15 @@
  */
 package com.shopzilla.api.client.brand;
 
+import com.shopzilla.api.client.UrlProvider;
+import com.shopzilla.api.client.model.request.AttributeSearchRequest;
+import com.shopzilla.api.client.model.request.ProductSearchRequest;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import com.shopzilla.api.client.ProductSearchRequest;
-import com.shopzilla.api.client.UrlProvider;
-
 /**
  * @author sscanlon
- * 
  */
 public abstract class AbstractBaseUrlProvider implements UrlProvider {
 
@@ -51,4 +51,21 @@ public abstract class AbstractBaseUrlProvider implements UrlProvider {
 
         return parameters;
     }
+
+    public Map<String, ?> makeAttributeParameterMap(AttributeSearchRequest request) {
+        Map<String, Object> parameters = new HashMap<String, Object>();
+
+        parameters.put("apiKey", request.getApiKey());
+        parameters.put("publisherId", request.getPublisherId());
+        parameters.put("placementId", request.getPlacementId());
+        parameters.put("attributeId", request.getAttributeId());
+        parameters.put("keyword", request.getKeyword());
+        parameters.put("resultsAttributeValues", request.getResultsAttributeValues());
+        parameters.put("numResults", request.getNumResults());
+        parameters.put("rfCode", request.getRfCode());
+        parameters.put("categoryId", request.getCategoryId());
+
+        return parameters;
+    }
+
 }

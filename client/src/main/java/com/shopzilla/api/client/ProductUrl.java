@@ -15,6 +15,8 @@
  */
 package com.shopzilla.api.client;
 
+import com.shopzilla.api.client.model.request.ProductSearchRequest;
+
 import java.util.HashMap;
 import java.util.Map;
 

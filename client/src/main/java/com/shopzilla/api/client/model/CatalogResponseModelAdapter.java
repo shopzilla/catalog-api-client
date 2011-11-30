@@ -152,7 +152,6 @@ public class CatalogResponseModelAdapter {
             p.setDescription(catalogProduct.getDescription());
             p.setLongDescription(catalogProduct.getLongDescription());
             p.setSku(catalogProduct.getSku());
-            p.setSkus(convertSkus(catalogProduct.getSkus()));
             p.setAttributes(convertAttributes(catalogProduct.getAttributes()));
 
             products.add(p);
@@ -189,17 +188,6 @@ public class CatalogResponseModelAdapter {
             convertedAttributeValues.add(attributeValue);
         }
         return convertedAttributeValues;
-    }
-
-    private static List<String> convertSkus(OfferType.Skus skus) {
-        if (skus == null) {
-            return null;
-        }
-        List<String> convertedSkus = new ArrayList<String>();
-        for (String sku : skus.getSku()) {
-            convertedSkus.add(sku);
-        }
-        return convertedSkus;
     }
 
 }

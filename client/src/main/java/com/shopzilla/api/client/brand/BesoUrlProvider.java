@@ -69,6 +69,10 @@ public class BesoUrlProvider extends AbstractBaseUrlProvider {
                 .toString();
     }
 
+    public String getAttributeServiceURL() {
+        return null;
+    }
+
     public String getTaxonomyServiceURL() {
         return new StringBuilder(BASE_URL)
                 .append("taxonomy/2")

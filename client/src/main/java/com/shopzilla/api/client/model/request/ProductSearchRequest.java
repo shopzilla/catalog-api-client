@@ -13,31 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.shopzilla.api.client;
+package com.shopzilla.api.client.model.request;
 
 /**
  * @author sscanlon
  * 
  */
-public class ProductSearchRequest {
+public class ProductSearchRequest extends AbstractSearchRequest {
 
     private static final String EMPTY_STRING = "";
-    private static final Integer DEFAULT_PLACEMENT_ID = 1;
 
     public static enum ProductType {
         SZOID, SZPID, MPID, SKU;
     };
 
-    private String apiKey;
-    private String publisherId;
-    
     private String keyword;
     private Integer start = 0;
     private Integer numResults = 25;
     private Integer backfillResults = 0;
     private Integer minRelevancyScore = 100;
 
-    private Integer placementId = DEFAULT_PLACEMENT_ID;
     private String categoryId = EMPTY_STRING;
     private String productId = EMPTY_STRING;
     private Long merchantId;
@@ -49,30 +44,6 @@ public class ProductSearchRequest {
     private Boolean showProductAttributes = Boolean.FALSE;
     
     private ProductType productType;
-
-    public String getApiKey() {
-        return apiKey;
-    }
-
-    public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
-    }
-
-    public String getPublisherId() {
-        return publisherId;
-    }
-
-    public void setPublisherId(String publisherId) {
-        this.publisherId = publisherId;
-    }
-
-    public Integer getPlacementId() {
-        return placementId;
-    }
-
-    public void setPlacementId(Integer placementId) {
-        this.placementId = placementId;
-    }
 
     public String getCategoryId() {
         return categoryId;
@@ -188,10 +159,10 @@ public class ProductSearchRequest {
 
     @Override
     public String toString() {
-        return "ProductSearchRequest [apiKey=" + apiKey + ", publisherId=" + publisherId
+        return "ProductSearchRequest [apiKey=" + getApiKey() + ", publisherId=" + getPublisherId()
                 + ", keyword=" + keyword + ", start=" + start + ", numResults=" + numResults
                 + ", backfillResults=" + backfillResults + ", minRelevancyScore="
-                + minRelevancyScore + ", placementId=" + placementId + ", categoryId=" + categoryId
+                + minRelevancyScore + ", placementId=" + getPlacementId() + ", categoryId=" + categoryId
                 + ", productId=" + productId + ", merchantId=" + merchantId + ", zipCode="
                 + zipCode + ", imageOnly=" + imageOnly + ", offersOnly=" + offersOnly
                 + ", showAttributes=" + showAttributes + ", showProductAttributes="

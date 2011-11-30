@@ -15,6 +15,7 @@
  */
 package com.shopzilla.api.client;
 
+import com.shopzilla.api.client.model.request.ProductSearchRequest;
 import org.springframework.web.client.RestOperations;
 
 import com.shopzilla.api.service.ProductService;

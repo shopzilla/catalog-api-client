@@ -15,11 +15,13 @@
  */
 package com.shopzilla.api.client;
 
+import com.shopzilla.api.client.model.request.AttributeSearchRequest;
+import com.shopzilla.api.client.model.request.ProductSearchRequest;
+
 import java.util.Map;
 
 /**
  * @author sscanlon
- * 
  */
 public interface UrlProvider {
 
@@ -27,9 +29,13 @@ public interface UrlProvider {
 
     public String getTaxonomyServiceURL();
 
+    public String getAttributeServiceURL();
+
     public String getBrandServiceURL();
 
     public String getMerchantServiceURL();
 
     public Map<String, ?> makeParameterMap(ProductSearchRequest request);
+
+    Map<String, ?> makeAttributeParameterMap(AttributeSearchRequest request);
 }

@@ -53,6 +53,17 @@ public class BizrateUrlProvider extends AbstractBaseUrlProvider {
             "&showRawUrl=" +
             "&imageOnly=";
 
+    private static final String ATTRIBUTE_QUERY_FRAGMENT = "?" +
+            "apiKey={apiKey}" +
+            "&publisherId={publisherId}" +
+            "&rfCode={rfCode}" +
+            "&placementId={placementId}" +
+            "&keyword={keyword}" +
+            "&attributeId={attributeId}" +
+            "&results={numResults}" +
+            "&resultsAttributeValues={resultsAttributeValues}" +
+            "&callback=callback";
+
     private static final String TAXONOMY_QUERY_FRAGMENT = "?" +
             "apiKey={apiKey}" +
             "&publisherId={publisherId}" +
@@ -74,6 +85,13 @@ public class BizrateUrlProvider extends AbstractBaseUrlProvider {
         return new StringBuilder(BASE_URL)
                 .append("taxonomy/1")
                 .append(TAXONOMY_QUERY_FRAGMENT)
+                .toString();
+    }
+
+    public String getAttributeServiceURL() {
+        return new StringBuilder(BASE_URL)
+                .append("attributes")
+                .append(ATTRIBUTE_QUERY_FRAGMENT)
                 .toString();
     }
 

@@ -27,7 +27,6 @@ public class Product {
     private String url;
     private String description;
     private String longDescription;
-    private List<String> skus;
     private String sku;
     private List<Attribute> attributes;
 
@@ -77,14 +76,6 @@ public class Product {
 
     public void setLongDescription(String longDescription) {
         this.longDescription = longDescription;
-    }
-
-    public List<String> getSkus() {
-        return skus;
-    }
-
-    public void setSkus(List<String> skus) {
-        this.skus = skus;
     }
 
     public String getSku() {
