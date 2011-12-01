@@ -10,7 +10,6 @@ import com.shopzilla.services.catalog.AttributeResponse;
 import com.shopzilla.services.catalog.AttributeType;
 
 /**
- * TODO: document this class!
  *
  * @author Emanuele Blanco
  * @since 30/11/11
