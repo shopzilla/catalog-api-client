@@ -48,4 +48,28 @@ public abstract class AbstractSearchRequest implements SearchRequest {
     public void setPlacementId(Integer placementId) {
         this.placementId = placementId;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AbstractSearchRequest that = (AbstractSearchRequest) o;
+
+        if (apiKey != null ? !apiKey.equals(that.apiKey) : that.apiKey != null) return false;
+        if (placementId != null ? !placementId.equals(that.placementId) : that.placementId != null) return false;
+        if (publisherId != null ? !publisherId.equals(that.publisherId) : that.publisherId != null) return false;
+        if (rfCode != null ? !rfCode.equals(that.rfCode) : that.rfCode != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = apiKey != null ? apiKey.hashCode() : 0;
+        result = 31 * result + (publisherId != null ? publisherId.hashCode() : 0);
+        result = 31 * result + (placementId != null ? placementId.hashCode() : 0);
+        result = 31 * result + (rfCode != null ? rfCode.hashCode() : 0);
+        return result;
+    }
 }
