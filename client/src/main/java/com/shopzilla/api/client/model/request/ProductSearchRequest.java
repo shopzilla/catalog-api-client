@@ -40,6 +40,8 @@ public class ProductSearchRequest extends AbstractSearchRequest {
     
     private Boolean imageOnly = Boolean.FALSE;
     private Boolean offersOnly = Boolean.FALSE;
+    private Boolean biddedOnly = Boolean.FALSE;
+    private Boolean showRawMerchantUrl = Boolean.FALSE;
     private Boolean showAttributes = Boolean.FALSE;
     private Boolean showProductAttributes = Boolean.FALSE;
     
@@ -117,6 +119,22 @@ public class ProductSearchRequest extends AbstractSearchRequest {
         this.offersOnly = offersOnly;
     }
 
+    public Boolean getBiddedOnly() {
+        return biddedOnly;
+    }
+
+    public void setBiddedOnly(Boolean biddedOnly) {
+        this.biddedOnly = biddedOnly;
+    }
+
+    public Boolean getShowRawMerchantUrl() {
+        return showRawMerchantUrl;
+    }
+
+    public void setShowRawMerchantUrl(Boolean showRawMerchantUrl) {
+        this.showRawMerchantUrl = showRawMerchantUrl;
+    }
+
     public ProductType getProductType() {
         return productType;
     }
@@ -159,13 +177,13 @@ public class ProductSearchRequest extends AbstractSearchRequest {
 
     @Override
     public String toString() {
-        return "ProductSearchRequest [apiKey=" + getApiKey() + ", publisherId=" + getPublisherId()
-                + ", keyword=" + keyword + ", start=" + start + ", numResults=" + numResults
-                + ", backfillResults=" + backfillResults + ", minRelevancyScore="
-                + minRelevancyScore + ", placementId=" + getPlacementId() + ", categoryId=" + categoryId
-                + ", productId=" + productId + ", merchantId=" + merchantId + ", zipCode="
-                + zipCode + ", imageOnly=" + imageOnly + ", offersOnly=" + offersOnly
-                + ", showAttributes=" + showAttributes + ", showProductAttributes="
-                + showProductAttributes + ", productType=" + productType + "]";
+        return "ProductSearchRequest [keyword=" + keyword + ", start=" + start + ", numResults="
+                + numResults + ", backfillResults=" + backfillResults + ", minRelevancyScore="
+                + minRelevancyScore + ", categoryId=" + categoryId + ", productId=" + productId
+                + ", merchantId=" + merchantId + ", zipCode=" + zipCode + ", imageOnly="
+                + imageOnly + ", offersOnly=" + offersOnly + ", biddedOnly=" + biddedOnly
+                + ", showRawMerchantUrl=" + showRawMerchantUrl + ", showAttributes="
+                + showAttributes + ", showProductAttributes=" + showProductAttributes
+                + ", productType=" + productType + "]";
     }
 }
