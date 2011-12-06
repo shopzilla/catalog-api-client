@@ -36,6 +36,7 @@ public class Offer {
 
     private String URL;
     private String detailURL;
+    private String rawMerchantUrl;
 
     private Merchant merchant;
 
@@ -50,6 +51,7 @@ public class Offer {
                 .append("description", description)
                 .append("URL", URL)
                 .append("detailURL", detailURL)
+                .append("rawMerchantUrl", rawMerchantUrl)
                 .toString();
     }
 
@@ -137,6 +139,14 @@ public class Offer {
 
     public void setDetailURL(String detailURL) {
         this.detailURL = detailURL;
+    }
+
+    public String getRawMerchantUrl() {
+        return rawMerchantUrl;
+    }
+
+    public void setRawMerchantUrl(String rawMerchantUrl) {
+        this.rawMerchantUrl = rawMerchantUrl;
     }
 
     public Merchant getMerchant() {

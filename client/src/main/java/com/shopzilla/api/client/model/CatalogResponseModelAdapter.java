@@ -131,6 +131,7 @@ public class CatalogResponseModelAdapter {
             o.setDescription(catalogOffer.getDescription());
             o.setURL(catalogOffer.getUrl());
             o.setDetailURL(catalogOffer.getDetailUrl());
+            o.setRawMerchantUrl(catalogOffer.getRawUrl());
             offers.add(o);
         }
         return offers;
