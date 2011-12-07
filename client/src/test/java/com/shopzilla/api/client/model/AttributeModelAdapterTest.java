@@ -26,6 +26,19 @@ import static org.junit.Assert.assertTrue;
 public class AttributeModelAdapterTest {
 
     @Test
+    public void testWithNullInput() throws Exception {
+        assertTrue(responsesAreEqual(new AttributeSearchResponse(), AttributeModelAdapter.fromCatalogAPI(null)));
+
+    }
+    @Test
+    public void testFromCatalogAPIWithNullAttributes() throws Exception {
+        AttributeResponse attributeResponse = generateAttributeResponse();
+        attributeResponse.setAttributes(null);
+        AttributeSearchResponse attributeSearchResponse = AttributeModelAdapter.fromCatalogAPI(attributeResponse);
+        assertTrue(responsesAreEqual(new AttributeSearchResponse(), attributeSearchResponse));
+    }
+
+    @Test
     public void testFromCatalogAPI() throws Exception {
         AttributeResponse attributeResponse = generateAttributeResponse();
         AttributeSearchResponse attributeSearchResponse = AttributeModelAdapter.fromCatalogAPI(attributeResponse);

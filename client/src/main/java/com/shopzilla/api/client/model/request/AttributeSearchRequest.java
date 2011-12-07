@@ -1,33 +1,35 @@
-/*
+/**
  * Copyright 2011 Shopzilla.com
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
  */
 package com.shopzilla.api.client.model.request;
 
 /**
- * @
- * author sscanlon
+ * Model object for invoking the Attribute Catalog API endpoint
+ *
+ * @author sscanlon
+ * @author eblanco
  * 
  */
 public class AttributeSearchRequest extends AbstractSearchRequest {
 
-    private static final String EMPTY_STRING = "";
+    private static final int DEFAULT_NUM_RESULTS = 20;
+    private static final int DEFAULT_RESULTS_ATTRIBUTE_VALUES = 100;
 
     private String keyword;
-
-    private Integer numResults = 20;
-    private Integer resultsAttributeValues = 100;
+    private Integer numResults = DEFAULT_NUM_RESULTS;
+    private Integer resultsAttributeValues = DEFAULT_RESULTS_ATTRIBUTE_VALUES;
     private String attributeId;
     private String categoryId;
 
