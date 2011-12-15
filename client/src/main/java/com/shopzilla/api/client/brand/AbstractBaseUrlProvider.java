@@ -26,6 +26,8 @@ import java.util.Map;
  * @author sscanlon
  */
 public abstract class AbstractBaseUrlProvider implements UrlProvider {
+    
+    public String apiBaseUrl = "http://catalog.bizrate.com/services/catalog/v1/api/";
 
     public Map<String, ?> makeParameterMap(ProductSearchRequest request) {
 
@@ -42,6 +44,9 @@ public abstract class AbstractBaseUrlProvider implements UrlProvider {
         parameters.put("productId", request.getProductId());
         parameters.put("offersOnly", request.getOffersOnly());
         parameters.put("biddedOnly", request.getBiddedOnly());
+        if( request.getMinMarkdown() != null ) {
+            parameters.put("minMarkdown", request.getMinMarkdown());
+        }
         parameters.put("showRawUrl", request.getShowRawMerchantUrl());
         parameters.put("showAttributes", request.isShowAttributes());
         parameters.put("showProductAttributes", request.isShowProductAttributes());
@@ -69,5 +74,10 @@ public abstract class AbstractBaseUrlProvider implements UrlProvider {
 
         return parameters;
     }
+
+    public void setApiBaseUrl(String baseUrl) {
+        apiBaseUrl = baseUrl;
+    }
+
 
 }

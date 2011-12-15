@@ -1,28 +1,17 @@
-/**
- * Copyright 2011 Shopzilla.com
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
  */
 package com.shopzilla.api.client.brand;
 
 /**
- * @author sscanlon
- * 
+ *
+ * @author sachar
  */
-public class BesoUrlProvider extends AbstractBaseUrlProvider {
-
-    private static final String BESO_PROFILE_ID = "2";
+public class LowpriceshopperUrlProvider extends AbstractBaseUrlProvider {
     
+    private static final String LOWPRICESHOPPER_PROFILE_ID = "8";
+
     private static final String PRODUCT_QUERY_FRAGMENT = "?" +
             "apiKey={apiKey}" +
             "&publisherId={publisherId}" +
@@ -31,16 +20,18 @@ public class BesoUrlProvider extends AbstractBaseUrlProvider {
             "&keyword={keyword}" +
             "&productId={productId}" +
             "&productIdType={productType}" +
+            "&offersOnly={offersOnly}" +
             "&merchantId={merchantId}" +
             "&brandId=&" +
-            "biddedOnly=" +
+            "biddedOnly={biddedOnly}" +
             "&minPrice=" +
             "&maxPrice=" +
-            "&minMarkdown=" +
+            "&minMarkdown={minMarkdown}" +
             "&zipCode=" +
             "&freeShipping=" +
             "&start={start}" +
             "&results={numResults}" +
+            "&backfillResults={backfillResults}" + 
             "&startOffers=0" +
             "&resultsOffers=0" +
             "&sort=relevancy_desc" +
@@ -51,6 +42,17 @@ public class BesoUrlProvider extends AbstractBaseUrlProvider {
             "&maxAge=" +
             "&showRawUrl=" +
             "&imageOnly=";
+
+    private static final String ATTRIBUTE_QUERY_FRAGMENT = "?" +
+            "apiKey={apiKey}" +
+            "&publisherId={publisherId}" +
+            "&rfCode={rfCode}" +
+            "&placementId={placementId}" +
+            "&keyword={keyword}" +
+            "&attributeId={attributeId}" +
+            "&results={numResults}" +
+            "&resultsAttributeValues={resultsAttributeValues}" +
+            "&callback=callback";
 
     private static final String TAXONOMY_QUERY_FRAGMENT = "?" +
             "apiKey={apiKey}" +
@@ -65,20 +67,24 @@ public class BesoUrlProvider extends AbstractBaseUrlProvider {
     public String getProductServiceURL() {
         return new StringBuilder(apiBaseUrl)
                 .append("product/")
-                .append(BESO_PROFILE_ID)
+                .append(LOWPRICESHOPPER_PROFILE_ID)
                 .append(PRODUCT_QUERY_FRAGMENT)
                 .toString();
-    }
-
-    public String getAttributeServiceURL() {
-        return null;
     }
 
     public String getTaxonomyServiceURL() {
         return new StringBuilder(apiBaseUrl)
                 .append("taxonomy/")
-                .append(BESO_PROFILE_ID)
+                .append(LOWPRICESHOPPER_PROFILE_ID)
                 .append(TAXONOMY_QUERY_FRAGMENT)
+                .toString();
+    }
+
+    public String getAttributeServiceURL() {
+        return new StringBuilder(apiBaseUrl)
+                .append("attributes/")
+                .append(LOWPRICESHOPPER_PROFILE_ID)
+                .append(ATTRIBUTE_QUERY_FRAGMENT)
                 .toString();
     }
 

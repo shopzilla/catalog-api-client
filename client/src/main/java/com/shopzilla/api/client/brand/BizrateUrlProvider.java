@@ -20,8 +20,8 @@ package com.shopzilla.api.client.brand;
  * 
  */
 public class BizrateUrlProvider extends AbstractBaseUrlProvider {
-
-    private static final String BASE_URL = "http://catalog.bizrate.com/services/catalog/v1/api/";
+    
+    private static final String BIZRATE_PROFILE_ID = "1";
 
     private static final String PRODUCT_QUERY_FRAGMENT = "?" +
             "apiKey={apiKey}" +
@@ -75,21 +75,23 @@ public class BizrateUrlProvider extends AbstractBaseUrlProvider {
             "&sort=prob_desc";
 
     public String getProductServiceURL() {
-        return new StringBuilder(BASE_URL)
-                .append("product/1")
+        return new StringBuilder(apiBaseUrl)
+                .append("product/")
+                .append(BIZRATE_PROFILE_ID)
                 .append(PRODUCT_QUERY_FRAGMENT)
                 .toString();
     }
 
     public String getTaxonomyServiceURL() {
-        return new StringBuilder(BASE_URL)
-                .append("taxonomy/1")
+        return new StringBuilder(apiBaseUrl)
+                .append("taxonomy/")
+                .append(BIZRATE_PROFILE_ID)
                 .append(TAXONOMY_QUERY_FRAGMENT)
                 .toString();
     }
 
     public String getAttributeServiceURL() {
-        return new StringBuilder(BASE_URL)
+        return new StringBuilder(apiBaseUrl)
                 .append("attributes")
                 .append(ATTRIBUTE_QUERY_FRAGMENT)
                 .toString();

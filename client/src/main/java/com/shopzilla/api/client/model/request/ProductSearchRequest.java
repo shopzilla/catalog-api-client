@@ -45,8 +45,18 @@ public class ProductSearchRequest extends AbstractSearchRequest {
     private Boolean showAttributes = Boolean.FALSE;
     private Boolean showProductAttributes = Boolean.FALSE;
     
+    private Integer minMarkdown = null;
+    
     private ProductType productType;
 
+    public void setMinMarkdown(Integer minMarkdown) {
+        this.minMarkdown = minMarkdown;
+    }
+
+    public Integer getMinMarkdown() {
+        return minMarkdown;
+    }
+    
     public String getCategoryId() {
         return categoryId;
     }
