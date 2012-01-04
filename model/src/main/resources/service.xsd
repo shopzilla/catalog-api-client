@@ -5,8 +5,21 @@
 
     <xs:annotation>
         <xs:documentation>
-    Copyright (C) 2004 - 2011 Shopzilla, Inc.
-    All rights reserved. Unauthorized disclosure or distribution is prohibited.
+    <!--
+          ~ Copyright 2011 Shopzilla.com
+          ~
+          ~ Licensed under the Apache License, Version 2.0 (the "License");
+          ~ you may not use this file except in compliance with the License.
+          ~ You may obtain a copy of the License at
+          ~
+          ~      http://www.apache.org/licenses/LICENSE-2.0
+          ~
+          ~ Unless required by applicable law or agreed to in writing, software
+          ~ distributed under the License is distributed on an "AS IS" BASIS,
+          ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+          ~ See the License for the specific language governing permissions and
+          ~ limitations under the License.
+          --> 
         </xs:documentation> 
     </xs:annotation>
 
@@ -184,9 +197,9 @@
                     </xs:annotation>
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="OriginalKeyword" minOccurs="1" maxOccurs="1" type="xs:string" />
-                            <xs:element name="RestrictedToAdult" minOccurs="1" maxOccurs="1" type="xs:string" />
-                            <xs:element name="SpellerModifiedKeyword" minOccurs="1" maxOccurs="1" type="xs:string" />
+                            <xs:element name="originalKeyword" minOccurs="1" maxOccurs="1" type="xs:string" />
+                            <xs:element name="mature" minOccurs="1" maxOccurs="1" type="xs:string" />
+                            <xs:element name="spellerModifiedKeyword" minOccurs="1" maxOccurs="1" type="xs:string" />
                             <xs:element name="QuerySuggestions" minOccurs="1" maxOccurs="1" type="QuerySuggestionsType" />
                         </xs:sequence>
                      </xs:complexType>
@@ -204,8 +217,7 @@
     
     <xs:complexType name="QuerySuggestionType">
         <xs:sequence>
-            <xs:element name="Classification" type="xs:string" minOccurs="1" maxOccurs="1"/>
-            <xs:element name="Suggestion" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="keyword" type="xs:string" minOccurs="1" maxOccurs="1"/>
             <xs:element name="Category" minOccurs="1" maxOccurs="1" type="CatType" />
              <xs:choice minOccurs="0" maxOccurs="1">
                 <xs:annotation>
@@ -218,13 +230,14 @@
              </xs:choice>
         </xs:sequence>
         <xs:attribute name="numResults" type="xs:long" />
-        
+        <xs:attribute name="id" type="xs:string" />
     </xs:complexType>
     
     
     <xs:complexType name="CatType">
         <xs:sequence>
-            <xs:element name="CategoryLabel" type="xs:string" />
+            <xs:element name="name" type="xs:string" />
+            <xs:element name="probability" type="xs:long" />
         </xs:sequence>
         <xs:attribute name="id" type="xs:long" />
     </xs:complexType>
@@ -772,7 +785,7 @@
             <xs:group ref="ProductOfferElementGroup"/>
             <xs:element name="detailUrl" type="xs:anyURI" minOccurs="0">
                 <xs:annotation>
-                    <xs:documentation>Link to the offer's page on BizRate.com.
+                    <xs:documentation>Link to the offer's page on site.
                     </xs:documentation>
                 </xs:annotation>
             </xs:element>
