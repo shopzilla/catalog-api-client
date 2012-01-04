@@ -15,10 +15,11 @@
  */
 package com.shopzilla.api.client;
 
-import com.shopzilla.api.client.model.request.AttributeSearchRequest;
-import com.shopzilla.api.client.model.request.ProductSearchRequest;
-
 import java.util.Map;
+
+import com.shopzilla.api.client.model.request.AttributeSearchRequest;
+import com.shopzilla.api.client.model.request.ClassificationRequest;
+import com.shopzilla.api.client.model.request.ProductSearchRequest;
 
 /**
  * @author sscanlon
@@ -30,6 +31,8 @@ public interface UrlProvider {
     public String getTaxonomyServiceURL();
 
     public String getAttributeServiceURL();
+    
+    public String getClassificationServiceURL();
 
     public String getBrandServiceURL();
 
@@ -38,4 +41,6 @@ public interface UrlProvider {
     public Map<String, ?> makeParameterMap(ProductSearchRequest request);
 
     Map<String, ?> makeAttributeParameterMap(AttributeSearchRequest request);
+    
+    Map<String, ?> makeClassificationParameterMap(ClassificationRequest request);
 }

@@ -15,12 +15,16 @@
  */
 package com.shopzilla.api.client.brand;
 
-import com.shopzilla.api.client.UrlProvider;
-import com.shopzilla.api.client.model.request.AttributeSearchRequest;
-import com.shopzilla.api.client.model.request.ProductSearchRequest;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.commons.lang.BooleanUtils;
+import org.apache.commons.lang.ObjectUtils;
+
+import com.shopzilla.api.client.UrlProvider;
+import com.shopzilla.api.client.model.request.AttributeSearchRequest;
+import com.shopzilla.api.client.model.request.ClassificationRequest;
+import com.shopzilla.api.client.model.request.ProductSearchRequest;
 
 /**
  * @author sscanlon
@@ -74,6 +78,21 @@ public abstract class AbstractBaseUrlProvider implements UrlProvider {
         parameters.put("rfCode", request.getRfCode());
         parameters.put("categoryId", request.getCategoryId());
 
+        return parameters;
+    }
+    
+    public Map<String, ?> makeClassificationParameterMap(ClassificationRequest request) {
+        Map<String, Object> parameters = new HashMap<String, Object>();
+
+        parameters.put("apiKey", request.getApiKey());
+        parameters.put("publisherId", request.getPublisherId());
+        parameters.put("placementId", request.getPlacementId());
+        parameters.put("keyword", request.getKeyword());
+        parameters.put("showAll", BooleanUtils.toBooleanDefaultIfNull(request.getShowAll(), Boolean.TRUE));
+        parameters.put("format",
+                ((ClassificationRequest.Format) ObjectUtils.defaultIfNull(request.getFormat(),
+                        ClassificationRequest.Format.XML)).toString().toLowerCase());
+        
         return parameters;
     }
 

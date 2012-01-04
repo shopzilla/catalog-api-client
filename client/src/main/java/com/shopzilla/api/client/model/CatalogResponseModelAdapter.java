@@ -101,6 +101,46 @@ public class CatalogResponseModelAdapter {
 
         return toReturn;
     }
+    
+    public static Offer convertOffer(OfferType catalogOffer) {
+        Offer o = new Offer();
+
+        Merchant m = new Merchant();
+        m.setId(catalogOffer.getMerchantId());
+        m.setName(catalogOffer.getMerchantName());
+        o.setMerchant(m);
+
+        o.setCategoryId(catalogOffer.getCategoryId());
+        o.setId(catalogOffer.getId());
+        o.setMid(catalogOffer.getMerchantId());
+
+        if (catalogOffer.getPrice() != null) {
+            Price p = new Price();
+            p.setIntegral(catalogOffer.getPrice().getIntegral());
+            p.setPrice(catalogOffer.getPrice().getValue());
+            o.setPrice(p);
+        }
+        o.setTitle(catalogOffer.getTitle());
+        o.setDescription(catalogOffer.getDescription());
+        o.setURL(catalogOffer.getUrl());
+        o.setDetailURL(catalogOffer.getDetailUrl());
+        o.setRawMerchantUrl(catalogOffer.getRawUrl());
+        
+        return o;
+    }
+    
+    public static Product convertProduct(ProductType catalogProduct) {
+        Product p = new Product();
+        p.setId(catalogProduct.getId());
+        p.setCategoryId(catalogProduct.getCategoryId());
+        p.setTitle(catalogProduct.getTitle());
+        p.setURL(catalogProduct.getUrl());
+        p.setDescription(catalogProduct.getDescription());
+        p.setLongDescription(catalogProduct.getLongDescription());
+        p.setSku(catalogProduct.getSku());
+        p.setAttributes(convertAttributes(catalogProduct.getAttributes()));
+        return p;
+    }
 
     private static List<Offer> convertOffers(List<?> rawOffers) {
         ArrayList<Offer> offers = new ArrayList<Offer>();
@@ -110,28 +150,7 @@ public class CatalogResponseModelAdapter {
             }
 
             OfferType catalogOffer = (OfferType) productOrOffer;
-            Offer o = new Offer();
-
-            Merchant m = new Merchant();
-            m.setId(catalogOffer.getMerchantId());
-            m.setName(catalogOffer.getMerchantName());
-            o.setMerchant(m);
-
-            o.setCategoryId(catalogOffer.getCategoryId());
-            o.setId(catalogOffer.getId());
-            o.setMid(catalogOffer.getMerchantId());
-
-            if (catalogOffer.getPrice() != null) {
-                Price p = new Price();
-                p.setIntegral(catalogOffer.getPrice().getIntegral());
-                p.setPrice(catalogOffer.getPrice().getValue());
-                o.setPrice(p);
-            }
-            o.setTitle(catalogOffer.getTitle());
-            o.setDescription(catalogOffer.getDescription());
-            o.setURL(catalogOffer.getUrl());
-            o.setDetailURL(catalogOffer.getDetailUrl());
-            o.setRawMerchantUrl(catalogOffer.getRawUrl());
+            Offer o = convertOffer(catalogOffer);
             offers.add(o);
         }
         return offers;
@@ -145,15 +164,7 @@ public class CatalogResponseModelAdapter {
             }
 
             ProductType catalogProduct = (ProductType) productOrOffer;
-            Product p = new Product();
-            p.setId(catalogProduct.getId());
-            p.setCategoryId(catalogProduct.getCategoryId());
-            p.setTitle(catalogProduct.getTitle());
-            p.setURL(catalogProduct.getUrl());
-            p.setDescription(catalogProduct.getDescription());
-            p.setLongDescription(catalogProduct.getLongDescription());
-            p.setSku(catalogProduct.getSku());
-            p.setAttributes(convertAttributes(catalogProduct.getAttributes()));
+            Product p = convertProduct(catalogProduct);
 
             products.add(p);
         }

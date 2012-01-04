@@ -81,6 +81,11 @@ public class BesoUrlProvider extends AbstractBaseUrlProvider {
                 .append(TAXONOMY_QUERY_FRAGMENT)
                 .toString();
     }
+    
+    public String getClassificationServiceURL() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
     public String getBrandServiceURL() {
         // TODO Auto-generated method stub
