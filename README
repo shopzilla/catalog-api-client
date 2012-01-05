@@ -24,9 +24,15 @@ To get started:
      export PUBLISHER_ID=<your id>
      export PUBLISHER_API_KEY=<your api key>
 
-5) Run the following command to build the code and make sample requests against the Catalog API:
+   Optionally you can pass your Shopzilla publisher api key and id through maven as arguments.
 
+5) Run the following command to build the code and make sample requests against the Catalog API:
+     
      mvn clean install
+     (requires environment variables to be set)
+
+     or
+     mvn clean install -DPUBLISHER_ID=<your id> -DPUBLISHER_API_KEY=<your api key>
 
    You should see output towards the end that looks as below (with your credentials instead of <KEY>/<ID>). This is the
    Url used to retrieve the product data. If you browse to this URL, you'll see an example of what data is available
