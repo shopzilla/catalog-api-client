@@ -71,7 +71,7 @@ public class BizrateUrlProvider extends AbstractBaseUrlProvider {
             "&categoryId={categoryId}" +
             "&keyword={keyword}" +
             "&ancestors=" +
-            "&results=10" +
+            "&results={results}" +
             "&sort=prob_desc";
 
     public String getProductServiceURL() {
@@ -92,7 +92,8 @@ public class BizrateUrlProvider extends AbstractBaseUrlProvider {
 
     public String getAttributeServiceURL() {
         return new StringBuilder(apiBaseUrl)
-                .append("attributes")
+                .append("attributes/")
+                .append(BIZRATE_PROFILE_ID)
                 .append(ATTRIBUTE_QUERY_FRAGMENT)
                 .toString();
     }

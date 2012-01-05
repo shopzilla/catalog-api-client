@@ -23,6 +23,7 @@ import org.apache.commons.lang.ObjectUtils;
 
 import com.shopzilla.api.client.UrlProvider;
 import com.shopzilla.api.client.model.request.AttributeSearchRequest;
+import com.shopzilla.api.client.model.request.CategorySearchRequest;
 import com.shopzilla.api.client.model.request.ClassificationRequest;
 import com.shopzilla.api.client.model.request.ProductSearchRequest;
 
@@ -32,7 +33,16 @@ import com.shopzilla.api.client.model.request.ProductSearchRequest;
 public abstract class AbstractBaseUrlProvider implements UrlProvider {
     
     public String apiBaseUrl = "http://catalog.bizrate.com/services/catalog/v1/api/";
-
+    
+    public static final String PRODUCT_SERVICE_ENDPOINT_NAME = "product/";
+    public static final String ATTRIBUTE_SERVICE_ENDPOINT_NAME = "attributes/";
+    public static final String BRAND_SERVICE_ENDPOINT_NAME = "brands/";
+    public static final String TAXONOMY_SERVICE_ENDPOINT_NAME = "taxonomy/";
+    public static final String CLASSIFICATION_SERVICE_ENDPOINT_NAME = "classification/";
+    public static final String MERCHANT_SERVICE_ENDPOINT_NAME = "merchantinfo/";
+    
+    private static final Integer defaultResults = 10;
+    
     public Map<String, ?> makeParameterMap(ProductSearchRequest request) {
 
         Map<String, Object> parameters = new HashMap<String, Object>();
@@ -89,6 +99,29 @@ public abstract class AbstractBaseUrlProvider implements UrlProvider {
         parameters.put("placementId", request.getPlacementId());
         parameters.put("keyword", request.getKeyword());
         parameters.put("showAll", BooleanUtils.toBooleanDefaultIfNull(request.getShowAll(), Boolean.TRUE));
+        parameters.put("format",
+                ((ClassificationRequest.Format) ObjectUtils.defaultIfNull(request.getFormat(),
+                        ClassificationRequest.Format.XML)).toString().toLowerCase());
+        
+        return parameters;
+    }
+    
+    public Map<String, ?> makeCategoryParameterMap(CategorySearchRequest request) {
+        Map<String, Object> parameters = new HashMap<String, Object>();
+
+        parameters.put("apiKey", request.getApiKey());
+        parameters.put("publisherId", request.getPublisherId());
+        parameters.put("placementId", request.getPlacementId());
+        parameters.put("keyword", request.getKeyword());
+        parameters.put("categoryId", request.getCategoryId());
+        parameters.put("ancestors", request.getAncestors());
+        if( request.getResults() == null ) {
+            parameters.put("results", defaultResults);
+        } else {
+            parameters.put("results", request.getResults());
+        }
+        parameters.put("sort", request.getSortOrder());
+        parameters.put("attFilter", request.getAttFilter());
         parameters.put("format",
                 ((ClassificationRequest.Format) ObjectUtils.defaultIfNull(request.getFormat(),
                         ClassificationRequest.Format.XML)).toString().toLowerCase());

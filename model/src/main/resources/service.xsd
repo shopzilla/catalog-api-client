@@ -1039,6 +1039,7 @@
                     <xs:documentation>A local currency value indicating the minimum price a merchant can bid on products within a category.</xs:documentation>
                 </xs:annotation>
             </xs:element>
+            <xs:element name="probability" type="xs:float" />
             <xs:element name="url" type="xs:anyURI"/>
             <xs:element name="Children" type="CategoriesType" maxOccurs="1" minOccurs="0">
                 <xs:annotation>

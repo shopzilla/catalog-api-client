@@ -13,13 +13,9 @@ package com.shopzilla.api.client.model.request;
  */
 public class ClassificationRequest extends AbstractSearchRequest {
     
-    public static enum Format {XML, JSON, JS};
-    
     private String keyword;
     private Boolean showAll;
     
-    private Format format;
-
     public String getKeyword() {
         return keyword;
     }
@@ -36,11 +32,5 @@ public class ClassificationRequest extends AbstractSearchRequest {
         this.showAll = showAll;
     }
 
-    public Format getFormat() {
-        return format;
-    }
-
-    public void setFormat(Format format) {
-        this.format = format;
-    }
+    
 }

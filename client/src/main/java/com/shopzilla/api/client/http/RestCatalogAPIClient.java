@@ -32,6 +32,7 @@ import com.shopzilla.api.client.model.Category;
 import com.shopzilla.api.client.model.CategoryModelAdapter;
 import com.shopzilla.api.client.model.ClassificationModelAdapter;
 import com.shopzilla.api.client.model.request.AttributeSearchRequest;
+import com.shopzilla.api.client.model.request.CategorySearchRequest;
 import com.shopzilla.api.client.model.request.ClassificationRequest;
 import com.shopzilla.api.client.model.request.ProductSearchRequest;
 import com.shopzilla.api.client.model.response.AttributeSearchResponse;
@@ -70,10 +71,10 @@ public class RestCatalogAPIClient implements CatalogAPIClient {
         return AttributeModelAdapter.fromCatalogAPI(response);
     }
 
-    public List<Category> performCategorySearch(ProductSearchRequest request) {
+    public List<Category> performCategorySearch(CategorySearchRequest request) {
         TaxonomyResponse response = restTemplate.getForObject(urlProvider.getTaxonomyServiceURL(),
                 TaxonomyResponse.class,
-                urlProvider.makeParameterMap(request));
+                urlProvider.makeCategoryParameterMap(request));
 
         return CategoryModelAdapter.fromCatalogAPI(response);
     }

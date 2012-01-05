@@ -18,6 +18,7 @@ package com.shopzilla.api.client;
 import java.util.Map;
 
 import com.shopzilla.api.client.model.request.AttributeSearchRequest;
+import com.shopzilla.api.client.model.request.CategorySearchRequest;
 import com.shopzilla.api.client.model.request.ClassificationRequest;
 import com.shopzilla.api.client.model.request.ProductSearchRequest;
 
@@ -37,10 +38,12 @@ public interface UrlProvider {
     public String getBrandServiceURL();
 
     public String getMerchantServiceURL();
-
-    public Map<String, ?> makeParameterMap(ProductSearchRequest request);
-
-    Map<String, ?> makeAttributeParameterMap(AttributeSearchRequest request);
     
-    Map<String, ?> makeClassificationParameterMap(ClassificationRequest request);
+    public Map<String, ?> makeParameterMap(ProductSearchRequest request);
+    
+    public Map<String, ?> makeCategoryParameterMap(CategorySearchRequest request);
+
+    public Map<String, ?> makeAttributeParameterMap(AttributeSearchRequest request);
+    
+    public Map<String, ?> makeClassificationParameterMap(ClassificationRequest request);
 }
