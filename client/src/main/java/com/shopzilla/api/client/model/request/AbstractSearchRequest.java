@@ -26,12 +26,16 @@ package com.shopzilla.api.client.model.request;
 public abstract class AbstractSearchRequest implements SearchRequest {
 
     private static final Integer DEFAULT_PLACEMENT_ID = 1;
-
+    public static enum Format {XML, JSON, JS};
+    
     private String apiKey;
     private String publisherId;
     private Integer placementId = DEFAULT_PLACEMENT_ID;
     private String rfCode;
-
+    
+    private Format format;
+    private String callback;
+    
     public String getApiKey() {
         return apiKey;
     }
@@ -63,7 +67,23 @@ public abstract class AbstractSearchRequest implements SearchRequest {
     public void setPlacementId(Integer placementId) {
         this.placementId = placementId;
     }
+    
+    public Format getFormat() {
+        return format;
+    }
 
+    public void setFormat(Format format) {
+        this.format = format;
+    }
+
+    public String getCallback() {
+        return callback;
+    }
+
+    public void setCallback(String callback) {
+        this.callback = callback;
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -75,7 +95,9 @@ public abstract class AbstractSearchRequest implements SearchRequest {
         if (placementId != null ? !placementId.equals(that.placementId) : that.placementId != null) return false;
         if (publisherId != null ? !publisherId.equals(that.publisherId) : that.publisherId != null) return false;
         if (rfCode != null ? !rfCode.equals(that.rfCode) : that.rfCode != null) return false;
-
+        if (format != null ? !format.equals(that.format) : that.format != null) return false;
+        if (callback != null ? !callback.equals(that.callback) : that.callback != null) return false;
+        
         return true;
     }
 
@@ -85,6 +107,8 @@ public abstract class AbstractSearchRequest implements SearchRequest {
         result = 31 * result + (publisherId != null ? publisherId.hashCode() : 0);
         result = 31 * result + (placementId != null ? placementId.hashCode() : 0);
         result = 31 * result + (rfCode != null ? rfCode.hashCode() : 0);
+        result = 31 * result + (format != null ? format.hashCode() : 0);
+        result = 31 * result + (callback != null ? callback.hashCode() : 0);
         return result;
     }
 }

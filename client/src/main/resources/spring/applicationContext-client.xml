@@ -28,6 +28,13 @@
         <property name="restTemplate" ref="restTemplate"/>
         <property name="productService" ref="productService"/>
     </bean>
+    
+    <bean id="taxonomyClient" class="com.shopzilla.api.client.TaxonomyClient">
+        <property name="restTemplate" ref="restTemplate"/>
+        <property name="urlProvider" ref="bzUrlProvider" />
+    </bean>
+    
+    <bean id="bzUrlProvider" class="com.shopzilla.api.client.brand.BizrateUrlProvider" /> 
 
     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
         <property name="messageConverters">
@@ -42,13 +49,7 @@
 
 
     <bean id="jaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
-        <property name="classesToBeBound">
-            <list>
-                <value>com.shopzilla.services.catalog.ProductResponse</value>
-                <value>com.shopzilla.services.catalog.ProductType</value>
-                <value>com.shopzilla.services.catalog.ProductOffersType</value>
-            </list>
-        </property>
+        <property name="contextPath" value="com.shopzilla.services.catalog" />
         <property name="schema" value="classpath:service.xsd"/>
     </bean>
 
