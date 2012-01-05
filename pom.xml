@@ -46,6 +46,23 @@
               <artifactId>maven-release-plugin</artifactId>
               <version>2.2.1</version>
             </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-surefire-plugin</artifactId>
+              <version>2.4.3</version>
+              <configuration>
+                <systemProperties>
+                  <property>
+                    <name>PUBLISHER_ID</name>
+                    <value>${PUBLISHER_ID}</value>
+                  </property>
+                  <property>
+                    <name>PUBLISHER_API_KEY</name>
+                    <value>${PUBLISHER_API_KEY}</value>
+                  </property>
+                </systemProperties>
+              </configuration>
+            </plugin>
         </plugins>
         <pluginManagement>
             <plugins>
