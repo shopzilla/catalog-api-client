@@ -15,6 +15,8 @@
  */
 package com.shopzilla.api.client.helper;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * Class that looks for the API key and publisher Id in environment variables
  * when the context initializes. Be sure to set the following variables before
@@ -30,8 +32,8 @@ public class CredentialFactory {
     private String publisherApiKey;
 
     public CredentialFactory() {
-        String id = System.getenv("PUBLISHER_ID");
-        String key = System.getenv("PUBLISHER_API_KEY");
+        String id = StringUtils.isNotBlank(System.getenv("PUBLISHER_ID")) ? System.getenv("PUBLISHER_ID") : System.getProperty("PUBLISHER_ID");
+        String key = StringUtils.isNotBlank(System.getenv("PUBLISHER_API_KEY")) ? System.getenv("PUBLISHER_API_KEY") : System.getProperty("PUBLISHER_API_KEY");
 
         if (key != null && id != null) {
             this.publisherId = id;
