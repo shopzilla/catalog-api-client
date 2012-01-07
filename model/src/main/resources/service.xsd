@@ -230,7 +230,16 @@
              </xs:choice>
         </xs:sequence>
         <xs:attribute name="numResults" type="xs:long" />
-        <xs:attribute name="id" type="xs:string" />
+        <xs:attribute name="id" >
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="SCRUBBER" />
+                    <xs:enumeration value="QUERY_SUGGESTION" />
+                    <xs:enumeration value="QUERY_CLASSIFICATION" />
+                    <xs:enumeration value="EXCLUDE_SCORCHING" />
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
     </xs:complexType>
     
     

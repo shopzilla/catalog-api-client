@@ -13,7 +13,7 @@ package com.shopzilla.api.client.model;
  */
 public class Suggestion {
     public static enum SuggestionType {
-        SCRUBBER, QUERY_SUGGESTION, QUERY_CLASSIFICATION, EXCLUDE_SCROCHING
+        SCRUBBER, QUERY_SUGGESTION, QUERY_CLASSIFICATION, EXCLUDE_SCORCHING
     };
 
     private SuggestionType suggestionType;
