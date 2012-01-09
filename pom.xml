@@ -3,7 +3,7 @@
 
     <groupId>com.shopzilla.api</groupId>
     <artifactId>root</artifactId>
-    <version>1.7-SNAPSHOT</version>
+    <version>1.7</version>
     
     <packaging>pom</packaging>
 
