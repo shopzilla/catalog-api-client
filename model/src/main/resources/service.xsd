@@ -198,7 +198,9 @@
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="originalKeyword" minOccurs="1" maxOccurs="1" type="xs:string" />
+                            <xs:element name="originalNumResults" type="xs:unsignedInt" minOccurs="1" maxOccurs="1" />
                             <xs:element name="mature" minOccurs="1" maxOccurs="1" type="xs:string" />
+                            <xs:element name="media" minOccurs="1" maxOccurs="1" type="xs:string" />
                             <xs:element name="spellerModifiedKeyword" minOccurs="1" maxOccurs="1" type="xs:string" />
                             <xs:element name="QuerySuggestions" minOccurs="1" maxOccurs="1" type="QuerySuggestionsType" />
                         </xs:sequence>
@@ -229,7 +231,7 @@
                 <xs:element name="Offer" type="OfferType" />
              </xs:choice>
         </xs:sequence>
-        <xs:attribute name="numResults" type="xs:long" />
+        <xs:attribute name="numResults" type="xs:unsignedInt" />
         <xs:attribute name="id" >
             <xs:simpleType>
                 <xs:restriction base="xs:string">

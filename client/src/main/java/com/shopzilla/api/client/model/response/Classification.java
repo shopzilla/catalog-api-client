@@ -18,7 +18,9 @@ import com.shopzilla.api.client.model.Suggestion;
 public class Classification {
 
     private String originalKeyword;
+    private Long originalNumResults;
     private Boolean mature;
+    private Boolean media;
     private List<Suggestion> suggestions;
 
     public Classification() {
@@ -32,6 +34,14 @@ public class Classification {
         this.originalKeyword = originalKeyword;
     }
 
+    public Long getOriginalNumResults() {
+        return originalNumResults;
+    }
+
+    public void setOriginalNumResults(Long originalNumResults) {
+        this.originalNumResults = originalNumResults;
+    }
+   
     public Boolean getMature() {
         return mature;
     }
@@ -40,6 +50,14 @@ public class Classification {
         this.mature = mature;
     }
 
+    public Boolean getMedia() {
+        return media;
+    }
+
+    public void setMedia(Boolean media) {
+        this.media = media;
+    }
+    
     public List<Suggestion> getSuggestions() {
         if (suggestions == null) {
             suggestions = new ArrayList<Suggestion>();
