@@ -15,6 +15,7 @@
  */
 package com.shopzilla.api.client.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -29,6 +30,11 @@ public class Product {
     private String longDescription;
     private String sku;
     private List<Attribute> attributes;
+    private List<Offer> offers;
+    private Price minPrice;
+    private Price maxPrice;
+    private Long storeCount;
+    private BigDecimal relevancy;
 
     public Long getId() {
         return id;
@@ -94,4 +100,43 @@ public class Product {
         this.attributes = attributes;
     }
 
+    public Price getMaxPrice() {
+        return maxPrice;
+    }
+
+    public void setMaxPrice(Price maxPrice) {
+        this.maxPrice = maxPrice;
+    }
+
+    public Price getMinPrice() {
+        return minPrice;
+    }
+
+    public void setMinPrice(Price minPrice) {
+        this.minPrice = minPrice;
+    }
+
+    public List<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
+    }
+
+    public BigDecimal getRelevancy() {
+        return relevancy;
+    }
+
+    public void setRelevancy(BigDecimal relevancy) {
+        this.relevancy = relevancy;
+    }
+
+    public Long getStoreCount() {
+        return storeCount;
+    }
+
+    public void setStoreCount(Long storeCount) {
+        this.storeCount = storeCount;
+    }
 }

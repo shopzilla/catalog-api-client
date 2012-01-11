@@ -20,7 +20,7 @@ package com.shopzilla.api.client.model.request;
  *
  * @author sscanlon
  * @author eblanco
- * 
+ *
  */
 public class AttributeSearchRequest extends AbstractSearchRequest {
 

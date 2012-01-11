@@ -20,19 +20,22 @@ import java.util.List;
 
 /**
  * @author sscanlon
- * 
+ *
  */
 public class CatalogResponse {
 
     private Long totalResults;
+    private Long includedResults;
 
     private Long relevancyScore;
-    
+
     private String serviceUrl;
 
     private List<Attribute> relatedAttributes;
     private List<Product> products = Collections.emptyList();
     private List<Offer> offers = Collections.emptyList();
+    private Price minPrice;
+    private Price maxPrice;
 
     public List<Attribute> getRelatedAttributes() {
         return relatedAttributes;
@@ -82,10 +85,43 @@ public class CatalogResponse {
         this.serviceUrl = serviceUrl;
     }
 
+    public Price getMaxPrice() {
+        return maxPrice;
+    }
+
+    public void setMaxPrice(Price maxPrice) {
+        this.maxPrice = maxPrice;
+    }
+
+    public Price getMinPrice() {
+        return minPrice;
+    }
+
+    public void setMinPrice(Price minPrice) {
+        this.minPrice = minPrice;
+    }
+
+    public Long getIncludedResults() {
+        return includedResults;
+    }
+
+    public void setIncludedResults(Long includedResults) {
+        this.includedResults = includedResults;
+    }
+
     @Override
     public String toString() {
-        return "CatalogResponse [totalResults=" + totalResults + ", relevancyScore="
-                + relevancyScore + ", serviceUrl=" + serviceUrl + ", relatedAttributes="
-                + relatedAttributes + ", products=" + products + ", offers=" + offers + "]";
+        return "CatalogResponse{" +
+                "includedResults=" + includedResults +
+                ", totalResults=" + totalResults +
+                ", relevancyScore=" + relevancyScore +
+                ", serviceUrl='" + serviceUrl + '\'' +
+                ", relatedAttributes=" + relatedAttributes +
+                ", products=" + products +
+                ", offers=" + offers +
+                ", minPrice=" + minPrice +
+                ", maxPrice=" + maxPrice +
+                '}';
     }
+
 }

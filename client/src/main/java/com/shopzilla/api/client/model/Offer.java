@@ -17,12 +17,10 @@ package com.shopzilla.api.client.model;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
  * @author sscanlon
- * 
+ *
  */
 public class Offer {
 
@@ -37,22 +35,27 @@ public class Offer {
     private String URL;
     private String detailURL;
     private String rawMerchantUrl;
+    private String sku;
+    private Boolean bidded;
 
     private Merchant merchant;
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("id", id)
-                .append("mid", mid)
-                .append("price", price)
-                .append("categoryId", categoryId)
-                .append("title", title)
-                .append("description", description)
-                .append("URL", URL)
-                .append("detailURL", detailURL)
-                .append("rawMerchantUrl", rawMerchantUrl)
-                .toString();
+        return "Offer{" +
+                "bidded=" + bidded +
+                ", id=" + id +
+                ", mid=" + mid +
+                ", price=" + price +
+                ", categoryId=" + categoryId +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", URL='" + URL + '\'' +
+                ", detailURL='" + detailURL + '\'' +
+                ", rawMerchantUrl='" + rawMerchantUrl + '\'' +
+                ", sku='" + sku + '\'' +
+                ", merchant=" + merchant +
+                '}';
     }
 
     @Override
@@ -155,5 +158,21 @@ public class Offer {
 
     public void setMerchant(Merchant merchant) {
         this.merchant = merchant;
+    }
+
+    public Boolean isBidded() {
+        return bidded;
+    }
+
+    public void setBidded(Boolean bidded) {
+        this.bidded = bidded;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
     }
 }

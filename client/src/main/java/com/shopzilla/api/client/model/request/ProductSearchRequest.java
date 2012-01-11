@@ -17,7 +17,6 @@ package com.shopzilla.api.client.model.request;
 
 /**
  * @author sscanlon
- * 
  */
 public class ProductSearchRequest extends AbstractSearchRequest {
 
@@ -25,7 +24,7 @@ public class ProductSearchRequest extends AbstractSearchRequest {
 
     public static enum ProductType {
         SZOID, SZPID, MPID, SKU;
-    };
+    }
 
     private String keyword;
     private Integer start = 0;
@@ -37,16 +36,26 @@ public class ProductSearchRequest extends AbstractSearchRequest {
     private String productId = EMPTY_STRING;
     private Long merchantId;
     private String zipCode = EMPTY_STRING;
-    
+
     private Boolean imageOnly = Boolean.FALSE;
     private Boolean offersOnly = Boolean.FALSE;
     private Boolean biddedOnly = Boolean.FALSE;
     private Boolean showRawMerchantUrl = Boolean.FALSE;
     private Boolean showAttributes = Boolean.FALSE;
     private Boolean showProductAttributes = Boolean.FALSE;
-    
+
     private Integer minMarkdown = null;
-    
+    private Integer resultsOffers = 0;
+
+    private String attributeId = EMPTY_STRING;
+    private String attWeights = EMPTY_STRING;
+    private String attFilter = EMPTY_STRING;
+    private Long minPrice = 0L;
+    private Long maxPrice;
+    private Integer maxAge;
+    private boolean freeShipping = Boolean.FALSE;
+    private String sort = "relevancy_desc";
+
     private ProductType productType;
 
     public void setMinMarkdown(Integer minMarkdown) {
@@ -56,7 +65,7 @@ public class ProductSearchRequest extends AbstractSearchRequest {
     public Integer getMinMarkdown() {
         return minMarkdown;
     }
-    
+
     public String getCategoryId() {
         return categoryId;
     }
@@ -185,15 +194,108 @@ public class ProductSearchRequest extends AbstractSearchRequest {
         this.merchantId = merchantId;
     }
 
+    public Integer getResultsOffers() {
+        return resultsOffers;
+    }
+
+    public void setResultsOffers(Integer resultsOffers) {
+        this.resultsOffers = resultsOffers;
+    }
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
+
+    public String getAttributeId() {
+        return attributeId;
+    }
+
+    public void setAttributeId(String attributeId) {
+        this.attributeId = attributeId;
+    }
+
+    public String getAttWeights() {
+        return attWeights;
+    }
+
+    public void setAttWeights(String attWeights) {
+        this.attWeights = attWeights;
+    }
+
+    public boolean isFreeShipping() {
+        return freeShipping;
+    }
+
+    public void setFreeShipping(boolean freeShipping) {
+        this.freeShipping = freeShipping;
+    }
+
+    public Integer getMaxAge() {
+        return maxAge;
+    }
+
+    public void setMaxAge(Integer maxAge) {
+        this.maxAge = maxAge;
+    }
+
+    public Long getMaxPrice() {
+        return maxPrice;
+    }
+
+    public void setMaxPrice(Long maxPrice) {
+        this.maxPrice = maxPrice;
+    }
+
+    public Long getMinPrice() {
+        return minPrice;
+    }
+
+    public void setMinPrice(Long minPrice) {
+        this.minPrice = minPrice;
+    }
+
+    public String getAttFilter() {
+        return attFilter;
+    }
+
+    public void setAttFilter(String attFilter) {
+        this.attFilter = attFilter;
+    }
+
     @Override
     public String toString() {
-        return "ProductSearchRequest [keyword=" + keyword + ", start=" + start + ", numResults="
-                + numResults + ", backfillResults=" + backfillResults + ", minRelevancyScore="
-                + minRelevancyScore + ", categoryId=" + categoryId + ", productId=" + productId
-                + ", merchantId=" + merchantId + ", zipCode=" + zipCode + ", imageOnly="
-                + imageOnly + ", offersOnly=" + offersOnly + ", biddedOnly=" + biddedOnly
-                + ", showRawMerchantUrl=" + showRawMerchantUrl + ", showAttributes="
-                + showAttributes + ", showProductAttributes=" + showProductAttributes
-                + ", productType=" + productType + "]";
+        return "ProductSearchRequest{" +
+                "attFilter='" + attFilter + '\'' +
+                ", keyword='" + keyword + '\'' +
+                ", start=" + start +
+                ", numResults=" + numResults +
+                ", backfillResults=" + backfillResults +
+                ", minRelevancyScore=" + minRelevancyScore +
+                ", categoryId='" + categoryId + '\'' +
+                ", productId='" + productId + '\'' +
+                ", merchantId=" + merchantId +
+                ", zipCode='" + zipCode + '\'' +
+                ", imageOnly=" + imageOnly +
+                ", offersOnly=" + offersOnly +
+                ", biddedOnly=" + biddedOnly +
+                ", showRawMerchantUrl=" + showRawMerchantUrl +
+                ", showAttributes=" + showAttributes +
+                ", showProductAttributes=" + showProductAttributes +
+                ", minMarkdown=" + minMarkdown +
+                ", resultsOffers=" + resultsOffers +
+                ", attributeId='" + attributeId + '\'' +
+                ", attWeights='" + attWeights + '\'' +
+                ", minPrice=" + minPrice +
+                ", maxPrice=" + maxPrice +
+                ", maxAge=" + maxAge +
+                ", freeShipping=" + freeShipping +
+                ", sort='" + sort + '\'' +
+                ", productType=" + productType +
+                '}';
     }
+
 }

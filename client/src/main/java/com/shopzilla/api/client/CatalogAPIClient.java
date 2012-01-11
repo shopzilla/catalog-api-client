@@ -15,15 +15,13 @@
  */
 package com.shopzilla.api.client;
 
-import java.util.List;
-
 import com.shopzilla.api.client.model.CatalogResponse;
-import com.shopzilla.api.client.model.Category;
 import com.shopzilla.api.client.model.request.AttributeSearchRequest;
 import com.shopzilla.api.client.model.request.CategorySearchRequest;
 import com.shopzilla.api.client.model.request.ClassificationRequest;
 import com.shopzilla.api.client.model.request.ProductSearchRequest;
 import com.shopzilla.api.client.model.response.AttributeSearchResponse;
+import com.shopzilla.api.client.model.response.CategoryResponse;
 import com.shopzilla.api.client.model.response.Classification;
 
 /**
@@ -34,7 +32,7 @@ public interface CatalogAPIClient {
 
     public CatalogResponse performSearch(ProductSearchRequest request);
 
-    public List<Category> performCategorySearch(CategorySearchRequest request);
+    public CategoryResponse performCategorySearch(CategorySearchRequest request);
 
     AttributeSearchResponse performAttributeSearch(AttributeSearchRequest request);
 

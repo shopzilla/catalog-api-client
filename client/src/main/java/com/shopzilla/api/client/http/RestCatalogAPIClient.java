@@ -15,13 +15,6 @@
  */
 package com.shopzilla.api.client.http;
 
-import java.net.URI;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.web.client.RestOperations;
-import org.springframework.web.util.UriTemplate;
-
 import com.shopzilla.api.client.CatalogAPIClient;
 import com.shopzilla.api.client.UrlProvider;
 import com.shopzilla.api.client.brand.BizrateUrlProvider;
@@ -36,11 +29,18 @@ import com.shopzilla.api.client.model.request.CategorySearchRequest;
 import com.shopzilla.api.client.model.request.ClassificationRequest;
 import com.shopzilla.api.client.model.request.ProductSearchRequest;
 import com.shopzilla.api.client.model.response.AttributeSearchResponse;
+import com.shopzilla.api.client.model.response.CategoryResponse;
 import com.shopzilla.api.client.model.response.Classification;
 import com.shopzilla.services.catalog.AttributeResponse;
 import com.shopzilla.services.catalog.ClassificationResponse;
 import com.shopzilla.services.catalog.ProductResponse;
 import com.shopzilla.services.catalog.TaxonomyResponse;
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.web.client.RestOperations;
+import org.springframework.web.util.UriTemplate;
+
+import java.net.URI;
+import java.util.List;
 
 /**
  * @author sscanlon
@@ -71,14 +71,20 @@ public class RestCatalogAPIClient implements CatalogAPIClient {
         return AttributeModelAdapter.fromCatalogAPI(response);
     }
 
-    public List<Category> performCategorySearch(CategorySearchRequest request) {
-        TaxonomyResponse response = restTemplate.getForObject(urlProvider.getTaxonomyServiceURL(),
-                TaxonomyResponse.class,
-                urlProvider.makeCategoryParameterMap(request));
+    public CategoryResponse performCategorySearch(CategorySearchRequest request) {
+        UriTemplate uriTemplate = new UriTemplate(urlProvider.getTaxonomyServiceURL());
+        URI serviceUri = uriTemplate.expand(urlProvider.makeCategoryParameterMap(request));
 
-        return CategoryModelAdapter.fromCatalogAPI(response);
+        TaxonomyResponse response = restTemplate.getForObject(serviceUri, TaxonomyResponse.class);
+
+        final List<Category> categories = CategoryModelAdapter.fromCatalogAPI(response);
+        final CategoryResponse categoryResponse = new CategoryResponse();
+        categoryResponse.setCategories(categories);
+        categoryResponse.setServiceUrl(serviceUri.toString());
+
+        return categoryResponse;
     }
-    
+
     public Classification performClassification(ClassificationRequest request) {
         ClassificationResponse response = restTemplate.getForObject(urlProvider.getClassificationServiceURL(),
                 ClassificationResponse.class,

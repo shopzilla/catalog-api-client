@@ -15,19 +15,17 @@
  */
 package com.shopzilla.api.client.model;
 
+import com.shopzilla.services.catalog.CategoriesType;
+import com.shopzilla.services.catalog.CategoryType;
+import com.shopzilla.services.catalog.TaxonomyResponse;
+import org.apache.commons.collections.CollectionUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.collections.CollectionUtils;
-
-import com.shopzilla.services.catalog.CategoriesType;
-import com.shopzilla.services.catalog.CategoryType;
-import com.shopzilla.services.catalog.TaxonomyResponse;
-
 /**
  * @author sscanlon
- * 
  */
 public class CategoryModelAdapter {
 
@@ -45,11 +43,11 @@ public class CategoryModelAdapter {
     }
 
     private static List<Category> convertChildren(CategoriesType children) {
-        
+
         if (children == null || CollectionUtils.isEmpty(children.getCategory())) {
             return Collections.emptyList();
         }
-        
+
         List<Category> toReturn = new ArrayList<Category>();
         for (CategoryType child : children.getCategory()) {
             toReturn.add(convertCategory(child));
@@ -57,12 +55,14 @@ public class CategoryModelAdapter {
         return toReturn;
     }
 
-    private static Category convertCategory(CategoryType cat) {
+    private static Category convertCategory(CategoryType categoryType) {
+
         Category category = new Category();
-        category.setId(cat.getId());
-        category.setName(cat.getName());
-        category.setURL(cat.getUrl());
-        category.setChildren(convertChildren(cat.getChildren()));
+        category.setId(categoryType.getId());
+        category.setName(categoryType.getName());
+        category.setURL(categoryType.getUrl());
+        category.setChildren(convertChildren(categoryType.getChildren()));
+        category.setAncestors(convertChildren(categoryType.getAncestors()));
         return category;
     }
 

@@ -9,5 +9,5 @@ package com.shopzilla.api.client.model.request;
  * @author sachar
  */
 public enum EnumSortOrder {
-    prob_desc,name_asc,name_desc;
+    prob_desc, name_asc, name_desc;
 }

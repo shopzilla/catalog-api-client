@@ -83,10 +83,22 @@ public class CatalogResponseModelAdapter {
         if (result.getProducts() != null
                 && CollectionUtils.isNotEmpty(result.getProducts().getProductOrOffer())) {
             toReturn.setTotalResults(result.getProducts().getTotalResults());
+            toReturn.setIncludedResults(result.getProducts().getIncludedResults());
+            final PriceSetType priceSet = result.getProducts().getPriceSet();
+            if (priceSet != null) {
+                toReturn.setMaxPrice(convertPrice(priceSet.getMaxPrice()));
+                toReturn.setMinPrice(convertPrice(priceSet.getMinPrice()));
+            }
             offers.addAll(convertOffers(result.getProducts().getProductOrOffer()));
         }
         if (result.getOffers() != null && CollectionUtils.isNotEmpty(result.getOffers().getOffer())) {
             toReturn.setTotalResults(result.getOffers().getTotalResults());
+            toReturn.setIncludedResults(result.getOffers().getIncludedResults());
+            final PriceSetType priceSet = result.getOffers().getPriceSet();
+            if (priceSet != null) {
+                toReturn.setMaxPrice(convertPrice(priceSet.getMaxPrice()));
+                toReturn.setMinPrice(convertPrice(priceSet.getMinPrice()));
+            }
             offers.addAll(convertOffers(result.getOffers().getOffer()));
         }
         toReturn.setOffers(offers);
@@ -95,13 +107,19 @@ public class CatalogResponseModelAdapter {
         if (result.getProducts() != null
                 && CollectionUtils.isNotEmpty(result.getProducts().getProductOrOffer())) {
             toReturn.setTotalResults(result.getProducts().getTotalResults());
+            toReturn.setIncludedResults(result.getProducts().getIncludedResults());
+            final PriceSetType priceSet = result.getProducts().getPriceSet();
+            if (priceSet != null) {
+                toReturn.setMaxPrice(convertPrice(priceSet.getMaxPrice()));
+                toReturn.setMinPrice(convertPrice(priceSet.getMinPrice()));
+            }
             products.addAll(convertProducts(result.getProducts().getProductOrOffer()));
         }
         toReturn.setProducts(products);
 
         return toReturn;
     }
-    
+
     public static Offer convertOffer(OfferType catalogOffer) {
         Offer o = new Offer();
 
@@ -114,10 +132,9 @@ public class CatalogResponseModelAdapter {
         o.setId(catalogOffer.getId());
         o.setMid(catalogOffer.getMerchantId());
 
-        if (catalogOffer.getPrice() != null) {
-            Price p = new Price();
-            p.setIntegral(catalogOffer.getPrice().getIntegral());
-            p.setPrice(catalogOffer.getPrice().getValue());
+        final PriceType price = catalogOffer.getPrice();
+        if (price != null) {
+            Price p = convertPrice(price);
             o.setPrice(p);
         }
         o.setTitle(catalogOffer.getTitle());
@@ -125,10 +142,18 @@ public class CatalogResponseModelAdapter {
         o.setURL(catalogOffer.getUrl());
         o.setDetailURL(catalogOffer.getDetailUrl());
         o.setRawMerchantUrl(catalogOffer.getRawUrl());
-        
+        o.setSku(catalogOffer.getSku());
+        o.setBidded(catalogOffer.isBidded());
         return o;
     }
-    
+
+    public static Price convertPrice(PriceType price) {
+        Price p = new Price();
+        p.setIntegral(price.getIntegral());
+        p.setPrice(price.getValue());
+        return p;
+    }
+
     public static Product convertProduct(ProductType catalogProduct) {
         Product p = new Product();
         p.setId(catalogProduct.getId());
@@ -139,6 +164,21 @@ public class CatalogResponseModelAdapter {
         p.setLongDescription(catalogProduct.getLongDescription());
         p.setSku(catalogProduct.getSku());
         p.setAttributes(convertAttributes(catalogProduct.getAttributes()));
+        final ProductOffersType offers = catalogProduct.getOffers();
+        if (offers != null) {
+            p.setOffers(convertOffers(offers.getOffer()));
+        }
+        final PriceSetType priceSet = catalogProduct.getPriceSet();
+        if (priceSet != null) {
+            if (priceSet.getMaxPrice() != null) {
+                p.setMaxPrice(convertPrice(priceSet.getMaxPrice()));
+            }
+            if (priceSet.getMinPrice() != null) {
+                p.setMinPrice(convertPrice(priceSet.getMinPrice()));
+            }
+            p.setStoreCount(priceSet.getStores());
+        }
+        p.setRelevancy(catalogProduct.getRelevancy());
         return p;
     }
 

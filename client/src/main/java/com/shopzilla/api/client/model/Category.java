@@ -15,18 +15,14 @@
  */
 package com.shopzilla.api.client.model;
 
-import java.math.BigDecimal;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
-
 /**
  * @author sscanlon
- * 
  */
 public class Category {
 
@@ -35,6 +31,7 @@ public class Category {
     private String URL;
 
     private List<Category> children = Collections.emptyList();
+    private List<Category> ancestors = Collections.emptyList();
 
     @Override
     public int hashCode() {
@@ -57,12 +54,13 @@ public class Category {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("id", id)
-                .append("name", name)
-                .append("URL", URL)
-                .append("children", children)
-                .toString();
+        return "Category{" +
+                "ancestors=" + ancestors +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", URL='" + URL + '\'' +
+                ", children=" + children +
+                '}';
     }
 
     public Long getId() {
@@ -95,5 +93,13 @@ public class Category {
 
     public void setChildren(List<Category> children) {
         this.children = children;
+    }
+
+    public List<Category> getAncestors() {
+        return ancestors;
+    }
+
+    public void setAncestors(List<Category> ancestors) {
+        this.ancestors = ancestors;
     }
 }
