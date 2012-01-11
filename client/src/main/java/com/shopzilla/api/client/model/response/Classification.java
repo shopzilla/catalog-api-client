@@ -12,10 +12,10 @@ import com.shopzilla.api.client.model.Suggestion;
 /**
  *  
  * @author Tom Suthanurak
- * 
+ * @author Swati Achar
  * @since Jan 3, 2012
  */
-public class Classification {
+public class Classification extends BaseResponse {
 
     private String originalKeyword;
     private Long originalNumResults;

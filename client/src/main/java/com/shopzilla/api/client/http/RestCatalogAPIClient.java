@@ -86,10 +86,14 @@ public class RestCatalogAPIClient implements CatalogAPIClient {
     }
 
     public Classification performClassification(ClassificationRequest request) {
-        ClassificationResponse response = restTemplate.getForObject(urlProvider.getClassificationServiceURL(),
-                ClassificationResponse.class,
-                urlProvider.makeClassificationParameterMap(request));
-        return ClassificationModelAdapter.fromCatalogAPI(response);
+        UriTemplate uriTemplate = new UriTemplate(urlProvider.getClassificationServiceURL());
+        URI serviceUri = uriTemplate.expand(urlProvider.makeClassificationParameterMap(request));
+        
+        ClassificationResponse response = restTemplate.getForObject(serviceUri,
+                ClassificationResponse.class);
+        Classification classification = ClassificationModelAdapter.fromCatalogAPI(response);
+        classification.setServiceUrl(serviceUri.toString());
+        return classification;
     }
 
     @Required

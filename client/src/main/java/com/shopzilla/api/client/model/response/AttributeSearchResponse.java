@@ -26,7 +26,7 @@ import java.util.List;
  *
  * @since 8/3/11
  */
-public class AttributeSearchResponse implements SearchResponse {
+public class AttributeSearchResponse extends BaseResponse implements SearchResponse {
 
     private Attributes attributes;
 

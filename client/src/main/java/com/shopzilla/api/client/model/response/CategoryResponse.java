@@ -8,9 +8,8 @@ import java.util.List;
  * @author Praveena Subrahmanyam
  * @since 1/10/12
  */
-public class CategoryResponse {
+public class CategoryResponse extends BaseResponse  {
     private List<Category> categories;
-    private String serviceUrl;
 
     public List<Category> getCategories() {
         return categories;
@@ -20,11 +19,4 @@ public class CategoryResponse {
         this.categories = categories;
     }
 
-    public String getServiceUrl() {
-        return serviceUrl;
-    }
-
-    public void setServiceUrl(String serviceUrl) {
-        this.serviceUrl = serviceUrl;
-    }
 }

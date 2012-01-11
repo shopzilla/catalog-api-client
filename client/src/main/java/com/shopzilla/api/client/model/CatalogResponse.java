@@ -15,6 +15,7 @@
  */
 package com.shopzilla.api.client.model;
 
+import com.shopzilla.api.client.model.response.BaseResponse;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,14 +23,13 @@ import java.util.List;
  * @author sscanlon
  *
  */
-public class CatalogResponse {
+public class CatalogResponse extends BaseResponse {
 
     private Long totalResults;
     private Long includedResults;
 
     private Long relevancyScore;
 
-    private String serviceUrl;
 
     private List<Attribute> relatedAttributes;
     private List<Product> products = Collections.emptyList();
@@ -77,14 +77,6 @@ public class CatalogResponse {
         this.totalResults = totalResults;
     }
 
-    public String getServiceUrl() {
-        return serviceUrl;
-    }
-
-    public void setServiceUrl(String serviceUrl) {
-        this.serviceUrl = serviceUrl;
-    }
-
     public Price getMaxPrice() {
         return maxPrice;
     }
@@ -115,7 +107,7 @@ public class CatalogResponse {
                 "includedResults=" + includedResults +
                 ", totalResults=" + totalResults +
                 ", relevancyScore=" + relevancyScore +
-                ", serviceUrl='" + serviceUrl + '\'' +
+                ", serviceUrl='" + this.getServiceUrl() + '\'' +
                 ", relatedAttributes=" + relatedAttributes +
                 ", products=" + products +
                 ", offers=" + offers +

@@ -31,6 +31,8 @@ public class ClassificationModelAdapter {
         if (response.getClassification() != null) {
             output.setOriginalKeyword(response.getClassification().getOriginalKeyword());
             output.setMature(BooleanUtils.toBooleanObject(response.getClassification().getMature()));
+            output.setMedia(BooleanUtils.toBooleanObject(response.getClassification().getMedia()));
+            output.setOriginalNumResults(response.getClassification().getOriginalNumResults());
             
             setSuggestions(output, response.getClassification().getQuerySuggestions().getQuerySuggestion());
             
@@ -54,7 +56,9 @@ public class ClassificationModelAdapter {
                 }
                 
                 suggestion.setKeyword(querySuggestion.getKeyword());
-                
+                if( querySuggestion.getNumResults() != null ) {
+                    suggestion.setNumResults(querySuggestion.getNumResults());
+                }
                 if (querySuggestion.getOffer() != null) {
                     suggestion.setOffer(CatalogResponseModelAdapter.convertOffer(querySuggestion.getOffer()));
                 }
