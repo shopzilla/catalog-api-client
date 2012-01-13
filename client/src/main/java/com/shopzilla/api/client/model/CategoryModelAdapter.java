@@ -63,6 +63,7 @@ public class CategoryModelAdapter {
         category.setURL(categoryType.getUrl());
         category.setChildren(convertChildren(categoryType.getChildren()));
         category.setAncestors(convertChildren(categoryType.getAncestors()));
+        category.setProbability(new Double(categoryType.getProbability()));
         return category;
     }
 

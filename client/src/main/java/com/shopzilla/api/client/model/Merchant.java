@@ -20,6 +20,8 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
+import java.math.BigDecimal;
+
 /**
  * @author sscanlon
  * 
@@ -28,6 +30,8 @@ public class Merchant {
 
     private String name;
     private Long id;
+    private BigDecimal overallRating;
+    private Integer certification;
 
     @Override
     public int hashCode() {
@@ -59,6 +63,8 @@ public class Merchant {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("id", id)
                 .append("name", name)
+                .append("overallRating", overallRating)
+                .append("certification", certification)
                 .toString();
     }
 
@@ -76,5 +82,21 @@ public class Merchant {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public BigDecimal getOverallRating() {
+        return overallRating;
+    }
+
+    public void setOverallRating(BigDecimal overallRating) {
+        this.overallRating = overallRating;
+    }
+
+    public Integer getCertification() {
+        return certification;
+    }
+
+    public void setCertification(Integer certification) {
+        this.certification = certification;
     }
 }

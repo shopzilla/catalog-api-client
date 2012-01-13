@@ -29,6 +29,7 @@ public class Category {
     private Long id;
     private String name;
     private String URL;
+    private Double probability;
 
     private List<Category> children = Collections.emptyList();
     private List<Category> ancestors = Collections.emptyList();
@@ -52,6 +53,7 @@ public class Category {
                 .isEquals();
     }
 
+
     @Override
     public String toString() {
         return "Category{" +
@@ -59,6 +61,7 @@ public class Category {
                 ", id=" + id +
                 ", name='" + name + '\'' +
                 ", URL='" + URL + '\'' +
+                ", probability=" + probability +
                 ", children=" + children +
                 '}';
     }
@@ -101,5 +104,13 @@ public class Category {
 
     public void setAncestors(List<Category> ancestors) {
         this.ancestors = ancestors;
+    }
+
+    public Double getProbability() {
+        return probability;
+    }
+
+    public void setProbability(Double probability) {
+        this.probability = probability;
     }
 }

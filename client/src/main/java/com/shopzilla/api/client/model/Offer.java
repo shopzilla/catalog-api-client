@@ -37,6 +37,7 @@ public class Offer {
     private String rawMerchantUrl;
     private String sku;
     private Boolean bidded;
+    private Boolean showLogo;
 
     private Merchant merchant;
 
@@ -54,6 +55,7 @@ public class Offer {
                 ", detailURL='" + detailURL + '\'' +
                 ", rawMerchantUrl='" + rawMerchantUrl + '\'' +
                 ", sku='" + sku + '\'' +
+                ", showLogo=" + showLogo +
                 ", merchant=" + merchant +
                 '}';
     }
@@ -174,5 +176,13 @@ public class Offer {
 
     public void setSku(String sku) {
         this.sku = sku;
+    }
+
+    public Boolean getShowLogo() {
+        return showLogo;
+    }
+
+    public void setShowLogo(Boolean showLogo) {
+        this.showLogo = showLogo;
     }
 }

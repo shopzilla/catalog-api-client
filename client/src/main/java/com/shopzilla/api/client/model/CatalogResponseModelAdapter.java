@@ -126,8 +126,19 @@ public class CatalogResponseModelAdapter {
         Merchant m = new Merchant();
         m.setId(catalogOffer.getMerchantId());
         m.setName(catalogOffer.getMerchantName());
+        final RatingType merchantRating = catalogOffer.getMerchantRating();
+        if (merchantRating != null) {
+            m.setOverallRating(merchantRating.getValue());
+        }
+
+        final CertificationType merchantCertification = catalogOffer.getMerchantCertification();
+        if (merchantCertification != null && merchantCertification.getLevel() != null) {
+                m.setCertification(merchantCertification.getLevel().ordinal() + 1);
+        }
+
         o.setMerchant(m);
 
+        o.setShowLogo(catalogOffer.isShowLogo());
         o.setCategoryId(catalogOffer.getCategoryId());
         o.setId(catalogOffer.getId());
         o.setMid(catalogOffer.getMerchantId());

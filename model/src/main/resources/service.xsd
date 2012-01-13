@@ -324,8 +324,53 @@
             <xs:element name="Image" type="ImageType" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute name="certified" type="xs:boolean" default="true"/>
+        <xs:attribute name="level" use="required" type="Level">
+            <xs:annotation>
+                <xs:documentation>
+                    1. CUSTOMER_CERTIFIED - Customer Certified
+                    2. RED_MERCHANT - Red Merchant (1 red smiley out of 5)
+                    3. SILVERADO - Silverado (>= 20 reviews not CC)
+                    4. IN_PROCESS - In Process (1-19 reviews)
+                    5. NO_SURVERYS - Surveys (0 reviews)
+                    6. RE_RATED - Re-Rated
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
-
+    <xs:simpleType name="Level">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CUSTOMER_CERTIFIED">
+                <xs:annotation>
+                    <xs:documentation>Customer Certified</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="RED_MERCHANT">
+                <xs:annotation>
+                    <xs:documentation>Red Merchant (1 red smiley out of 5)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SILVERADO">
+                <xs:annotation>
+                    <xs:documentation>Silverado (>= 20 reviews not CC)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="IN_PROCESS">
+                <xs:annotation>
+                    <xs:documentation>In Process (1-19 reviews)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NO_SURVERYS">
+                <xs:annotation>
+                    <xs:documentation>Surveys (0 reviews)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="RE_RATED">
+                <xs:annotation>
+                    <xs:documentation>Re-Rated</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
     <xs:simpleType name="RatingValueType">
         <xs:annotation>
             <xs:documentation>
@@ -842,6 +887,8 @@
                     <xs:documentation>The merchant's overall rating</xs:documentation>
                 </xs:annotation>
             </xs:element>
+            <xs:element name="MerchantCertification" type="CertificationType" minOccurs="0" maxOccurs="1" />
+            <xs:element name="showLogo" type="xs:boolean" minOccurs="0"/>
             <xs:element name="merchantLogoUrl" type="xs:anyURI" minOccurs="0"/>
             <xs:element name="condition" minOccurs="0">
                 <xs:annotation>
