@@ -143,11 +143,9 @@ public class CatalogResponseModelAdapter {
         o.setId(catalogOffer.getId());
         o.setMid(catalogOffer.getMerchantId());
 
-        final PriceType price = catalogOffer.getPrice();
-        if (price != null) {
-            Price p = convertPrice(price);
-            o.setPrice(p);
-        }
+        o.setPrice(convertPrice(catalogOffer.getPrice()));
+        o.setOriginalPrice(convertPrice(catalogOffer.getOriginalPrice()));
+        o.setTotalPrice(convertPrice(catalogOffer.getTotalPrice()));
         o.setTitle(catalogOffer.getTitle());
         o.setDescription(catalogOffer.getDescription());
         o.setURL(catalogOffer.getUrl());
@@ -155,10 +153,20 @@ public class CatalogResponseModelAdapter {
         o.setRawMerchantUrl(catalogOffer.getRawUrl());
         o.setSku(catalogOffer.getSku());
         o.setBidded(catalogOffer.isBidded());
+        o.setShipAmount(convertPrice(catalogOffer.getShipAmount()));
+        o.setShipCost(convertPrice(catalogOffer.getShipCost()));
+        o.setShipType(catalogOffer.getShipType());
+        o.setTax(convertPrice(catalogOffer.getTax()));
+        o.setCondition(catalogOffer.getCondition());
+        o.setStock(catalogOffer.getStock());
+
         return o;
     }
 
     public static Price convertPrice(PriceType price) {
+        if (price == null) {
+            return null;
+        }
         Price p = new Price();
         p.setIntegral(price.getIntegral());
         p.setPrice(price.getValue());

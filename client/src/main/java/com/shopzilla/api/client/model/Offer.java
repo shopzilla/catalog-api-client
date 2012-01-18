@@ -20,13 +20,14 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
  * @author sscanlon
- *
  */
 public class Offer {
 
     private Long id;
     private Long mid;
     private Price price;
+    private Price originalPrice;
+    private Price totalPrice;
     private Long categoryId;
 
     private String title;
@@ -38,6 +39,12 @@ public class Offer {
     private String sku;
     private Boolean bidded;
     private Boolean showLogo;
+    private String shipType;
+    private Price shipAmount;
+    private Price shipCost;
+    private Price tax;
+    private String stock;
+    private String condition;
 
     private Merchant merchant;
 
@@ -48,6 +55,7 @@ public class Offer {
                 ", id=" + id +
                 ", mid=" + mid +
                 ", price=" + price +
+                ", originalPrice=" + originalPrice +
                 ", categoryId=" + categoryId +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
@@ -56,9 +64,16 @@ public class Offer {
                 ", rawMerchantUrl='" + rawMerchantUrl + '\'' +
                 ", sku='" + sku + '\'' +
                 ", showLogo=" + showLogo +
+                ", shipType='" + shipType + '\'' +
+                ", shipAmount=" + shipAmount +
+                ", shipCost=" + shipCost +
+                ", tax=" + tax +
+                ", stock='" + stock + '\'' +
+                ", condition='" + condition + '\'' +
                 ", merchant=" + merchant +
                 '}';
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -184,5 +199,69 @@ public class Offer {
 
     public void setShowLogo(Boolean showLogo) {
         this.showLogo = showLogo;
+    }
+
+    public Price getShipAmount() {
+        return shipAmount;
+    }
+
+    public void setShipAmount(Price shipAmount) {
+        this.shipAmount = shipAmount;
+    }
+
+    public String getShipType() {
+        return shipType;
+    }
+
+    public void setShipType(String shipType) {
+        this.shipType = shipType;
+    }
+
+    public String getCondition() {
+        return condition;
+    }
+
+    public void setCondition(String condition) {
+        this.condition = condition;
+    }
+
+    public Price getOriginalPrice() {
+        return originalPrice;
+    }
+
+    public void setOriginalPrice(Price originalPrice) {
+        this.originalPrice = originalPrice;
+    }
+
+    public Price getShipCost() {
+        return shipCost;
+    }
+
+    public void setShipCost(Price shipCost) {
+        this.shipCost = shipCost;
+    }
+
+    public String getStock() {
+        return stock;
+    }
+
+    public void setStock(String stock) {
+        this.stock = stock;
+    }
+
+    public Price getTax() {
+        return tax;
+    }
+
+    public void setTax(Price tax) {
+        this.tax = tax;
+    }
+
+    public Price getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Price totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }
