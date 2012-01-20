@@ -45,7 +45,7 @@ public class Offer {
     private Price tax;
     private String stock;
     private String condition;
-
+    private String bidAmt;
     private Merchant merchant;
 
     @Override
@@ -71,6 +71,7 @@ public class Offer {
                 ", stock='" + stock + '\'' +
                 ", condition='" + condition + '\'' +
                 ", merchant=" + merchant +
+                ", bidAmt=" + bidAmt +
                 '}';
     }
 
@@ -264,4 +265,14 @@ public class Offer {
     public void setTotalPrice(Price totalPrice) {
         this.totalPrice = totalPrice;
     }
+
+    public String getBidAmt() {
+        return bidAmt;
+    }
+
+    public void setBidAmt(String bidAmt) {
+        this.bidAmt = bidAmt;
+    }
+    
+    
 }
