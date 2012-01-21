@@ -839,6 +839,7 @@
         </xs:annotation>
         <xs:sequence>
             <xs:group ref="ProductOfferElementGroup"/>
+            <xs:element name="bidAmt" type="xs:string" minOccurs="0" />
             <xs:element name="detailUrl" type="xs:anyURI" minOccurs="0">
                 <xs:annotation>
                     <xs:documentation>Link to the offer's page on site.

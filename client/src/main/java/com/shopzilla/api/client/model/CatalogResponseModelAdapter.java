@@ -139,6 +139,7 @@ public class CatalogResponseModelAdapter {
         o.setMerchant(m);
 
         o.setShowLogo(catalogOffer.isShowLogo());
+        o.setBidAmt(catalogOffer.getBidAmt());
         o.setCategoryId(catalogOffer.getCategoryId());
         o.setId(catalogOffer.getId());
         o.setMid(catalogOffer.getMerchantId());
