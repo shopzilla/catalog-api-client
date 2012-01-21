@@ -62,6 +62,7 @@ public abstract class AbstractBaseUrlProvider implements UrlProvider {
         } else {
             parameters.put("minMarkdown", "");
         }
+        parameters.put("showRedirectInfo", request.getShowRedirectInfo());
         parameters.put("showRawUrl", request.getShowRawMerchantUrl());
         parameters.put("showAttributes", request.isShowAttributes());
         parameters.put("showProductAttributes", request.isShowProductAttributes());

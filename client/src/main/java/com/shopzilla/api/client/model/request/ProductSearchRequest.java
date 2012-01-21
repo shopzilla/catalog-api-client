@@ -267,7 +267,7 @@ public class ProductSearchRequest extends AbstractSearchRequest {
         this.attFilter = attFilter;
     }
 
-    public boolean isShowRedirectInfo() {
+    public boolean getShowRedirectInfo() {
         return showRedirectInfo;
     }
 
