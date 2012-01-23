@@ -25,6 +25,7 @@ public class Offer {
 
     private Long id;
     private Long mid;
+    private Long pid;
     private Price price;
     private Price originalPrice;
     private Price totalPrice;
@@ -54,8 +55,10 @@ public class Offer {
                 "bidded=" + bidded +
                 ", id=" + id +
                 ", mid=" + mid +
+                ", pid=" + pid +
                 ", price=" + price +
                 ", originalPrice=" + originalPrice +
+                ", totalPrice=" + totalPrice +
                 ", categoryId=" + categoryId +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
@@ -263,5 +266,13 @@ public class Offer {
 
     public void setTotalPrice(Price totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public Long getPid() {
+        return pid;
+    }
+
+    public void setPid(Long pid) {
+        this.pid = pid;
     }
 }
