@@ -54,6 +54,7 @@ public class ProductSearchRequest extends AbstractSearchRequest {
     private Long maxPrice;
     private Integer maxAge;
     private boolean freeShipping = Boolean.FALSE;
+    private boolean showRedirectInfo = Boolean.FALSE;
     private String sort = "relevancy_desc";
 
     private ProductType productType;
@@ -266,6 +267,14 @@ public class ProductSearchRequest extends AbstractSearchRequest {
         this.attFilter = attFilter;
     }
 
+    public boolean getShowRedirectInfo() {
+        return showRedirectInfo;
+    }
+
+    public void setShowRedirectInfo(boolean showRedirectInfo) {
+        this.showRedirectInfo = showRedirectInfo;
+    }
+
     @Override
     public String toString() {
         return "ProductSearchRequest{" +
@@ -295,6 +304,7 @@ public class ProductSearchRequest extends AbstractSearchRequest {
                 ", freeShipping=" + freeShipping +
                 ", sort='" + sort + '\'' +
                 ", productType=" + productType +
+                ", showRedirectInfo=" + showRedirectInfo +
                 '}';
     }
 
