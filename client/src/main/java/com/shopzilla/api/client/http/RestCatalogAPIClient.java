@@ -67,8 +67,13 @@ public class RestCatalogAPIClient implements CatalogAPIClient {
         UriTemplate uriTemplate = new UriTemplate(urlProvider.getAttributeServiceURL());
         URI serviceUri = uriTemplate.expand(urlProvider.makeAttributeParameterMap(request));
 
-        AttributeResponse response = restTemplate.getForObject(serviceUri, AttributeResponse.class);
-        return AttributeModelAdapter.fromCatalogAPI(response);
+		AttributeResponse response = restTemplate.getForObject(serviceUri, AttributeResponse.class);
+
+		AttributeSearchResponse attributeSearchresponse =  AttributeModelAdapter.fromCatalogAPI(response);
+
+		attributeSearchresponse.setServiceUrl(serviceUri.toString());
+
+		return attributeSearchresponse;
     }
 
     public CategoryResponse performCategorySearch(CategorySearchRequest request) {
