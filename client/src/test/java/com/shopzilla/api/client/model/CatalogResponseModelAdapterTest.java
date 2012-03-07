@@ -64,6 +64,7 @@ public class CatalogResponseModelAdapterTest {
         o.setMerchantId(321l);
         o.setPrice(new PriceType());
         o.getPrice().setIntegral(1234l);
+	    o.setMerchantLogoUrl("http://merchantLogoUrl.com");
 
         from.setProducts(new Products());
         from.getProducts().getProductOrOffer().add(o);
@@ -78,6 +79,7 @@ public class CatalogResponseModelAdapterTest {
         assertEquals(converted.getURL(), o.getUrl());
         assertEquals(converted.getDetailURL(), o.getDetailUrl());
         assertEquals(converted.getTitle(), o.getTitle());
+	    assertEquals(converted.getMerchantLogoUrl(), o.getMerchantLogoUrl());
 
     }
 
