@@ -40,6 +40,7 @@ public class Offer {
     private String sku;
     private Boolean bidded;
     private Boolean showLogo;
+	private String merchantLogoUrl;
     private String shipType;
     private Price shipAmount;
     private Price shipCost;
@@ -67,6 +68,7 @@ public class Offer {
                 ", rawMerchantUrl='" + rawMerchantUrl + '\'' +
                 ", sku='" + sku + '\'' +
                 ", showLogo=" + showLogo +
+	            ", merchantLogoUrl=" + merchantLogoUrl +
                 ", shipType='" + shipType + '\'' +
                 ", shipAmount=" + shipAmount +
                 ", shipCost=" + shipCost +
@@ -284,6 +286,12 @@ public class Offer {
     public void setPid(Long pid) {
         this.pid = pid;
     }
-    
-    
+
+	public String getMerchantLogoUrl() {
+		return merchantLogoUrl;
+	}
+
+	public void setMerchantLogoUrl(final String merchantLogoUrl) {
+		this.merchantLogoUrl = merchantLogoUrl;
+	}
 }
