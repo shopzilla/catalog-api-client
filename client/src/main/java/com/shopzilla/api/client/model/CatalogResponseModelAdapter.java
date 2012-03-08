@@ -136,6 +136,10 @@ public class CatalogResponseModelAdapter {
                 m.setCertification(merchantCertification.getLevel().ordinal() + 1);
         }
 
+	    if(catalogOffer !=null && catalogOffer.getMerchantLogoUrl() != null) {
+		    o.setMerchantLogoUrl(catalogOffer.getMerchantLogoUrl());
+	    }
+
         o.setMerchant(m);
 
         o.setShowLogo(catalogOffer.isShowLogo());
