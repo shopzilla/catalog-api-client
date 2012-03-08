@@ -18,23 +18,13 @@ package com.shopzilla.api.client.http;
 import com.shopzilla.api.client.CatalogAPIClient;
 import com.shopzilla.api.client.UrlProvider;
 import com.shopzilla.api.client.brand.BizrateUrlProvider;
-import com.shopzilla.api.client.model.AttributeModelAdapter;
-import com.shopzilla.api.client.model.CatalogResponse;
-import com.shopzilla.api.client.model.CatalogResponseModelAdapter;
-import com.shopzilla.api.client.model.Category;
-import com.shopzilla.api.client.model.CategoryModelAdapter;
-import com.shopzilla.api.client.model.ClassificationModelAdapter;
-import com.shopzilla.api.client.model.request.AttributeSearchRequest;
-import com.shopzilla.api.client.model.request.CategorySearchRequest;
-import com.shopzilla.api.client.model.request.ClassificationRequest;
-import com.shopzilla.api.client.model.request.ProductSearchRequest;
+import com.shopzilla.api.client.model.*;
+import com.shopzilla.api.client.model.request.*;
 import com.shopzilla.api.client.model.response.AttributeSearchResponse;
 import com.shopzilla.api.client.model.response.CategoryResponse;
 import com.shopzilla.api.client.model.response.Classification;
-import com.shopzilla.services.catalog.AttributeResponse;
-import com.shopzilla.services.catalog.ClassificationResponse;
-import com.shopzilla.services.catalog.ProductResponse;
-import com.shopzilla.services.catalog.TaxonomyResponse;
+import com.shopzilla.api.client.model.response.MerchantResponse;
+import com.shopzilla.services.catalog.*;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.util.UriTemplate;
@@ -100,6 +90,18 @@ public class RestCatalogAPIClient implements CatalogAPIClient {
         classification.setServiceUrl(serviceUri.toString());
         return classification;
     }
+
+    public MerchantResponse performMerchantInfo(MerchantRequest request) {
+
+        UriTemplate uriTemplate = new UriTemplate(urlProvider.getMerchantServiceURL());
+        URI serviceUri = uriTemplate.expand(urlProvider.makeMerchantParameterMap(request));
+        
+        MerchantsResponse xmlResponse = restTemplate.getForObject(serviceUri, MerchantsResponse.class);
+        MerchantResponse merchantResponse = MerchantModelAdapter.fromCatalogAPI(xmlResponse);
+        merchantResponse.setServiceUrl(serviceUri.toString());
+        return merchantResponse;
+    }
+
 
     @Required
     public void setRestTemplate(RestOperations restTemplate) {

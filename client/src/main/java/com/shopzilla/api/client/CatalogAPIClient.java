@@ -16,13 +16,11 @@
 package com.shopzilla.api.client;
 
 import com.shopzilla.api.client.model.CatalogResponse;
-import com.shopzilla.api.client.model.request.AttributeSearchRequest;
-import com.shopzilla.api.client.model.request.CategorySearchRequest;
-import com.shopzilla.api.client.model.request.ClassificationRequest;
-import com.shopzilla.api.client.model.request.ProductSearchRequest;
+import com.shopzilla.api.client.model.request.*;
 import com.shopzilla.api.client.model.response.AttributeSearchResponse;
 import com.shopzilla.api.client.model.response.CategoryResponse;
 import com.shopzilla.api.client.model.response.Classification;
+import com.shopzilla.api.client.model.response.MerchantResponse;
 
 /**
  * @author sscanlon
@@ -37,4 +35,8 @@ public interface CatalogAPIClient {
     AttributeSearchResponse performAttributeSearch(AttributeSearchRequest request);
 
     Classification performClassification(ClassificationRequest request);
+
+    MerchantResponse performMerchantInfo(MerchantRequest request);
+
+
 }

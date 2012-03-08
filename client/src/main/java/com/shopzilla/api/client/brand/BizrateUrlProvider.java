@@ -74,6 +74,12 @@ public class BizrateUrlProvider extends AbstractBaseUrlProvider {
             "&results={results}" +
             "&sort=prob_desc";
 
+    private static final String MERCHANT_QUERY_FRAGMENT = "?" +
+            "apiKey={apiKey}" +
+            "&publisherId={publisherId}" +
+            "&placementId={placementId}" +
+            "&merchantId={merchantId}";
+
     public String getProductServiceURL() {
         return new StringBuilder(apiBaseUrl)
                 .append("product/")
@@ -109,8 +115,11 @@ public class BizrateUrlProvider extends AbstractBaseUrlProvider {
     }
 
     public String getMerchantServiceURL() {
-        // TODO Auto-generated method stub
-        return null;
+        return new StringBuilder(apiBaseUrl)
+                .append(MERCHANT_SERVICE_ENDPOINT_NAME)
+                .append(BIZRATE_PROFILE_ID)
+                .append(MERCHANT_QUERY_FRAGMENT)
+                .toString();
     }
 
 }

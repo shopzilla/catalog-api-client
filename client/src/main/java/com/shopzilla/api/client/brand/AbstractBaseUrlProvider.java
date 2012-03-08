@@ -16,10 +16,7 @@
 package com.shopzilla.api.client.brand;
 
 import com.shopzilla.api.client.UrlProvider;
-import com.shopzilla.api.client.model.request.AttributeSearchRequest;
-import com.shopzilla.api.client.model.request.CategorySearchRequest;
-import com.shopzilla.api.client.model.request.ClassificationRequest;
-import com.shopzilla.api.client.model.request.ProductSearchRequest;
+import com.shopzilla.api.client.model.request.*;
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.ObjectUtils;
 
@@ -147,6 +144,17 @@ public abstract class AbstractBaseUrlProvider implements UrlProvider {
         parameters.put("format",
                 ((ClassificationRequest.Format) ObjectUtils.defaultIfNull(request.getFormat(),
                         ClassificationRequest.Format.XML)).toString().toLowerCase());
+
+        return parameters;
+    }
+    
+    public Map<String, ?> makeMerchantParameterMap(MerchantRequest request) {
+        Map<String, Object> parameters = new HashMap<String, Object>();
+        
+        parameters.put("apiKey", request.getApiKey());
+        parameters.put("publisherId", request.getPublisherId());
+        parameters.put("placementId", request.getPlacementId());
+        parameters.put("merchantId", request.getMerchantId());
 
         return parameters;
     }
