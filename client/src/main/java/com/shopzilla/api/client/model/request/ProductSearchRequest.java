@@ -15,6 +15,9 @@
  */
 package com.shopzilla.api.client.model.request;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 /**
  * @author sscanlon
  */
@@ -307,5 +310,80 @@ public class ProductSearchRequest extends AbstractSearchRequest {
                 ", showRedirectInfo=" + showRedirectInfo +
                 '}';
     }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+                .appendSuper(super.hashCode())
+                .append(keyword)
+                .append(start)
+                .append(backfillResults)
+                .append(minRelevancyScore)
+                .append(categoryId)
+                .append(productId)
+                .append(merchantId)
+                .append(zipCode)
+                .append(imageOnly)
+                .append(offersOnly)
+                .append(biddedOnly)
+                .append(showRawMerchantUrl)
+                .append(showAttributes)
+                .append(showProductAttributes)
+                .append(minMarkdown)
+                .append(resultsOffers)
+                .append(attributeId)
+                .append(attWeights)
+                .append(attFilter)
+                .append(minPrice)
+                .append(maxPrice)
+                .append(maxAge)
+                .append(freeShipping)
+                .append(showRedirectInfo)
+                .append(sort)
+                .append(productType).toHashCode();
+    }
+    
+    @Override 
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        ProductSearchRequest rhs = (ProductSearchRequest) obj;
+        return new EqualsBuilder()
+                .appendSuper(super.equals(obj))
+                .append(keyword, rhs.keyword)
+                .append(start, rhs.start)
+                .append(backfillResults, rhs.backfillResults)
+                .append(minRelevancyScore, rhs.minRelevancyScore)
+                .append(categoryId, rhs.categoryId)
+                .append(productId, rhs.productId)
+                .append(merchantId, rhs.merchantId)
+                .append(zipCode, rhs.zipCode)
+                .append(imageOnly, rhs.imageOnly)
+                .append(offersOnly, rhs.offersOnly)
+                .append(biddedOnly, rhs.biddedOnly)
+                .append(showRawMerchantUrl, rhs.showRawMerchantUrl)
+                .append(showAttributes, rhs.showAttributes)
+                .append(showProductAttributes, rhs.showProductAttributes)
+                .append(minMarkdown, rhs.minMarkdown)
+                .append(resultsOffers, rhs.resultsOffers)
+                .append(attributeId, rhs.attributeId)
+                .append(attWeights, rhs.attWeights)
+                .append(attFilter, rhs.attFilter)
+                .append(minPrice, rhs.minPrice)
+                .append(maxPrice, rhs.maxPrice)
+                .append(maxAge, rhs.maxAge)
+                .append(freeShipping, rhs.freeShipping)
+                .append(showRedirectInfo, rhs.showRedirectInfo)
+                .append(sort, rhs.sort)
+                .append(productType, rhs.productType).isEquals();
+    }
+    
 
 }
