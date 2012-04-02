@@ -342,8 +342,8 @@ public class ProductSearchRequest extends AbstractSearchRequest {
                 .append(sort)
                 .append(productType).toHashCode();
     }
-    
-    @Override 
+
+    @Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
@@ -384,6 +384,6 @@ public class ProductSearchRequest extends AbstractSearchRequest {
                 .append(sort, rhs.sort)
                 .append(productType, rhs.productType).isEquals();
     }
-    
+
 
 }
