@@ -11,7 +11,7 @@
     
     <scm>
         <connection>scm:git:git://github.com/shopzilla/catalog-api-client</connection>
-        <developerConnection>scm:git:ssh://git@github.com:shopzilla/catalog-api-client.git</developerConnection>
+        <developerConnection>scm:git:ssh://git@github.com/shopzilla/catalog-api-client.git</developerConnection>
     </scm>
 
     <modules>
