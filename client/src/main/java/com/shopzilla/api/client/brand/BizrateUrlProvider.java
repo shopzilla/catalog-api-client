@@ -58,6 +58,7 @@ public class BizrateUrlProvider extends AbstractBaseUrlProvider {
             "&publisherId={publisherId}" +
             "&rfCode={rfCode}" +
             "&placementId={placementId}" +
+            "&categoryId={categoryId}" +
             "&keyword={keyword}" +
             "&attributeId={attributeId}" +
             "&results={numResults}" +

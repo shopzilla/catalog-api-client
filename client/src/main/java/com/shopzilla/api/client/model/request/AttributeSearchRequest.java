@@ -15,12 +15,16 @@
  */
 package com.shopzilla.api.client.model.request;
 
+import java.util.List;
+
+import com.shopzilla.api.client.model.Attribute;
+
 /**
  * Model object for invoking the Attribute Catalog API endpoint
  *
  * @author sscanlon
  * @author eblanco
- *
+ * @author nbajpai
  */
 public class AttributeSearchRequest extends AbstractSearchRequest {
 
@@ -30,7 +34,7 @@ public class AttributeSearchRequest extends AbstractSearchRequest {
     private String keyword;
     private Integer numResults = DEFAULT_NUM_RESULTS;
     private Integer resultsAttributeValues = DEFAULT_RESULTS_ATTRIBUTE_VALUES;
-    private String attributeId;
+    private List<Attribute> attributes;
     private String categoryId;
 
     public String getKeyword() {
@@ -57,12 +61,12 @@ public class AttributeSearchRequest extends AbstractSearchRequest {
         this.resultsAttributeValues = resultsAttributeValues;
     }
 
-    public String getAttributeId() {
-        return attributeId;
+    public List<Attribute> getAttributes() {
+        return attributes;
     }
 
-    public void setAttributeId(String attributeId) {
-        this.attributeId = attributeId;
+    public void setAttributes(List<Attribute> attributes) {
+        this.attributes = attributes;
     }
 
     public String getCategoryId() {
@@ -72,7 +76,7 @@ public class AttributeSearchRequest extends AbstractSearchRequest {
     public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
     }
-
+    
     @Override
     public String toString() {
         return "AttributeSearchRequest{" +
@@ -82,7 +86,7 @@ public class AttributeSearchRequest extends AbstractSearchRequest {
                 ", keyword='" + keyword + '\'' +
                 ", numResults=" + numResults +
                 ", resultsAttributeValues=" + resultsAttributeValues +
-                ", attributeId='" + attributeId + '\'' +
+                ", attributes='" + attributes + '\'' +
                 ", categoryId='" + categoryId + '\'' +
                 '}';
     }
@@ -95,7 +99,7 @@ public class AttributeSearchRequest extends AbstractSearchRequest {
 
         AttributeSearchRequest that = (AttributeSearchRequest) o;
 
-        if (attributeId != null ? !attributeId.equals(that.attributeId) : that.attributeId != null) return false;
+        if (attributes != null ? !attributes.equals(that.attributes) : that.attributes != null) return false;
         if (categoryId != null ? !categoryId.equals(that.categoryId) : that.categoryId != null) return false;
         if (keyword != null ? !keyword.equals(that.keyword) : that.keyword != null) return false;
         if (numResults != null ? !numResults.equals(that.numResults) : that.numResults != null) return false;
@@ -111,8 +115,9 @@ public class AttributeSearchRequest extends AbstractSearchRequest {
         result = 31 * result + (keyword != null ? keyword.hashCode() : 0);
         result = 31 * result + (numResults != null ? numResults.hashCode() : 0);
         result = 31 * result + (resultsAttributeValues != null ? resultsAttributeValues.hashCode() : 0);
-        result = 31 * result + (attributeId != null ? attributeId.hashCode() : 0);
+        result = 31 * result + (attributes != null ? attributes.hashCode() : 0);
         result = 31 * result + (categoryId != null ? categoryId.hashCode() : 0);
         return result;
     }
+
 }

@@ -15,18 +15,30 @@
  */
 package com.shopzilla.api.client.brand;
 
-import com.shopzilla.api.client.UrlProvider;
-import com.shopzilla.api.client.model.request.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.ObjectUtils;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.shopzilla.api.client.UrlProvider;
+import com.shopzilla.api.client.model.Attribute;
+import com.shopzilla.api.client.model.AttributeValue;
+import com.shopzilla.api.client.model.request.AttributeSearchRequest;
+import com.shopzilla.api.client.model.request.CategorySearchRequest;
+import com.shopzilla.api.client.model.request.ClassificationRequest;
+import com.shopzilla.api.client.model.request.MerchantRequest;
+import com.shopzilla.api.client.model.request.ProductSearchRequest;
 
 /**
  * @author sscanlon
  */
 public abstract class AbstractBaseUrlProvider implements UrlProvider {
+
+    private static final String ATTRIBUTE_VALUE_DELIMITER = ":";
+
+    private static final String EMPTY_STRING = "";
 
     public String apiBaseUrl = "http://catalog.bizrate.com/services/catalog/v1/api/";
 
@@ -57,7 +69,7 @@ public abstract class AbstractBaseUrlProvider implements UrlProvider {
         if (request.getMinMarkdown() != null) {
             parameters.put("minMarkdown", request.getMinMarkdown());
         } else {
-            parameters.put("minMarkdown", "");
+            parameters.put("minMarkdown", EMPTY_STRING);
         }
         parameters.put("showRedirectInfo", request.getShowRedirectInfo());
         parameters.put("showRawUrl", request.getShowRawMerchantUrl());
@@ -83,13 +95,13 @@ public abstract class AbstractBaseUrlProvider implements UrlProvider {
             parameters.put("maxPrice", request.getMaxPrice());
             parameters.put("minPrice", request.getMinPrice());
         } else {
-            parameters.put("maxPrice", "");
-            parameters.put("minPrice", "");
+            parameters.put("maxPrice", EMPTY_STRING);
+            parameters.put("minPrice", EMPTY_STRING);
         }
         if (request.getMaxAge() != null) {
             parameters.put("maxAge", request.getMaxAge());
         } else {
-            parameters.put("maxAge", "");
+            parameters.put("maxAge", EMPTY_STRING);
         }
         return parameters;
     }
@@ -100,7 +112,8 @@ public abstract class AbstractBaseUrlProvider implements UrlProvider {
         parameters.put("apiKey", request.getApiKey());
         parameters.put("publisherId", request.getPublisherId());
         parameters.put("placementId", request.getPlacementId());
-        parameters.put("attributeId", request.getAttributeId());
+        final String attributeId = makeAttributeParam(request.getAttributes());
+        parameters.put("attributeId", attributeId);
         parameters.put("keyword", request.getKeyword());
         parameters.put("resultsAttributeValues", request.getResultsAttributeValues());
         parameters.put("numResults", request.getNumResults());
@@ -110,6 +123,58 @@ public abstract class AbstractBaseUrlProvider implements UrlProvider {
         return parameters;
     }
 
+    private String makeAttributeParam(List<Attribute> attributes) {
+        StringBuffer attributeId = new StringBuffer();
+        if (attributes != null) {
+            for (int i=0; i < attributes.size();i++) {
+                Attribute attribute = attributes.get(i);
+                addAttributeId(attributeId, attribute);
+                addAttributeValueId(attributeId, attribute, attribute.getValues());
+                addDelimiterIfNotFirstOrLast(attributes, attributeId, i);
+            }
+        }
+        return attributeId.toString();
+    }
+
+    private void addDelimiterIfNotFirstOrLast(List<Attribute> attributes, StringBuffer attributeId,
+            int j) {
+        final int FIRST_INDEX = 0;
+        final int LAST_INDEX = attributes.size()-1;
+        final String DELIMITER = ",";
+        if(j<FIRST_INDEX && j<LAST_INDEX){
+            attributeId.append(DELIMITER);
+        }
+    }
+
+    private void addAttributeId(StringBuffer attributeId, Attribute attribute) {
+        attributeId.append(attribute.getId());
+    }
+
+    private void addAttributeValueId(StringBuffer attributeId, Attribute attribute,
+            List<AttributeValue> values) {
+        if(values!=null){
+            for (int i = 0; i < values.size(); i++) {
+                addAttributeIdWithDelimiterIfNotFirst(attributeId, attribute, i);
+                addAttributeValueId(attributeId, values, i);
+            }
+        }
+    }
+
+    private void addAttributeValueId(StringBuffer attributeId, List<AttributeValue> values, int i) {
+        attributeId.append(ATTRIBUTE_VALUE_DELIMITER);
+        attributeId.append(values.get(i).getId());
+    }
+
+    private void addAttributeIdWithDelimiterIfNotFirst(StringBuffer attributeId,
+            Attribute attribute, int i) {
+        final int FIRST_INDEX = 0;
+        final String DELIMITER = ",";
+        if(i<FIRST_INDEX){
+            attributeId.append(DELIMITER);
+            addAttributeId(attributeId, attribute);
+        }
+    }
+
     public Map<String, ?> makeClassificationParameterMap(ClassificationRequest request) {
         Map<String, Object> parameters = new HashMap<String, Object>();
 
@@ -117,7 +182,8 @@ public abstract class AbstractBaseUrlProvider implements UrlProvider {
         parameters.put("publisherId", request.getPublisherId());
         parameters.put("placementId", request.getPlacementId());
         parameters.put("keyword", request.getKeyword());
-        parameters.put("showAll", BooleanUtils.toBooleanDefaultIfNull(request.getShowAll(), Boolean.TRUE));
+        parameters.put("showAll",
+                BooleanUtils.toBooleanDefaultIfNull(request.getShowAll(), Boolean.TRUE));
         parameters.put("format",
                 ((ClassificationRequest.Format) ObjectUtils.defaultIfNull(request.getFormat(),
                         ClassificationRequest.Format.XML)).toString().toLowerCase());
@@ -147,10 +213,10 @@ public abstract class AbstractBaseUrlProvider implements UrlProvider {
 
         return parameters;
     }
-    
+
     public Map<String, ?> makeMerchantParameterMap(MerchantRequest request) {
         Map<String, Object> parameters = new HashMap<String, Object>();
-        
+
         parameters.put("apiKey", request.getApiKey());
         parameters.put("publisherId", request.getPublisherId());
         parameters.put("placementId", request.getPlacementId());
@@ -162,6 +228,5 @@ public abstract class AbstractBaseUrlProvider implements UrlProvider {
     public void setApiBaseUrl(String baseUrl) {
         apiBaseUrl = baseUrl;
     }
-
 
 }
