@@ -15,22 +15,38 @@
  */
 package com.shopzilla.api.client.http;
 
-import com.shopzilla.api.client.CatalogAPIClient;
-import com.shopzilla.api.client.UrlProvider;
-import com.shopzilla.api.client.brand.BizrateUrlProvider;
-import com.shopzilla.api.client.model.*;
-import com.shopzilla.api.client.model.request.*;
-import com.shopzilla.api.client.model.response.AttributeSearchResponse;
-import com.shopzilla.api.client.model.response.CategoryResponse;
-import com.shopzilla.api.client.model.response.Classification;
-import com.shopzilla.api.client.model.response.MerchantResponse;
-import com.shopzilla.services.catalog.*;
+import java.net.URI;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.util.UriTemplate;
 
-import java.net.URI;
-import java.util.List;
+import com.shopzilla.api.client.CatalogAPIClient;
+import com.shopzilla.api.client.UrlProvider;
+import com.shopzilla.api.client.brand.BizrateUrlProvider;
+import com.shopzilla.api.client.model.AttributeModelAdapter;
+import com.shopzilla.api.client.model.CatalogProductResponse;
+import com.shopzilla.api.client.model.CatalogResponse;
+import com.shopzilla.api.client.model.CatalogResponseModelAdapter;
+import com.shopzilla.api.client.model.Category;
+import com.shopzilla.api.client.model.CategoryModelAdapter;
+import com.shopzilla.api.client.model.ClassificationModelAdapter;
+import com.shopzilla.api.client.model.MerchantModelAdapter;
+import com.shopzilla.api.client.model.request.AttributeSearchRequest;
+import com.shopzilla.api.client.model.request.CategorySearchRequest;
+import com.shopzilla.api.client.model.request.ClassificationRequest;
+import com.shopzilla.api.client.model.request.MerchantRequest;
+import com.shopzilla.api.client.model.request.ProductSearchRequest;
+import com.shopzilla.api.client.model.response.AttributeSearchResponse;
+import com.shopzilla.api.client.model.response.CategoryResponse;
+import com.shopzilla.api.client.model.response.Classification;
+import com.shopzilla.api.client.model.response.MerchantResponse;
+import com.shopzilla.services.catalog.AttributeResponse;
+import com.shopzilla.services.catalog.ClassificationResponse;
+import com.shopzilla.services.catalog.MerchantsResponse;
+import com.shopzilla.services.catalog.ProductResponse;
+import com.shopzilla.services.catalog.TaxonomyResponse;
 
 /**
  * @author sscanlon
@@ -45,12 +61,19 @@ public class RestCatalogAPIClient implements CatalogAPIClient {
 
         UriTemplate uriTemplate = new UriTemplate(urlProvider.getProductServiceURL());
         URI serviceUri = uriTemplate.expand(urlProvider.makeParameterMap(request));
-
         ProductResponse result = restTemplate.getForObject(serviceUri, ProductResponse.class);
 
         CatalogResponse toReturn = CatalogResponseModelAdapter.fromCatalogAPI(result);
         toReturn.setServiceUrl(serviceUri.toString());
         return toReturn;
+    }
+    
+    public CatalogProductResponse performProductSearch(ProductSearchRequest request) {
+
+        UriTemplate uriTemplate = new UriTemplate(urlProvider.getProductServiceURL());
+        URI serviceUri = uriTemplate.expand(urlProvider.makeParameterMap(request));
+        ProductResponse result = restTemplate.getForObject(serviceUri, ProductResponse.class);
+        return new CatalogProductResponse(result,serviceUri.toString());
     }
 
     public AttributeSearchResponse performAttributeSearch(AttributeSearchRequest request) {
