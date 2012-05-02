@@ -36,6 +36,8 @@ import com.shopzilla.api.client.model.request.ProductSearchRequest;
  */
 public abstract class AbstractBaseUrlProvider implements UrlProvider {
 
+    private static final String ATTRIBUTE_DELIMITER = ";";
+
     private static final String ATTRIBUTE_VALUE_DELIMITER = ":";
 
     private static final String EMPTY_STRING = "";
@@ -112,8 +114,8 @@ public abstract class AbstractBaseUrlProvider implements UrlProvider {
         parameters.put("apiKey", request.getApiKey());
         parameters.put("publisherId", request.getPublisherId());
         parameters.put("placementId", request.getPlacementId());
-        final String attributeId = makeAttributeParam(request.getAttributes());
-        parameters.put("attributeId", attributeId);
+        parameters.put("attributeId", makeAttributeParam(request.getAttributes()));
+        parameters.put("attFilter", makeAttFilter(request.getAttributes()));
         parameters.put("keyword", request.getKeyword());
         parameters.put("resultsAttributeValues", request.getResultsAttributeValues());
         parameters.put("numResults", request.getNumResults());
@@ -123,56 +125,57 @@ public abstract class AbstractBaseUrlProvider implements UrlProvider {
         return parameters;
     }
 
+    private String makeAttFilter(List<Attribute> attributes) {
+        StringBuffer attFilter = new StringBuffer();
+        if (attributes != null) {
+            for (int i = 0; i < attributes.size(); i++) {
+                Attribute attribute = attributes.get(i);
+                attFilter.append(addAttributeAndValueId(attribute.getId(), attribute.getValues()));
+                addDelimiterIfNotLast(attributes.size(), attFilter, i, ATTRIBUTE_DELIMITER);
+            }
+        }
+        return attFilter.toString();
+    }
+
+    private String addAttributeAndValueId(String id, List<AttributeValue> values) {
+        StringBuffer valueAndId = new StringBuffer();
+        if (values != null) {
+            for (int i = 0; i < values.size(); i++) {
+                addAttIdAndValueId(id, values, valueAndId, i);
+                addDelimiterIfNotLast(values.size(), valueAndId, i, ATTRIBUTE_DELIMITER);
+            }
+        }
+        return valueAndId.toString();
+    }
+
+    private void addAttIdAndValueId(String id, List<AttributeValue> values,
+            StringBuffer valueAndId, int i) {
+        valueAndId.append(id);
+        valueAndId.append(ATTRIBUTE_VALUE_DELIMITER);
+        valueAndId.append(values.get(i).getId());
+    }
+
+    private void addDelimiterIfNotLast(int size, StringBuffer buffer, int index, String delimiter) {
+        final int LAST_INDEX = size - 1;
+        if (index < LAST_INDEX) {
+            buffer.append(delimiter);
+        }
+    }
+
     private String makeAttributeParam(List<Attribute> attributes) {
         StringBuffer attributeId = new StringBuffer();
         if (attributes != null) {
-            for (int i=0; i < attributes.size();i++) {
+            for (int i = 0; i < attributes.size(); i++) {
                 Attribute attribute = attributes.get(i);
                 addAttributeId(attributeId, attribute);
-                addAttributeValueId(attributeId, attribute, attribute.getValues());
-                addDelimiterIfNotFirstOrLast(attributes, attributeId, i);
+                addDelimiterIfNotLast(attributes.size(), attributeId, i, ATTRIBUTE_DELIMITER);
             }
         }
         return attributeId.toString();
     }
 
-    private void addDelimiterIfNotFirstOrLast(List<Attribute> attributes, StringBuffer attributeId,
-            int j) {
-        final int FIRST_INDEX = 0;
-        final int LAST_INDEX = attributes.size()-1;
-        final String DELIMITER = ",";
-        if(j<FIRST_INDEX && j<LAST_INDEX){
-            attributeId.append(DELIMITER);
-        }
-    }
-
     private void addAttributeId(StringBuffer attributeId, Attribute attribute) {
         attributeId.append(attribute.getId());
-    }
-
-    private void addAttributeValueId(StringBuffer attributeId, Attribute attribute,
-            List<AttributeValue> values) {
-        if(values!=null){
-            for (int i = 0; i < values.size(); i++) {
-                addAttributeIdWithDelimiterIfNotFirst(attributeId, attribute, i);
-                addAttributeValueId(attributeId, values, i);
-            }
-        }
-    }
-
-    private void addAttributeValueId(StringBuffer attributeId, List<AttributeValue> values, int i) {
-        attributeId.append(ATTRIBUTE_VALUE_DELIMITER);
-        attributeId.append(values.get(i).getId());
-    }
-
-    private void addAttributeIdWithDelimiterIfNotFirst(StringBuffer attributeId,
-            Attribute attribute, int i) {
-        final int FIRST_INDEX = 0;
-        final String DELIMITER = ",";
-        if(i<FIRST_INDEX){
-            attributeId.append(DELIMITER);
-            addAttributeId(attributeId, attribute);
-        }
     }
 
     public Map<String, ?> makeClassificationParameterMap(ClassificationRequest request) {
