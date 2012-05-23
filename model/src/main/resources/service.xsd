@@ -1138,7 +1138,7 @@
         <xs:annotation>
             <xs:documentation>"Universal" ID space for products and offers</xs:documentation>
         </xs:annotation>
-        <xs:restriction base="xs:unsignedInt"/>
+        <xs:restriction base="xs:long"/>
     </xs:simpleType>
     <xs:simpleType name="uidList">
         <xs:annotation>
