@@ -36,7 +36,7 @@ public interface CatalogAPIClient {
 
     Classification performClassification(ClassificationRequest request);
 
-    MerchantResponse performMerchantInfo(MerchantRequest request);
+    MerchantResponse performBaseMerchantInfo(MerchantRequest request);
 
 
 }

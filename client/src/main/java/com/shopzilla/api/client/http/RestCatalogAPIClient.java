@@ -91,7 +91,7 @@ public class RestCatalogAPIClient implements CatalogAPIClient {
         return classification;
     }
 
-    public MerchantResponse performMerchantInfo(MerchantRequest request) {
+    public MerchantResponse performBaseMerchantInfo(MerchantRequest request) {
 
         UriTemplate uriTemplate = new UriTemplate(urlProvider.getMerchantServiceURL());
         URI serviceUri = uriTemplate.expand(urlProvider.makeMerchantParameterMap(request));
