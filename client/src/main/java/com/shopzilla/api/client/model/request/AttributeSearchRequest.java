@@ -34,6 +34,7 @@ public class AttributeSearchRequest extends AbstractSearchRequest {
     private String keyword;
     private Integer numResults = DEFAULT_NUM_RESULTS;
     private Integer resultsAttributeValues = DEFAULT_RESULTS_ATTRIBUTE_VALUES;
+    private String attributeId;
     private List<Attribute> attributes;
     private String categoryId;
 
@@ -59,6 +60,14 @@ public class AttributeSearchRequest extends AbstractSearchRequest {
 
     public void setResultsAttributeValues(Integer resultsAttributeValues) {
         this.resultsAttributeValues = resultsAttributeValues;
+    }
+
+    public String getAttributeId() {
+         return attributeId;
+    }
+
+    public void setAttributeId(String attributeId) {
+	this.attributeId = attributeId;
     }
 
     public List<Attribute> getAttributes() {
