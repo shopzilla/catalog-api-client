@@ -4,8 +4,8 @@
  */
 package com.shopzilla.api.client;
 
-import com.shopzilla.services.catalog.TaxonomyResponse;
-import com.shopzilla.api.client.helper.CredentialFactory;
+import static junit.framework.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static junit.framework.Assert.assertEquals;
+import com.shopzilla.api.client.helper.CredentialFactory;
+import com.shopzilla.services.catalog.TaxonomyResponse;
 
 /**
  *

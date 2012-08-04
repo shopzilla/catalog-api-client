@@ -15,10 +15,10 @@
  */
 package com.shopzilla.api.client;
 
-import com.shopzilla.api.client.model.request.ProductSearchRequest;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import com.shopzilla.api.client.model.request.ProductSearchRequest;
 
 /**
  * @author alook
@@ -26,7 +26,7 @@ import java.util.Map;
  */
 public class ProductUrl {
 
-    public static final String PRODUCT_URL = "http://pubdevcatalog001.shopzilla.laxhq:7046/services/catalog/v1/us/product?"
+    public static final String PRODUCT_URL = "http://apistage001.sl1.shopzilla.seastg:7046/services/catalog/v1/us/product?"
             +
             "apiKey={apiKey}" +
             "&publisherId={publisherId}" +
