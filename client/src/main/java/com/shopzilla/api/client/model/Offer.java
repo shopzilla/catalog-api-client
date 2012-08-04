@@ -15,6 +15,8 @@
  */
 package com.shopzilla.api.client.model;
 
+import java.util.List;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
@@ -40,7 +42,7 @@ public class Offer {
     private String sku;
     private Boolean bidded;
     private Boolean showLogo;
-	private String merchantLogoUrl;
+    private String merchantLogoUrl;
     private String shipType;
     private Price shipAmount;
     private Price shipCost;
@@ -49,6 +51,7 @@ public class Offer {
     private String condition;
     private String bidAmt;
     private Merchant merchant;
+    private List<Attribute> attributes;
 
     @Override
     public String toString() {
@@ -287,11 +290,20 @@ public class Offer {
         this.pid = pid;
     }
 
-	public String getMerchantLogoUrl() {
-		return merchantLogoUrl;
-	}
+    public String getMerchantLogoUrl() {
+        return merchantLogoUrl;
+    }
 
-	public void setMerchantLogoUrl(final String merchantLogoUrl) {
-		this.merchantLogoUrl = merchantLogoUrl;
-	}
+    public void setMerchantLogoUrl(final String merchantLogoUrl) {
+        this.merchantLogoUrl = merchantLogoUrl;
+    }
+
+    public List<Attribute> getAttributes() {
+        return attributes;
+    }
+
+
+    public void setAttributes(List<Attribute> attributes) {
+        this.attributes = attributes;
+    }
 }

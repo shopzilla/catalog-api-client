@@ -15,14 +15,24 @@
  */
 package com.shopzilla.api.client.model;
 
-import com.shopzilla.services.catalog.*;
-import com.shopzilla.services.catalog.AttributeType.AttributeValues;
-import com.shopzilla.services.catalog.ProductResponse.Classification;
-import com.shopzilla.services.catalog.ProductResponse.RelatedAttributes;
-import org.apache.commons.collections.CollectionUtils;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
+
+import com.shopzilla.services.catalog.AttributeType;
+import com.shopzilla.services.catalog.AttributeType.AttributeValues;
+import com.shopzilla.services.catalog.AttributeValueType;
+import com.shopzilla.services.catalog.CertificationType;
+import com.shopzilla.services.catalog.OfferType;
+import com.shopzilla.services.catalog.PriceSetType;
+import com.shopzilla.services.catalog.PriceType;
+import com.shopzilla.services.catalog.ProductOffersType;
+import com.shopzilla.services.catalog.ProductResponse;
+import com.shopzilla.services.catalog.ProductResponse.Classification;
+import com.shopzilla.services.catalog.ProductResponse.RelatedAttributes;
+import com.shopzilla.services.catalog.ProductType;
+import com.shopzilla.services.catalog.RatingType;
 
 /**
  * @author sscanlon
@@ -165,6 +175,8 @@ public class CatalogResponseModelAdapter {
         o.setTax(convertPrice(catalogOffer.getTax()));
         o.setCondition(catalogOffer.getCondition());
         o.setStock(catalogOffer.getStock());
+        OfferType.Attributes attributes = catalogOffer.getAttributes();
+        o.setAttributes(convertAttributes(attributes));
 
         return o;
     }
@@ -177,6 +189,22 @@ public class CatalogResponseModelAdapter {
         p.setIntegral(price.getIntegral());
         p.setPrice(price.getValue());
         return p;
+    }
+    
+    private static List<Attribute> convertAttributes(OfferType.Attributes offerTypeAttributes) {
+        if (offerTypeAttributes == null) {
+            return null;
+        }
+        List<AttributeType> attributeTypes = offerTypeAttributes.getAttribute();
+        List<Attribute> convertedAttributes = new ArrayList<Attribute>(attributeTypes.size());
+        for (AttributeType attributeType : attributeTypes) {
+            Attribute attribute = new Attribute();
+            attribute.setLabel(attributeType.getName());
+            attribute.setId(attributeType.getId());
+            attribute.setValues(convertAttributeValues(attributeType.getAttributeValues()));
+            convertedAttributes.add(attribute);
+        }
+        return convertedAttributes;
     }
 
     public static Product convertProduct(ProductType catalogProduct) {
