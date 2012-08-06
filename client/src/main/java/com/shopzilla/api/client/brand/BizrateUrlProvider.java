@@ -51,7 +51,7 @@ public class BizrateUrlProvider extends AbstractBaseUrlProvider {
             "&showProductAttributes={showProductAttributes}" +
             "&minRelevancyScore=100" +
             "&maxAge=" +
-            "&showRawUrl=" +
+            "&showRawUrl={showRawMerchantUrl}" +
             "&imageOnly=";
 
     private static final String ATTRIBUTE_QUERY_FRAGMENT = "?" +
