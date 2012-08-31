@@ -26,6 +26,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Boolean.TRUE;
 import static org.junit.Assert.*;
 
 /**
@@ -51,7 +52,6 @@ public class CatalogResponseModelAdapterTest {
         CatalogResponse result = CatalogResponseModelAdapter.fromCatalogAPI(from);
         assertNotNull(result);
         assertEquals(from.getClassification().getRelevancyScore(), result.getRelevancyScore());
-
     }
 
     @Test
@@ -80,7 +80,7 @@ public class CatalogResponseModelAdapterTest {
         assertEquals(converted.getDetailURL(), o.getDetailUrl());
         assertEquals(converted.getTitle(), o.getTitle());
 	    assertEquals(converted.getMerchantLogoUrl(), o.getMerchantLogoUrl());
-
+        assertFalse(converted.isMature());
     }
 
     @Test
@@ -136,7 +136,28 @@ public class CatalogResponseModelAdapterTest {
         assertEquals(convertedProduct.getLongDescription(), p.getLongDescription());
         assertEquals(convertedProduct.getSku(), p.getSku());
         assertTrue(attributesAreEqual(convertedProduct.getAttributes(), p.getAttributes()));
+    }
 
+
+    @Test
+    public void testMatureOfferFromCatalogAPI() {
+        OfferType o = new OfferType();
+        o.setCategoryId(5L);
+        o.setDescription("desc");
+        o.setId(123l);
+        o.setMerchantId(321l);
+        o.setPrice(new PriceType());
+        o.getPrice().setIntegral(1234l);
+	    o.setMerchantLogoUrl("http://merchantLogoUrl.com");
+        o.setMature(TRUE);
+
+        from.setProducts(new Products());
+        from.getProducts().getProductOrOffer().add(o);
+        CatalogResponse result = CatalogResponseModelAdapter.fromCatalogAPI(from);
+        assertEquals(result.getOffers().size(), 1);
+        Offer converted = result.getOffers().get(0);
+
+        assertTrue(converted.isMature());
     }
 
     private boolean attributesAreEqual(List<Attribute> attributes, ProductType.Attributes productTypeAttributes) {
@@ -236,9 +257,7 @@ public class CatalogResponseModelAdapterTest {
         assertEquals(v.getId(), attr.getId());
         assertEquals(v.getLabel(), attr.getName());
         assertEquals(v.getValues().size(), 1);
-
     }
-
 }
 
 

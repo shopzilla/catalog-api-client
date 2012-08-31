@@ -159,6 +159,9 @@ public class CatalogResponseModelAdapter {
         o.setMid(catalogOffer.getMerchantId());
         o.setPid(catalogOffer.getProductId());
 
+        if( catalogOffer.isMature() != null ) {
+            o.setMature(catalogOffer.isMature());
+        }
         o.setPrice(convertPrice(catalogOffer.getPrice()));
         o.setOriginalPrice(convertPrice(catalogOffer.getOriginalPrice()));
         o.setTotalPrice(convertPrice(catalogOffer.getTotalPrice()));

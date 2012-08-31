@@ -50,6 +50,7 @@ public class Offer {
     private String stock;
     private String condition;
     private String bidAmt;
+    private boolean mature;
     private Merchant merchant;
     private List<Attribute> attributes;
 
@@ -80,6 +81,7 @@ public class Offer {
                 ", condition='" + condition + '\'' +
                 ", merchant=" + merchant +
                 ", bidAmt=" + bidAmt +
+                ", mature=" + mature +
                 '}';
     }
 
@@ -280,6 +282,14 @@ public class Offer {
 
     public void setBidAmt(String bidAmt) {
         this.bidAmt = bidAmt;
+    }
+    
+    public boolean isMature() {
+        return mature;
+    }
+
+    public void setMature(boolean mature) {
+        this.mature = mature;
     }
     
     public Long getPid() {
