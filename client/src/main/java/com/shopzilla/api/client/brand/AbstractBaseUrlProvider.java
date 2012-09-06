@@ -42,7 +42,7 @@ public abstract class AbstractBaseUrlProvider implements UrlProvider {
 
     private static final String EMPTY_STRING = "";
 
-    public String apiBaseUrl = "http://apistage001.sl1.shopzilla.seastg:7046/services/catalog/v1/api/";
+    public String apiBaseUrl = "http://apiprod006.sl1.shopzilla.sea:7046/services/catalog/v1/api/";
 
     public static final String PRODUCT_SERVICE_ENDPOINT_NAME = "product/";
     public static final String ATTRIBUTE_SERVICE_ENDPOINT_NAME = "attributes/";
