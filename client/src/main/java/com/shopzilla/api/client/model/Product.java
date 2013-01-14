@@ -17,6 +17,7 @@ package com.shopzilla.api.client.model;
 
 import java.math.BigDecimal;
 import java.util.List;
+import com.shopzilla.services.catalog.RatingType;
 
 /**
  * @author sscanlon
@@ -35,6 +36,7 @@ public class Product {
     private Price maxPrice;
     private Long storeCount;
     private BigDecimal relevancy;
+    private RatingType rating;
 
     public Long getId() {
         return id;
@@ -138,5 +140,13 @@ public class Product {
 
     public void setStoreCount(Long storeCount) {
         this.storeCount = storeCount;
+    }
+   
+    public RatingType getRating() {
+        return rating;
+    }
+  
+    public void setRating(RatingType rating) {
+        this.rating = rating;
     }
 }

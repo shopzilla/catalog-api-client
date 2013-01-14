@@ -235,6 +235,10 @@ public class CatalogResponseModelAdapter {
             p.setStoreCount(priceSet.getStores());
         }
         p.setRelevancy(catalogProduct.getRelevancy());
+        final RatingType rating = catalogProduct.getRating();
+        if (rating != null) {
+            p.setRating(catalogProduct.getRating());
+        }
         return p;
     }
 
