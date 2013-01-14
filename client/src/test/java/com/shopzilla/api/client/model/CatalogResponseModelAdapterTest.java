@@ -23,6 +23,7 @@ import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,6 +96,8 @@ public class CatalogResponseModelAdapterTest {
         o.getPrice().setIntegral(1234l);
 
         ProductType p = new ProductType();
+        RatingType rating =new RatingType();
+        rating.setValue(new BigDecimal(4));
         p.setTitle("MyProduct");
         p.setUrl("http://my.url/");
         p.setCategoryId(222L);
@@ -102,6 +105,7 @@ public class CatalogResponseModelAdapterTest {
         p.setDescription("Description");
         p.setLongDescription("LongDescription");
         p.setSku("sku");
+        p.setRating(new RatingType());
 
         ProductType.Attributes attributes = new ProductType.Attributes();
         AttributeType attributeType = new AttributeType();
@@ -135,6 +139,7 @@ public class CatalogResponseModelAdapterTest {
         assertEquals(convertedProduct.getDescription(), p.getDescription());
         assertEquals(convertedProduct.getLongDescription(), p.getLongDescription());
         assertEquals(convertedProduct.getSku(), p.getSku());
+        assertEquals(convertedProduct.getRating(), p.getRating());
         assertTrue(attributesAreEqual(convertedProduct.getAttributes(), p.getAttributes()));
     }
 

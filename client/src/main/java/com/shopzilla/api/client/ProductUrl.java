@@ -26,7 +26,7 @@ import com.shopzilla.api.client.model.request.ProductSearchRequest;
  */
 public class ProductUrl {
 
-    public static final String PRODUCT_URL = "http://apiprod006.sl1.shopzilla.sea:7046/services/catalog/v1/us/product?"
+    public static final String PRODUCT_URL = "http://apistage001.sl1.shopzilla.seastg:7046/services/catalog/v1/us/product?"
             +
             "apiKey={apiKey}" +
             "&publisherId={publisherId}" +
