@@ -237,7 +237,7 @@ public class CatalogResponseModelAdapter {
         p.setRelevancy(catalogProduct.getRelevancy());
         final RatingType rating = catalogProduct.getRating();
         if (rating != null) {
-            p.setRating(catalogProduct.getRating());
+            p.setRating(rating);
         }
         return p;
     }

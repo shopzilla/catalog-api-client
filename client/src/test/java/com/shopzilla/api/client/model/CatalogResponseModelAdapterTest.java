@@ -96,7 +96,7 @@ public class CatalogResponseModelAdapterTest {
         o.getPrice().setIntegral(1234l);
 
         ProductType p = new ProductType();
-        RatingType rating =new RatingType();
+        RatingType rating = new RatingType();
         rating.setValue(new BigDecimal(4));
         p.setTitle("MyProduct");
         p.setUrl("http://my.url/");
