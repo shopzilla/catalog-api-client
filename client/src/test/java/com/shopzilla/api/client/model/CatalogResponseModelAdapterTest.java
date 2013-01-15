@@ -105,7 +105,7 @@ public class CatalogResponseModelAdapterTest {
         p.setDescription("Description");
         p.setLongDescription("LongDescription");
         p.setSku("sku");
-        p.setRating(new RatingType());
+        p.setRating(rating);
 
         ProductType.Attributes attributes = new ProductType.Attributes();
         AttributeType attributeType = new AttributeType();
