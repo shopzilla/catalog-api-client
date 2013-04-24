@@ -35,7 +35,7 @@ public class Offer {
 
     private String title;
     private String description;
-
+    private String manufacturer;
     private String URL;
     private String detailURL;
     private String rawMerchantUrl;
@@ -316,4 +316,12 @@ public class Offer {
     public void setAttributes(List<Attribute> attributes) {
         this.attributes = attributes;
     }
+    
+    public String getManufacturer() {
+        return manufacturer;
+    } 
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }	    
 }
