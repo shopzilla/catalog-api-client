@@ -30,6 +30,7 @@ public class Product {
     private String description;
     private String longDescription;
     private String sku;
+    private String manufacturer;
     private List<Attribute> attributes;
     private List<Offer> offers;
     private Price minPrice;
@@ -148,5 +149,13 @@ public class Product {
   
     public void setRating(RatingType rating) {
         this.rating = rating;
+    }
+    
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
     }
 }

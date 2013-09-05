@@ -158,6 +158,7 @@ public class CatalogResponseModelAdapter {
         o.setId(catalogOffer.getId());
         o.setMid(catalogOffer.getMerchantId());
         o.setPid(catalogOffer.getProductId());
+        o.setManufacturer(catalogOffer.getManufacturer());
 
         if( catalogOffer.isMature() != null ) {
             o.setMature(catalogOffer.isMature());
@@ -219,6 +220,7 @@ public class CatalogResponseModelAdapter {
         p.setDescription(catalogProduct.getDescription());
         p.setLongDescription(catalogProduct.getLongDescription());
         p.setSku(catalogProduct.getSku());
+        p.setManufacturer(catalogProduct.getManufacturer());
         p.setAttributes(convertAttributes(catalogProduct.getAttributes()));
         final ProductOffersType offers = catalogProduct.getOffers();
         if (offers != null) {
