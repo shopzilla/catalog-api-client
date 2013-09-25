@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.shopzilla.api</groupId>
         <artifactId>root</artifactId>
-        <version>1.7.14-S8373-SNAPSHOT</version>
+        <version>1.7.14</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
