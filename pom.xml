@@ -181,11 +181,5 @@
         <name>internal-snapshots</name>
         <url>http://nexus.shopzilla.com:2099/nexus/content/repositories/internal-snapshots</url>
       </snapshotRepository>
-      <site>
-        <id>opensource.shopzilla.com</id>
-        <name>Bizrate.com</name>
-        <url>scp://opensource.shopzilla.com/site/bizrate.com</url>
-      </site>
     </distributionManagement>
-  
 </project>
