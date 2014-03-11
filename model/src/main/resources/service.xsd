@@ -1072,6 +1072,7 @@
         <xs:attributeGroup ref="CategoryIdAttributeGroup"/>
         <xs:attribute name="merchantId" type="mid" use="required"/>
         <xs:attribute name="productId" type="uid" use="optional"/>
+        <xs:attribute name="atomId" type="xs:long" use="optional"/>
     </xs:complexType>
 
     <xs:complexType name="ProductOffersType">

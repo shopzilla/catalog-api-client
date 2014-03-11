@@ -181,6 +181,10 @@ public class CatalogResponseModelAdapter {
         o.setStock(catalogOffer.getStock());
         OfferType.Attributes attributes = catalogOffer.getAttributes();
         o.setAttributes(convertAttributes(attributes));
+        
+	if(catalogOffer.getAtomId() != null) {
+            o.setAtomId(catalogOffer.getAtomId());
+        }
 
         return o;
     }

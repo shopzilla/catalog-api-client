@@ -28,6 +28,7 @@ public class Offer {
     private Long id;
     private Long mid;
     private Long pid;
+    private Long atomId;
     private Price price;
     private Price originalPrice;
     private Price totalPrice;
@@ -323,5 +324,15 @@ public class Offer {
 
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
+    }
+
+
+    public Long getAtomId() {
+        return atomId;
+    }
+
+
+    public void setAtomId(Long atomId) {
+        this.atomId = atomId;
     }	    
 }

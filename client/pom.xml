@@ -10,7 +10,7 @@
         <groupId>com.shopzilla.api</groupId>
         <artifactId>root</artifactId>
         <relativePath>../pom.xml</relativePath>
-        <version>1.7.16-SNAPSHOT</version>
+        <version>1.7.16-szindia-S11465-SNAPSHOT</version>
     </parent>
 
     <name>Shopzilla API Client - Client</name>
