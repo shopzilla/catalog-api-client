@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 Shopzilla.com
+ * Copyright 2014 Shopzilla.com
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -15,27 +15,18 @@
  */
 package com.shopzilla.api.client.model;
 
+import com.shopzilla.services.catalog.*;
+import com.shopzilla.services.catalog.AttributeType.AttributeValues;
+import com.shopzilla.services.catalog.ProductResponse.Classification;
+import com.shopzilla.services.catalog.ProductResponse.RelatedAttributes;
+import org.apache.commons.collections.CollectionUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.collections.CollectionUtils;
-
-import com.shopzilla.services.catalog.AttributeType;
-import com.shopzilla.services.catalog.AttributeType.AttributeValues;
-import com.shopzilla.services.catalog.AttributeValueType;
-import com.shopzilla.services.catalog.CertificationType;
-import com.shopzilla.services.catalog.OfferType;
-import com.shopzilla.services.catalog.PriceSetType;
-import com.shopzilla.services.catalog.PriceType;
-import com.shopzilla.services.catalog.ProductOffersType;
-import com.shopzilla.services.catalog.ProductResponse;
-import com.shopzilla.services.catalog.ProductResponse.Classification;
-import com.shopzilla.services.catalog.ProductResponse.RelatedAttributes;
-import com.shopzilla.services.catalog.ProductType;
-import com.shopzilla.services.catalog.RatingType;
-
 /**
  * @author sscanlon
+ * @author jperez
  */
 public class CatalogResponseModelAdapter {
 
@@ -133,57 +124,61 @@ public class CatalogResponseModelAdapter {
     public static Offer convertOffer(OfferType catalogOffer) {
         Offer o = new Offer();
 
-        Merchant m = new Merchant();
-        m.setId(catalogOffer.getMerchantId());
-        m.setName(catalogOffer.getMerchantName());
-        final RatingType merchantRating = catalogOffer.getMerchantRating();
-        if (merchantRating != null) {
-            m.setOverallRating(merchantRating.getValue());
-        }
+        if (catalogOffer != null) {
+            Merchant m = new Merchant();
+            m.setId(catalogOffer.getMerchantId());
+            m.setName(catalogOffer.getMerchantName());
+            final RatingType merchantRating = catalogOffer.getMerchantRating();
+            if (merchantRating != null) {
+                m.setOverallRating(merchantRating.getValue());
+            }
 
-        final CertificationType merchantCertification = catalogOffer.getMerchantCertification();
-        if (merchantCertification != null && merchantCertification.getLevel() != null) {
+            final CertificationType merchantCertification = catalogOffer.getMerchantCertification();
+            if (merchantCertification != null && merchantCertification.getLevel() != null) {
                 m.setCertification(merchantCertification.getLevel().ordinal() + 1);
-        }
+            }
 
-	    if(catalogOffer !=null && catalogOffer.getMerchantLogoUrl() != null) {
-		    o.setMerchantLogoUrl(catalogOffer.getMerchantLogoUrl());
-	    }
+            if (catalogOffer.getMerchantLogoUrl() != null) {
+                o.setMerchantLogoUrl(catalogOffer.getMerchantLogoUrl());
+            }
 
-        o.setMerchant(m);
+            o.setMerchant(m);
 
-        o.setShowLogo(catalogOffer.isShowLogo());
-        o.setBidAmt(catalogOffer.getBidAmt());
-        o.setCategoryId(catalogOffer.getCategoryId());
-        o.setId(catalogOffer.getId());
-        o.setMid(catalogOffer.getMerchantId());
-        o.setPid(catalogOffer.getProductId());
-        o.setManufacturer(catalogOffer.getManufacturer());
+            o.setShowLogo(catalogOffer.isShowLogo());
+            o.setBidAmt(catalogOffer.getBidAmt());
+            o.setCategoryId(catalogOffer.getCategoryId());
+            o.setId(catalogOffer.getId());
+            o.setMid(catalogOffer.getMerchantId());
+            o.setPid(catalogOffer.getProductId());
+            o.setManufacturer(catalogOffer.getManufacturer());
 
-        if( catalogOffer.isMature() != null ) {
-            o.setMature(catalogOffer.isMature());
-        }
-        o.setPrice(convertPrice(catalogOffer.getPrice()));
-        o.setOriginalPrice(convertPrice(catalogOffer.getOriginalPrice()));
-        o.setTotalPrice(convertPrice(catalogOffer.getTotalPrice()));
-        o.setTitle(catalogOffer.getTitle());
-        o.setDescription(catalogOffer.getDescription());
-        o.setURL(catalogOffer.getUrl());
-        o.setDetailURL(catalogOffer.getDetailUrl());
-        o.setRawMerchantUrl(catalogOffer.getRawUrl());
-        o.setSku(catalogOffer.getSku());
-        o.setBidded(catalogOffer.isBidded());
-        o.setShipAmount(convertPrice(catalogOffer.getShipAmount()));
-        o.setShipCost(convertPrice(catalogOffer.getShipCost()));
-        o.setShipType(catalogOffer.getShipType());
-        o.setTax(convertPrice(catalogOffer.getTax()));
-        o.setCondition(catalogOffer.getCondition());
-        o.setStock(catalogOffer.getStock());
-        OfferType.Attributes attributes = catalogOffer.getAttributes();
-        o.setAttributes(convertAttributes(attributes));
-        
-	if(catalogOffer.getAtomId() != null) {
-            o.setAtomId(catalogOffer.getAtomId());
+            if (catalogOffer.isMature() != null) {
+                o.setMature(catalogOffer.isMature());
+            }
+            o.setPrice(convertPrice(catalogOffer.getPrice()));
+            o.setOriginalPrice(convertPrice(catalogOffer.getOriginalPrice()));
+            o.setTotalPrice(convertPrice(catalogOffer.getTotalPrice()));
+            o.setTitle(catalogOffer.getTitle());
+            o.setDescription(catalogOffer.getDescription());
+            o.setURL(catalogOffer.getUrl());
+            o.setDetailURL(catalogOffer.getDetailUrl());
+            o.setRawMerchantUrl(catalogOffer.getRawUrl());
+            o.setSku(catalogOffer.getSku());
+            o.setBidded(catalogOffer.isBidded());
+            o.setShipAmount(convertPrice(catalogOffer.getShipAmount()));
+            o.setShipCost(convertPrice(catalogOffer.getShipCost()));
+            o.setShipType(catalogOffer.getShipType());
+            o.setTax(convertPrice(catalogOffer.getTax()));
+            o.setCondition(catalogOffer.getCondition());
+            o.setStock(catalogOffer.getStock());
+            OfferType.Attributes attributes = catalogOffer.getAttributes();
+            o.setAttributes(convertAttributes(attributes));
+            o.setBrand(convertBrand(catalogOffer.getBrand()));
+
+            if (catalogOffer.getAtomId() != null) {
+                o.setAtomId(catalogOffer.getAtomId());
+            }
+
         }
 
         return o;
@@ -198,7 +193,18 @@ public class CatalogResponseModelAdapter {
         p.setPrice(price.getValue());
         return p;
     }
-    
+
+    private static Attribute convertBrand(BrandType brandType) {
+        if (brandType == null) {
+            return null;
+        }
+
+        Attribute brand = new Attribute();
+        brand.setId(String.valueOf(brandType.getId()));
+        brand.setLabel(brandType.getName());
+        return brand;
+    }
+
     private static List<Attribute> convertAttributes(OfferType.Attributes offerTypeAttributes) {
         if (offerTypeAttributes == null) {
             return null;
