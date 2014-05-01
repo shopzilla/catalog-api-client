@@ -232,6 +232,7 @@ public class CatalogResponseModelAdapter {
         p.setSku(catalogProduct.getSku());
         p.setManufacturer(catalogProduct.getManufacturer());
         p.setAttributes(convertAttributes(catalogProduct.getAttributes()));
+        p.setProductReviewCount(catalogProduct.getProductReviewCount());
         final ProductOffersType offers = catalogProduct.getOffers();
         if (offers != null) {
             p.setOffers(convertOffers(offers.getOffer()));

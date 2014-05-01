@@ -56,6 +56,15 @@ public class ProductSearchRequest extends AbstractSearchRequest {
     private boolean showRedirectInfo = Boolean.FALSE;
     private String sort = SORT_BY_RELEVANCY;
     private ProductType productType;
+    private String reviews = "aggregate";
+
+    public String getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(String reviews) {
+        this.reviews = reviews;
+    }
 
     public Integer getMinMarkdown() {
         return minMarkdown;

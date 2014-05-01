@@ -807,6 +807,7 @@
         <xs:sequence>
             <xs:group ref="ProductOfferElementGroup"/>
             <xs:element name="relevancy" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="productReviewCount" type="xs:long" minOccurs="0"/>
             <xs:element name="Rating" type="RatingType" minOccurs="0">
                 <xs:annotation>
                     <xs:documentation>Rating is 1-5, represented here to two decimal places</xs:documentation>
