@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 Shopzilla.com
+ * Copyright 2014 Shopzilla.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,41 +15,37 @@
  */
 package com.shopzilla.api.client.model.request;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
  * @author sscanlon
+ * @author jperez
  */
 public class ProductSearchRequest extends AbstractSearchRequest {
 
+    public static final String SORT_BY_RELEVANCY = "relevancy_desc";
+    public static final String SORT_BY_LOWEST_PRICE = "price_asc";
+    public static final String SORT_BY_HIGHEST_PRICE = "price_desc";
     private static final String EMPTY_STRING = "";
-
-    public static enum ProductType {
-        SZOID, SZPID, MPID, SKU;
-    }
-
     private String keyword;
     private Integer start = 0;
     private Integer numResults = 25;
     private Integer backfillResults = 0;
     private Integer minRelevancyScore = 100;
-
     private String categoryId = EMPTY_STRING;
     private String productId = EMPTY_STRING;
     private Long merchantId;
     private String zipCode = EMPTY_STRING;
-
     private Boolean imageOnly = Boolean.FALSE;
     private Boolean offersOnly = Boolean.FALSE;
     private Boolean biddedOnly = Boolean.FALSE;
     private Boolean showRawMerchantUrl = Boolean.FALSE;
     private Boolean showAttributes = Boolean.FALSE;
     private Boolean showProductAttributes = Boolean.FALSE;
-
     private Integer minMarkdown = null;
     private Integer resultsOffers = 0;
-
     private String attributeId = EMPTY_STRING;
     private String attWeights = EMPTY_STRING;
     private String attFilter = EMPTY_STRING;
@@ -58,16 +54,15 @@ public class ProductSearchRequest extends AbstractSearchRequest {
     private Integer maxAge;
     private boolean freeShipping = Boolean.FALSE;
     private boolean showRedirectInfo = Boolean.FALSE;
-    private String sort = "relevancy_desc";
-
+    private String sort = SORT_BY_RELEVANCY;
     private ProductType productType;
-
-    public void setMinMarkdown(Integer minMarkdown) {
-        this.minMarkdown = minMarkdown;
-    }
 
     public Integer getMinMarkdown() {
         return minMarkdown;
+    }
+
+    public void setMinMarkdown(Integer minMarkdown) {
+        this.minMarkdown = minMarkdown;
     }
 
     public String getCategoryId() {
@@ -211,7 +206,16 @@ public class ProductSearchRequest extends AbstractSearchRequest {
     }
 
     public void setSort(String sort) {
-        this.sort = sort;
+        // Attempt to match up the sorting string to one of the sorting types.
+        // If no match, the default sort will be by relevancy.
+        if (StringUtils.isNotEmpty(sort)) {
+            if (StringUtils.containsIgnoreCase(sort, "price") && StringUtils.containsIgnoreCase(sort, "asc")) {
+                this.sort = SORT_BY_LOWEST_PRICE;
+            }
+            if (StringUtils.containsIgnoreCase(sort, "price") && StringUtils.containsIgnoreCase(sort, "desc")) {
+                this.sort = SORT_BY_HIGHEST_PRICE;
+            }
+        }
     }
 
     public String getAttributeId() {
@@ -383,6 +387,10 @@ public class ProductSearchRequest extends AbstractSearchRequest {
                 .append(showRedirectInfo, rhs.showRedirectInfo)
                 .append(sort, rhs.sort)
                 .append(productType, rhs.productType).isEquals();
+    }
+
+    public static enum ProductType {
+        SZOID, SZPID, MPID, SKU;
     }
 
 
