@@ -17,6 +17,7 @@
 package com.shopzilla.api.client.model;
 
 import com.shopzilla.api.client.model.response.MerchantResponse;
+import com.shopzilla.services.catalog.Average;
 import com.shopzilla.services.catalog.MerchantsResponse;
 
 import java.util.ArrayList;
@@ -51,6 +52,28 @@ public class MerchantModelAdapter {
         merchantInfo.setLogoUrl(merchant.getMerchantInfo().getLogoUrl());
         merchantInfo.setName(merchant.getMerchantInfo().getName());
         merchantInfo.setUrl(merchant.getMerchantInfo().getUrl());
+        merchantInfo.setMerchantUrl(merchant.getMerchantInfo().getMerchantUrl());
+
+        if (merchant.getMerchantRating() != null
+                && merchant.getMerchantRating().getRating() != null
+                && merchant.getMerchantRating().getRating().getDimensionalAverages() != null
+                && merchant.getMerchantRating().getRating().getDimensionalAverages().getAverage() != null) {
+
+            List<Average> averages = merchant.getMerchantRating().getRating().getDimensionalAverages().getAverage();
+            for (Average a : averages) {
+                if (a != null) {
+                    Rating rating = new Rating();
+
+                    rating.setDimension(a.getDimension());
+                    rating.setValue(a.getValue());
+                    rating.setMax(a.getMax());
+                    rating.setMin(a.getMin());
+
+                    merchantInfo.getRatings().add(rating);
+                }
+            }
+        }
+
         return merchantInfo;
     }
 }

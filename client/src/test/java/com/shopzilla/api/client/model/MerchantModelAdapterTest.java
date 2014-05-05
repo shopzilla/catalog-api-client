@@ -6,15 +6,16 @@
 package com.shopzilla.api.client.model;
 
 import com.shopzilla.api.client.model.response.MerchantResponse;
-import com.shopzilla.services.catalog.MerchInfoType;
-import com.shopzilla.services.catalog.MerchantsResponse;
+import com.shopzilla.services.catalog.*;
 import org.apache.commons.lang.StringUtils;
+import org.junit.Before;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * @author Emanuele Blanco
@@ -22,11 +23,70 @@ import static org.junit.Assert.assertTrue;
  */
 public class MerchantModelAdapterTest {
 
+    MerchantsResponse input;
+
+    MerchantResponse expectedResponse;
+
+    @Before
+    public void setUp() {
+        input = generateInput();
+        expectedResponse = generateExpectedOutput();
+    }
+
     @Test
     public void testFromCatalogAPI() throws Exception {
-        MerchantsResponse input = generateInput();
-        MerchantResponse expectedOutput = generateExpectedOutput();
-        assertTrue(areEquals(expectedOutput, MerchantModelAdapter.fromCatalogAPI(input)));
+        expectedResponse = generateExpectedOutput();
+        assertTrue(areEquals(expectedResponse, MerchantModelAdapter.fromCatalogAPI(input)));
+    }
+
+    @Test
+    public void testReviews() throws Exception {
+        // test merchantRating = null
+        MerchantsResponse.Merchant merchant = input.getMerchant().get(0);
+        merchant.setMerchantRating(null);
+        assertTrue(areEquals(expectedResponse, MerchantModelAdapter.fromCatalogAPI(input)));
+
+        // test ratingType = null
+        MerchantsResponse.Merchant.MerchantRating rating = new MerchantsResponse.Merchant.MerchantRating();
+        rating.setRating(null);
+        merchant.setMerchantRating(rating);
+        assertTrue(areEquals(expectedResponse, MerchantModelAdapter.fromCatalogAPI(input)));
+
+        // test dimensionalAverages = null
+        MerchRatingType ratingType = new MerchRatingType();
+        ratingType.setDimensionalAverages(null);
+        rating.setRating(ratingType);
+        expectedResponse = generateExpectedOutput();
+        assertTrue(areEquals(expectedResponse, MerchantModelAdapter.fromCatalogAPI(input)));
+
+        // test empty dimensionalAverages
+        MerchRatingType.DimensionalAverages averages = new MerchRatingType.DimensionalAverages();
+        ratingType.setDimensionalAverages(averages);
+        expectedResponse = generateExpectedOutput();
+        assertTrue(areEquals(expectedResponse, MerchantModelAdapter.fromCatalogAPI(input)));
+
+        // test averages only contains [null]
+        averages.getAverage().add(null);
+        expectedResponse = generateExpectedOutput();
+        assertTrue(areEquals(expectedResponse, MerchantModelAdapter.fromCatalogAPI(input)));
+
+        // test averages includes a result
+        Average average = new Average();
+        average.setDimension("averageShipping");
+        average.setValue(new BigDecimal(4.21));
+        average.setMax(10);
+        average.setMin(0);
+        averages.getAverage().add(average);
+
+        expectedResponse = generateExpectedOutput();
+        Rating outputRating = new Rating();
+        outputRating.setDimension("averageShipping");
+        outputRating.setValue(new BigDecimal(4.21));
+        outputRating.setMax(10);
+        outputRating.setMin(0);
+        expectedResponse.getMerchants().get(0).getRatings().add(outputRating);
+
+        assertTrue(areEquals(expectedResponse, MerchantModelAdapter.fromCatalogAPI(input)));
     }
 
     private MerchantsResponse generateInput() {
@@ -112,9 +172,33 @@ public class MerchantModelAdapterTest {
         if (first.getId() != second.getId()) {
             return false;
         }
+        for (int i = 0; i < first.getRatings().size(); i++) {
+            if (!areRatingsEqual(first.getRatings().get(i), second.getRatings().get(i))) {
+                return false;
+            }
+        }
         return true;
-
     }
 
-
+    private boolean areRatingsEqual(Rating first, Rating second) {
+        if (first == second) {
+            return true;
+        }
+        if (first == null || second == null) {
+            return false;
+        }
+        if (!StringUtils.equals(first.getDimension(), second.getDimension())) {
+            return false;
+        }
+        if (!first.getValue().equals(second.getValue())) {
+            return false;
+        }
+        if (first.getMax() != second.getMax()) {
+            return false;
+        }
+        if (first.getMin() != second.getMin()) {
+            return false;
+        }
+        return true;
+    }
 }

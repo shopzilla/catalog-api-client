@@ -21,6 +21,8 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
+import java.util.List;
+import java.util.ArrayList;
 /**
  * Represent a MerchantInfo
  *
@@ -32,8 +34,10 @@ public class MerchantInfo {
     private Long id;
     private String name;
     private String url;
+    private String merchantUrl;
     private String logoUrl;
     private String countryCode;
+    private List<Rating> ratings = new ArrayList<Rating>();
 
     public Long getId() {
         return id;
@@ -59,6 +63,14 @@ public class MerchantInfo {
         this.url = url;
     }
 
+    public String getMerchantUrl() {
+        return merchantUrl;
+    }
+
+    public void setMerchantUrl(String merchantUrl) {
+        this.merchantUrl = merchantUrl;
+    }
+
     public String getLogoUrl() {
         return logoUrl;
     }
@@ -74,15 +86,22 @@ public class MerchantInfo {
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
     }
-    
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
                 .append(id)
                 .append(name)
                 .append(url)
+                .append(merchantUrl)
                 .append(logoUrl)
-                .append(countryCode).toHashCode();
+                .append(countryCode)
+                .append(ratings)
+                .toHashCode();
     }
     
     @Override
@@ -101,8 +120,10 @@ public class MerchantInfo {
                 .append(id, rhs.id)
                 .append(name, rhs.name)
                 .append(url, rhs.url)
+                .append(merchantUrl, rhs.merchantUrl)
                 .append(logoUrl, rhs.logoUrl)
                 .append(countryCode, rhs.countryCode)
+                .append(ratings, rhs.ratings)
                 .isEquals();
     }
     
@@ -112,8 +133,10 @@ public class MerchantInfo {
                 .append(id)
                 .append(name)
                 .append(url)
+                .append(merchantUrl)
                 .append(logoUrl)
                 .append(countryCode)
+                .append(ratings)
                 .toString();
     }
 }
