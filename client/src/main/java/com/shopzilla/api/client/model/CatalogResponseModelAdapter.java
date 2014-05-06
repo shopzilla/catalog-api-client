@@ -177,6 +177,7 @@ public class CatalogResponseModelAdapter {
             o.setAttributes(convertAttributes(attributes));
             o.setBrand(convertBrand(catalogOffer.getBrand()));
             o.setPromoText(catalogOffer.getPromoText());
+            o.setNumMerchantReviews(catalogOffer.getNumMerchantReviews());
 
             if (catalogOffer.getAtomId() != null) {
                 o.setAtomId(catalogOffer.getAtomId());
