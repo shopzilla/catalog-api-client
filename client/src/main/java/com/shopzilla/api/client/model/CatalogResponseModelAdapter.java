@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Converts Catalog API Response models to Catalog API Client models.
+ *
  * @author sscanlon
  * @author jperez
  */
@@ -174,6 +176,7 @@ public class CatalogResponseModelAdapter {
             OfferType.Attributes attributes = catalogOffer.getAttributes();
             o.setAttributes(convertAttributes(attributes));
             o.setBrand(convertBrand(catalogOffer.getBrand()));
+            o.setPromoText(catalogOffer.getPromoText());
 
             if (catalogOffer.getAtomId() != null) {
                 o.setAtomId(catalogOffer.getAtomId());

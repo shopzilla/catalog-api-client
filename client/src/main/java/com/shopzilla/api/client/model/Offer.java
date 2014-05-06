@@ -55,6 +55,7 @@ public class Offer {
     private boolean mature;
     private Merchant merchant;
     private List<Attribute> attributes;
+    private String promoText;
 
     @Override
     public String toString() {
@@ -84,6 +85,7 @@ public class Offer {
                 ", condition='" + condition + '\'' +
                 ", merchant=" + merchant +
                 ", bidAmt=" + bidAmt +
+                ", promoText" + promoText +
                 ", mature=" + mature +
                 '}';
     }
@@ -332,6 +334,14 @@ public class Offer {
 
     public void setBrand(Attribute brand) {
         this.brand = brand;
+    }
+
+    public String getPromoText() {
+        return promoText;
+    }
+
+    public void setPromoText(String promoText) {
+        this.promoText = promoText;
     }
 
     public Long getAtomId() {
