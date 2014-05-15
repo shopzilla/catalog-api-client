@@ -12,10 +12,10 @@ import java.math.BigDecimal;
  */
 public class Rating {
 
-    String dimension;
-    BigDecimal value;
-    int max;
-    int min;
+    private String dimension;
+    private BigDecimal value;
+    private int max;
+    private int min;
 
     @Override
     public String toString() {
