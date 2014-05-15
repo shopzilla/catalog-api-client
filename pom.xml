@@ -4,7 +4,7 @@
 
     <groupId>com.shopzilla.api</groupId>
     <artifactId>root</artifactId>
-    <version>1.7.17-S8670-SNAPSHOT</version>
+    <version>1.7.18</version>
     <packaging>pom</packaging>
 
     <name>Shopzilla API Client - Root</name>
