@@ -570,6 +570,7 @@
         <xs:sequence>
             <xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1"/>
             <xs:element name="url" type="xs:anyURI" minOccurs="1" maxOccurs="1" />
+            <xs:element name="merchantUrl" type="xs:anyURI" minOccurs="1" maxOccurs="1" />
             <xs:element name="logoUrl" type="xs:anyURI" minOccurs="1" maxOccurs="1" />
             <xs:element name="totalProductCount" type="xs:long" minOccurs="1" maxOccurs="1" />
             <xs:element name="countryCode" type="xs:string" minOccurs="1" maxOccurs="1"/>
@@ -646,6 +647,7 @@
         <xs:sequence>
             <xs:element name="name" type="xs:string" minOccurs="0"/>
             <xs:element name="url" type="xs:anyURI" minOccurs="0"/>
+            <xs:element name="merchantUrl" type="xs:anyURI" minOccurs="0"/>
             <xs:element name="logoUrl" type="xs:anyURI" minOccurs="0"/>
             <xs:group ref="CatalogStatsElementGroup"/>
             <xs:element name="Certification" type="CertificationType" minOccurs="0"/>
