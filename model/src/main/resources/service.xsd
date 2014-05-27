@@ -846,7 +846,7 @@
             <xs:element name="bidAmt" type="xs:string" minOccurs="0" />
 	          <xs:element name="upc" type="xs:string" minOccurs="0" />
             <xs:element name="promoText" type="xs:string" minOccurs="0" />
-            <xs:element name="numMerchantReviews" type="xs:long" minOccurs="0" />
+            <xs:element name="numSurveysLife" type="xs:long" minOccurs="0" />
             <xs:element name="detailUrl" type="xs:anyURI" minOccurs="0">
                 <xs:annotation>
                     <xs:documentation>Link to the offer's page on site.

@@ -56,7 +56,7 @@ public class Offer {
     private Merchant merchant;
     private List<Attribute> attributes;
     private String promoText;
-    private Long numMerchantReviews;
+    private Long numSurveysLife;
 
     @Override
     public String toString() {
@@ -87,7 +87,7 @@ public class Offer {
                 ", merchant=" + merchant +
                 ", bidAmt=" + bidAmt +
                 ", promoText" + promoText +
-                ", numMerchantReviews" + numMerchantReviews +
+                ", numSurveysLife" + numSurveysLife +
                 ", mature=" + mature +
                 '}';
     }
@@ -346,12 +346,12 @@ public class Offer {
         this.promoText = promoText;
     }
 
-    public Long getNumMerchantReviews() {
-        return numMerchantReviews;
+    public Long getNumSurveysLife() {
+        return numSurveysLife;
     }
 
-    public void setNumMerchantReviews(Long numMerchantReviews) {
-        this.numMerchantReviews = numMerchantReviews;
+    public void setNumSurveysLife(Long numSurveysLife) {
+        this.numSurveysLife = numSurveysLife;
     }
 
 
