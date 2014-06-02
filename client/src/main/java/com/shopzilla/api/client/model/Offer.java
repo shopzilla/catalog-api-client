@@ -15,13 +15,14 @@
  */
 package com.shopzilla.api.client.model;
 
-import java.util.List;
-
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
+import java.util.List;
+
 /**
  * @author sscanlon
+ * @author jperez
  */
 public class Offer {
 
@@ -33,7 +34,7 @@ public class Offer {
     private Price originalPrice;
     private Price totalPrice;
     private Long categoryId;
-
+    private Attribute brand;
     private String title;
     private String description;
     private String manufacturer;
@@ -54,6 +55,8 @@ public class Offer {
     private boolean mature;
     private Merchant merchant;
     private List<Attribute> attributes;
+    private String promoText;
+    private Long numSurveysLife;
 
     @Override
     public String toString() {
@@ -66,6 +69,7 @@ public class Offer {
                 ", originalPrice=" + originalPrice +
                 ", totalPrice=" + totalPrice +
                 ", categoryId=" + categoryId +
+                ", brand=" + brand +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", URL='" + URL + '\'' +
@@ -73,7 +77,7 @@ public class Offer {
                 ", rawMerchantUrl='" + rawMerchantUrl + '\'' +
                 ", sku='" + sku + '\'' +
                 ", showLogo=" + showLogo +
-	            ", merchantLogoUrl=" + merchantLogoUrl +
+                ", merchantLogoUrl=" + merchantLogoUrl +
                 ", shipType='" + shipType + '\'' +
                 ", shipAmount=" + shipAmount +
                 ", shipCost=" + shipCost +
@@ -82,10 +86,11 @@ public class Offer {
                 ", condition='" + condition + '\'' +
                 ", merchant=" + merchant +
                 ", bidAmt=" + bidAmt +
+                ", promoText" + promoText +
+                ", numSurveysLife" + numSurveysLife +
                 ", mature=" + mature +
                 '}';
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -284,7 +289,7 @@ public class Offer {
     public void setBidAmt(String bidAmt) {
         this.bidAmt = bidAmt;
     }
-    
+
     public boolean isMature() {
         return mature;
     }
@@ -292,7 +297,7 @@ public class Offer {
     public void setMature(boolean mature) {
         this.mature = mature;
     }
-    
+
     public Long getPid() {
         return pid;
     }
@@ -313,17 +318,40 @@ public class Offer {
         return attributes;
     }
 
-
     public void setAttributes(List<Attribute> attributes) {
         this.attributes = attributes;
     }
-    
+
     public String getManufacturer() {
         return manufacturer;
-    } 
+    }
 
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
+    }
+
+    public Attribute getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Attribute brand) {
+        this.brand = brand;
+    }
+
+    public String getPromoText() {
+        return promoText;
+    }
+
+    public void setPromoText(String promoText) {
+        this.promoText = promoText;
+    }
+
+    public Long getNumSurveysLife() {
+        return numSurveysLife;
+    }
+
+    public void setNumSurveysLife(Long numSurveysLife) {
+        this.numSurveysLife = numSurveysLife;
     }
 
 
@@ -331,8 +359,7 @@ public class Offer {
         return atomId;
     }
 
-
     public void setAtomId(Long atomId) {
         this.atomId = atomId;
-    }	    
+    }
 }

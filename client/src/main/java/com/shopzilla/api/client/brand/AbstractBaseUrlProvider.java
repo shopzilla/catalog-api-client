@@ -87,7 +87,7 @@ public abstract class AbstractBaseUrlProvider implements UrlProvider {
         parameters.put("attWeights", request.getAttWeights());
         parameters.put("attFilter", request.getAttFilter());
         parameters.put("freeShipping", request.isFreeShipping());
-
+        parameters.put("reviews", request.getReviews());
         if (request.getSort() != null) {
             parameters.put("sort", request.getSort());
         } else {

@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 Shopzilla.com
+ * Copyright 2014 Shopzilla.com
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,11 +16,13 @@
 package com.shopzilla.api.client.model;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import com.shopzilla.services.catalog.RatingType;
 
 /**
  * @author sscanlon
+ * @author jperez
  */
 public class Product {
     private Long id;
@@ -38,6 +40,7 @@ public class Product {
     private Long storeCount;
     private BigDecimal relevancy;
     private RatingType rating;
+    private Long productReviewCount;
 
     public Long getId() {
         return id;
@@ -157,5 +160,13 @@ public class Product {
 
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
+    }
+
+    public Long getProductReviewCount() {
+        return productReviewCount;
+    }
+
+    public void setProductReviewCount(Long productReviewCount) {
+        this.productReviewCount = productReviewCount;
     }
 }

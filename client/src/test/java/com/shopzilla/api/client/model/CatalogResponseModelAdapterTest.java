@@ -24,7 +24,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Boolean.TRUE;
@@ -32,6 +31,7 @@ import static org.junit.Assert.*;
 
 /**
  * @author sscanlon
+ * @author jperez
  */
 public class CatalogResponseModelAdapterTest {
 
@@ -65,7 +65,13 @@ public class CatalogResponseModelAdapterTest {
         o.setMerchantId(321l);
         o.setPrice(new PriceType());
         o.getPrice().setIntegral(1234l);
-	    o.setMerchantLogoUrl("http://merchantLogoUrl.com");
+        o.setMerchantLogoUrl("http://merchantLogoUrl.com");
+
+        BrandType brandType = new BrandType();
+        brandType.setId(805L);
+        brandType.setName("Oxnard");
+
+        o.setBrand(brandType);
 
         from.setProducts(new Products());
         from.getProducts().getProductOrOffer().add(o);
@@ -80,7 +86,8 @@ public class CatalogResponseModelAdapterTest {
         assertEquals(converted.getURL(), o.getUrl());
         assertEquals(converted.getDetailURL(), o.getDetailUrl());
         assertEquals(converted.getTitle(), o.getTitle());
-	    assertEquals(converted.getMerchantLogoUrl(), o.getMerchantLogoUrl());
+        assertEquals(converted.getMerchantLogoUrl(), o.getMerchantLogoUrl());
+        assertEquals(converted.getBrand().getLabel(), o.getBrand().getName());
         assertFalse(converted.isMature());
     }
 
@@ -143,7 +150,6 @@ public class CatalogResponseModelAdapterTest {
         assertTrue(attributesAreEqual(convertedProduct.getAttributes(), p.getAttributes()));
     }
 
-
     @Test
     public void testMatureOfferFromCatalogAPI() {
         OfferType o = new OfferType();
@@ -153,7 +159,7 @@ public class CatalogResponseModelAdapterTest {
         o.setMerchantId(321l);
         o.setPrice(new PriceType());
         o.getPrice().setIntegral(1234l);
-	    o.setMerchantLogoUrl("http://merchantLogoUrl.com");
+        o.setMerchantLogoUrl("http://merchantLogoUrl.com");
         o.setMature(TRUE);
 
         from.setProducts(new Products());
