@@ -4,7 +4,7 @@
 
     <groupId>com.shopzilla.api</groupId>
     <artifactId>root</artifactId>
-    <version>1.7.19-SNAPSHOT</version>
+    <version>1.7.19</version>
     <packaging>pom</packaging>
 
     <name>Shopzilla API Client - Root</name>
@@ -13,7 +13,8 @@
     <scm>
         <connection>scm:git:git://github.com/shopzilla/catalog-api-client</connection>
         <developerConnection>scm:git:ssh://git@github.com/shopzilla/catalog-api-client.git</developerConnection>
-    </scm>
+      <tag>root-1.7.19</tag>
+  </scm>
 
     <modules>
         <module>model</module>
